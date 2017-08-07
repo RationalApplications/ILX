@@ -16,25 +16,32 @@ public class Model {
 
     private User user;
 
-    private ArrayList newRequests, seqRequests;
+    private ArrayList newRequests, curRequests, histRequests;
 
     public Model() throws IOException {
+        newRequests = new ArrayList();
+        curRequests = new ArrayList();
+        histRequests = new ArrayList();
+
         Request requestNew = new Request("Садовая ул.", "", "3 адреса, предоплата 3500 руб.", "", "130р.", Color.GREEN);
         Request requestNew2 = new Request("Егорова ул., 102", "", "2 адреса, нужен паспорт", "", "180р.", Color.BLUE);
 
-        Request requestSeq = new Request("Садовая ул.", "Выкупить товар -3200 руб", "3 адреса, предоплата 3500 руб.", "10:00-12:00", "180р.", Color.BLUE);
-        Request requestSeq2 = new Request("Садовая ул.", "", "3 адреса, предоплата 3500 руб.", "", "180р.", Color.BLUE);
-        Request requestSeq3 = new Request("Садовая ул.", "", "3 адреса, предоплата 3500 руб.", "", "", Color.BLUE);
+        Request requestCur = new Request("Садовая ул.", "Выкупить товар -3200 руб", "3 адреса, предоплата 3500 руб.", "10:00-12:00", "180р.", Color.BLUE);
+        Request requestCur2 = new Request("Садовая ул.", "", "3 адреса, предоплата 3500 руб.", "", "180р.", Color.BLUE);
+        Request requestCur3 = new Request("Садовая ул.", "", "3 адреса, предоплата 3500 руб.", "", "", Color.BLUE);
 
         newRequests.add(requestNew);
         newRequests.add(requestNew2);
 
-        seqRequests.add(requestSeq);
-        seqRequests.add(requestSeq2);
-        seqRequests.add(requestSeq3);
+        curRequests.add(requestCur);
+        curRequests.add(requestCur2);
+        curRequests.add(requestCur3);
 
+        histRequests.add(requestCur);
+        histRequests.add(requestCur2);
+        histRequests.add(requestCur3);
 
-        user = new User("Олег", "Диденко", "1sq2", "https://mycodeandlife.files.wordpress.com/2013/01/384088_2317070728022_2086719259_n.jpg");
+        user = new User("Олег", "Диденко", "1sq2", "https://mycodeandlife.files.wordpress.com/2013/01/384088_2317070728022_2086719259_n.jpg", histRequests, curRequests);
     }
 
     public User getUser(){
@@ -44,9 +51,4 @@ public class Model {
     public ArrayList<Request> getNewRequests(){
         return newRequests;
     }
-
-    public ArrayList<Request> getSeqRequests(){
-        return seqRequests;
-    }
-
 }

@@ -23,7 +23,9 @@ public class User implements Serializable {
     private List<Request> historyOfRequests;
 
     public User(String name, String lastName,
-                String sessionKey, String image) {
+                String sessionKey, String image,
+                List<Request> historyOfRequests,
+                List<Request> currentRequests) {
         this.name = name;
         this.lastName = lastName;
         this.sessionKey = sessionKey;

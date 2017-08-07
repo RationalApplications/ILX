@@ -70,7 +70,6 @@ public class LaunchActivity extends AppCompatActivity {
                 return 1;
             }
             else {
-                System.out.println(params[0]);
                 return 0;
             }
         }
