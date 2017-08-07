@@ -63,11 +63,5 @@
         android:layout_marginTop="80dp"
         android:layout_gravity="center"/>
 
-    <Button
-        android:id="@+id/button2"
-        style="@android:style/Widget.Holo.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 
 </LinearLayout>

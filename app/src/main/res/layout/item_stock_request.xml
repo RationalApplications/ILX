@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:id="@+id/cv_city_offer"
+    android:id="@+id/cv_stock_request"
     android:layout_marginLeft="6dp"
     android:layout_marginTop="10dp"
     android:layout_marginRight="6dp"
@@ -12,8 +12,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
 
     </android.support.constraint.ConstraintLayout>
 
