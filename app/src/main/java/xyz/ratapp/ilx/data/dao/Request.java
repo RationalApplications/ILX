@@ -15,10 +15,10 @@ public class Request {
     private String comment;
     private String time;
     private String cost;
-    private Color difficult;
+    private int difficult;
 
     public Request(String address, String task, String comment,
-                   String time, String cost, Color difficult) {
+                   String time, String cost, int difficult) {
         this.address = address;
         this.task = task;
         this.comment = comment;
@@ -47,7 +47,7 @@ public class Request {
         return cost;
     }
 
-    public Color getDifficult() {
+    public int getDifficult() {
         return difficult;
     }
 }
