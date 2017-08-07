@@ -9,4 +9,9 @@
 
     <!-- Login Screen:-->
     <string name="pin_to_login">Введите код доступа для входа в систему</string>
+
+    <!-- Main Screen:-->
+    <string name="online">Онлайн</string>
+    <string name="offline">Оффлайн</string>
+
 </resources>

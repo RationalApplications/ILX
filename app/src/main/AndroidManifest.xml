@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LaunchActivity"
+            android:name=".view.LaunchActivity"
             android:label="@string/title_activity_launch"></activity>
     </application>
 

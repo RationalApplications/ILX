@@ -32,4 +32,11 @@
         app:hint_text="@string/pin_to_login"
         app:codes="6" />
 
+    <Button
+        android:id="@+id/button2"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
 </LinearLayout>
