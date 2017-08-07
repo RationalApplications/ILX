@@ -8,5 +8,9 @@
     <string name="title_activity_launch">Sign in</string>
 
     <!-- Login Screen:-->
-    <string name="pin_to_login">Введите код доступа для входа в систему</string>
+    <string name="pin_to_login">Введите код доступа</string>
+    <string name="tv_launch_text">Платформа управления заявками и исполнителями</string>
+    <string name="btn_text_login">Войти</string>
+    <string name="toast_wrong_password">Неверно введен пароль</string>
+
 </resources>

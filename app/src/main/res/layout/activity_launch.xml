@@ -1,35 +1,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:textAlignment="center"
     tools:context="xyz.ratapp.ilx.view.LaunchActivity">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ilx" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/tv_launch_text"
+        android:textColor="@color/textColor" />
 
 
     <com.github.glomadrian.codeinputlib.CodeInput
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/ci_password"
-        app:underline_color="#457ad1"
-        app:underline_selected_color="#9e1ace"
-        app:text_color="#b12eff"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center"
+        android:layout_marginTop="60dp"
+        android:textAlignment="gravity"
+        app:codes="6"
         app:hint_color="#77ce9d"
         app:hint_text="@string/pin_to_login"
-        app:codes="6" />
+        app:text_color="#b12eff"
+        app:underline_color="#457ad1"
+        app:underline_selected_color="#9e1ace" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:text="@string/btn_text_login" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center"/>
 
 </LinearLayout>
