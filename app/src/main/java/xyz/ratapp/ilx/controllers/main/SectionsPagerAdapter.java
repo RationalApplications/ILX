@@ -13,12 +13,16 @@ import xyz.ratapp.ilx.view.fragments.StockFragment;
 
 class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    private StockFragment stock = new StockFragment();
-    private RecentFragment recent = new RecentFragment();
-    private HistoryFragment history = new HistoryFragment();
+    private StockFragment stock;
+    private RecentFragment recent;
+    private HistoryFragment history;
 
     SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
+        //initialize all fragments
+        stock = new StockFragment();
+        recent = new RecentFragment();
+        history = new HistoryFragment();
     }
 
 

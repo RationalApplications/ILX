@@ -1,7 +1,5 @@
 package xyz.ratapp.ilx.data.dao;
 
-import android.graphics.Color;
-
 /**
  * Created by timtim on 07/08/2017.
  *

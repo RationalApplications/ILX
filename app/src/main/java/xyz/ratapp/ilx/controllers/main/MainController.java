@@ -1,5 +1,6 @@
 package xyz.ratapp.ilx.controllers.main;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.view.MainActivity;
+import xyz.ratapp.ilx.view.activities.MainActivity;
 import xyz.ratapp.ilx.view.SlidingTabLayout;
 import xyz.ratapp.ilx.view.StatusSwitch;
 
@@ -34,6 +35,7 @@ public class MainController
         container.setAdapter(adapter);
 
         setupUI();
+        setupData();
     }
 
     private void setupUI() {
@@ -63,6 +65,10 @@ public class MainController
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    private void setupData() {
+
+    }
+
     /**
      * Process press to back-key
      *
@@ -88,4 +94,5 @@ public class MainController
 
         return true;
     }
+
 }

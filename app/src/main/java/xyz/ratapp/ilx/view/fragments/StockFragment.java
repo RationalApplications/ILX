@@ -7,13 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.data.dao.Request;
+import xyz.ratapp.ilx.view.adapters.RequestsAdapter;
+import xyz.ratapp.ilx.view.interfaces.DataSettable;
 
 /**
  * Created by timtim on 07/08/2017.
  */
 
-public class StockFragment extends Fragment {
+public class StockFragment extends Fragment
+        implements DataSettable {
 
     private RecyclerView stockList;
 
@@ -28,6 +34,11 @@ public class StockFragment extends Fragment {
 
     private void setupUI(View view) {
         stockList = view.findViewById(R.id.rv_stock);
+    }
+
+    @Override
+    public void setData(List<Request> requests) {
+        stockList.setAdapter(new RequestsAdapter(getActivity(), false, requests));
     }
 
 }
