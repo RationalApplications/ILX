@@ -3,6 +3,10 @@ package xyz.ratapp.ilx.controllers.main;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import java.util.List;
+
+import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.view.fragments.HistoryFragment;
 import xyz.ratapp.ilx.view.fragments.RecentFragment;
 import xyz.ratapp.ilx.view.fragments.StockFragment;
@@ -25,6 +29,17 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
         history = new HistoryFragment();
     }
 
+    public void setData(int position, List<Request> data) {
+        if(position == 0) {
+            stock.setData(data);
+        }
+        else if(position == 1) {
+            recent.setData(data);
+        }
+        else if(position == 2) {
+            //history.setData(data);
+        }
+    }
 
     @Override
     public Fragment getItem(int position) {

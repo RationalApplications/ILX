@@ -16,12 +16,12 @@ public class Model {
 
     private User user;
 
-    private ArrayList newRequests, curRequests, histRequests;
+    private ArrayList<Request> newRequests, curRequests, histRequests;
 
     public Model() throws IOException {
-        newRequests = new ArrayList();
-        curRequests = new ArrayList();
-        histRequests = new ArrayList();
+        newRequests = new ArrayList<>();
+        curRequests = new ArrayList<>();
+        histRequests = new ArrayList<>();
 
         Request requestNew = new Request("Садовая ул.", "", "3 адреса, предоплата 3500 руб.", "", "130р.", Color.GREEN);
         Request requestNew2 = new Request("Егорова ул., 102", "", "2 адреса, нужен паспорт", "", "180р.", Color.BLUE);

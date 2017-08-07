@@ -1,6 +1,5 @@
 package xyz.ratapp.ilx.controllers.main;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,7 +9,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Handler;
+
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.data.Model;
+import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.view.activities.MainActivity;
 import xyz.ratapp.ilx.view.SlidingTabLayout;
 import xyz.ratapp.ilx.view.StatusSwitch;
@@ -66,7 +72,13 @@ public class MainController
     }
 
     private void setupData() {
+        try {
+            Model model = new Model();
+            adapter.setData(0, model.getNewRequests());
+            adapter.setData(1, model.getUser().getCurrentRequests());
+        } catch (IOException e) {
 
+        }
     }
 
     /**

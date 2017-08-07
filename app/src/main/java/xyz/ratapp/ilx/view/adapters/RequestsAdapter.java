@@ -80,8 +80,8 @@ public class RequestsAdapter extends
             difficult = itemView.findViewById(R.id.v_difficult);
 
             if(isRecent) {
-                //comment = itemView.findViewById(R.id.tv_comment);
-                //time = itemView.findViewById(R.id.tv_time);
+                comment = itemView.findViewById(R.id.tv_comment);
+                time = itemView.findViewById(R.id.tv_time);
             }
             else {
                 cost = itemView.findViewById(R.id.tv_cost);

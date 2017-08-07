@@ -30,6 +30,8 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.sessionKey = sessionKey;
         this.image = image;
+        this.historyOfRequests = historyOfRequests;
+        this.currentRequests = currentRequests;
         online = false;
     }
 
@@ -51,5 +53,13 @@ public class User implements Serializable {
 
     public boolean isOnline() {
         return online;
+    }
+
+    public List<Request> getCurrentRequests() {
+        return currentRequests;
+    }
+
+    public List<Request> getHistoryOfRequests() {
+        return historyOfRequests;
     }
 }
