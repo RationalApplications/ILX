@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:textAlignment="center"
-    tools:context="xyz.ratapp.ilx.view.LaunchActivity">
+    tools:context="xyz.ratapp.ilx.view.activities.LaunchActivity">
 
     <ImageView
         android:layout_width="match_parent"
