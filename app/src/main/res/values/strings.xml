@@ -17,4 +17,8 @@
     <!-- Main Screen:-->
     <string name="online">Онлайн</string>
     <string name="offline">Оффлайн</string>
+    <string name="way">Маршрут</string>
+    <string name="get_order">Выполнить</string>
+    <string name="issue">Проблема</string>
+    <string name="write_logist">Написать логисту</string>
 </resources>
