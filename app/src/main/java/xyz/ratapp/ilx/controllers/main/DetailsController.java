@@ -1,5 +1,7 @@
 package xyz.ratapp.ilx.controllers.main;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
@@ -60,7 +62,8 @@ public class DetailsController {
         (activity.findViewById(R.id.img_phone)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Call intent
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + activity.findViewById(R.id.tv_telephone)));
+                activity.startActivity(intent);
             }
         });
     }
