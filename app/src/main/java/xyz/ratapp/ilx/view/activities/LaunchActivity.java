@@ -74,11 +74,12 @@ public class LaunchActivity extends AppCompatActivity {
 
         protected void onPostExecute(Integer result) {
             pbLoading.setVisibility(View.GONE);
-            btn_login.setVisibility(View.VISIBLE);
+
             if (result == 1){
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
             else{
+                btn_login.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), R.string.toast_wrong_password , Toast.LENGTH_LONG).show();
             }
         }

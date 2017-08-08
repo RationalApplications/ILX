@@ -22,6 +22,7 @@ public class User implements Serializable {
     private List<Request> currentRequests;
     private List<Request> historyOfRequests;
 
+
     public User(String name, String lastName,
                 String sessionKey, String image,
                 List<Request> historyOfRequests,
