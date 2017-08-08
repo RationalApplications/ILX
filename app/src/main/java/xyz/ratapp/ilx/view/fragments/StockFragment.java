@@ -14,14 +14,14 @@ import java.util.List;
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.view.adapters.RequestsAdapter;
-import xyz.ratapp.ilx.view.interfaces.DataSettable;
+import xyz.ratapp.ilx.view.interfaces.ListSettable;
 
 /**
  * Created by timtim on 07/08/2017.
  */
 
 public class StockFragment extends Fragment
-        implements DataSettable {
+        implements ListSettable<Request> {
 
     private RecyclerView stockList;
     private List<Request> requests;

@@ -17,10 +17,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
-        android:src="@drawable/ilx" />
+        android:src="@drawable/ilx"
+        android:contentDescription="" />
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -34,9 +34,7 @@
         android:id="@+id/ci_password"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center"
         android:layout_marginTop="60dp"
-        android:textAlignment="gravity"
         app:codes="6"
         app:hint_color="#77ce9d"
         app:hint_text="@string/pin_to_login"

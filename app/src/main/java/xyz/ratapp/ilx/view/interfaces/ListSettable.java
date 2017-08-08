@@ -8,7 +8,7 @@ import xyz.ratapp.ilx.data.dao.Request;
  * Created by timtim on 08/08/2017.
  */
 
-public interface DataSettable {
+public interface ListSettable<T> {
 
-    void setData(List<Request> requests);
+    void setData(List<T> requests);
 }

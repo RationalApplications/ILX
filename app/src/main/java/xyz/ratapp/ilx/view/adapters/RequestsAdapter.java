@@ -1,10 +1,14 @@
 package xyz.ratapp.ilx.view.adapters;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -44,11 +48,15 @@ public class RequestsAdapter extends
         Request r = requests.get(position);
 
         holder.title.setText(r.getAddress());
-        holder.task.setText(r.getTask());
+        holder.comment.setText(r.getComment());
+
+        //setup difficult
+        int height = holder.requests.getHeight();
+        holder.difficult.setMinimumHeight(height);
         holder.difficult.setBackgroundColor(r.getDifficult());
 
         if(recent) {
-            holder.comment.setText(r.getComment());
+            holder.task.setText(r.getTask());
             holder.time.setText(r.getTime());
         }
         else {
@@ -64,6 +72,7 @@ public class RequestsAdapter extends
     static class RequestsViewHolder
             extends RecyclerView.ViewHolder {
 
+        private RelativeLayout requests;
         private TextView cost;
         private TextView title;
         private TextView task;
@@ -72,15 +81,16 @@ public class RequestsAdapter extends
         private View difficult;
 
 
-        public RequestsViewHolder(View itemView, boolean isRecent) {
+        RequestsViewHolder(View itemView, boolean isRecent) {
             super(itemView);
 
+            requests = itemView.findViewById(R.id.rl_requests);
             title = itemView.findViewById(R.id.tv_title);
-            task = itemView.findViewById(R.id.tv_task);
+            comment = itemView.findViewById(R.id.tv_comment);
             difficult = itemView.findViewById(R.id.v_difficult);
 
             if(isRecent) {
-                comment = itemView.findViewById(R.id.tv_comment);
+                task = itemView.findViewById(R.id.tv_task);
                 time = itemView.findViewById(R.id.tv_time);
             }
             else {

@@ -11,12 +11,9 @@ import android.view.Gravity;
 import android.view.MenuItem;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.logging.Handler;
 
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.data.Model;
-import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.view.activities.MainActivity;
 import xyz.ratapp.ilx.view.SlidingTabLayout;
 import xyz.ratapp.ilx.view.StatusSwitch;
@@ -30,21 +27,21 @@ public class MainController
 
     private MainActivity activity;
     private DrawerLayout layout;
-    private ViewPager container;
     private SectionsPagerAdapter adapter;
 
     public MainController(MainActivity activity) {
         this.activity = activity;
-        layout = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
-        adapter = new SectionsPagerAdapter(activity.getSupportFragmentManager());
-        container = ((ViewPager) activity.findViewById(R.id.vp_container));
-        container.setAdapter(adapter);
-
         setupUI();
         setupData();
     }
 
     private void setupUI() {
+        //setup adapter, find views
+        layout = (DrawerLayout) activity.findViewById(R.id.dl_main);
+        adapter = new SectionsPagerAdapter(activity.getSupportFragmentManager());
+        ViewPager container = (ViewPager) activity.findViewById(R.id.vp_container);
+        container.setAdapter(adapter);
+
         //toolbar
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.requests);
@@ -56,15 +53,14 @@ public class MainController
         SlidingTabLayout slidingTabLayout = (SlidingTabLayout)
                 activity.findViewById(R.id.stl_tabs);
         slidingTabLayout.setSelectedIndicatorColors(
-                activity.getResources().getColor(R.color.tab_line));
+                activity.getResources().getColor(R.color.white));
         slidingTabLayout.setDistributeEvenly(true);
         slidingTabLayout.setViewPager(container);
 
         //drawer
-        DrawerLayout drawer = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawer, toolbar,
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, layout, toolbar,
                 R.string.nav_drawer_open_desc, R.string.nav_drawer_close_desc);
-        drawer.addDrawerListener(toggle);
+        layout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
@@ -76,6 +72,7 @@ public class MainController
             Model model = new Model();
             adapter.setData(0, model.getNewRequests());
             adapter.setData(1, model.getUser().getCurrentRequests());
+            adapter.setData(2, model.getUser().getHistoryOfRequests());
         } catch (IOException e) {
 
         }
@@ -99,7 +96,7 @@ public class MainController
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_requests) {
-            //TODO: send intent to requests
+            //TODO: send intent to requests?
         }
 
         layout.closeDrawer(GravityCompat.START);

@@ -17,9 +17,9 @@ import xyz.ratapp.ilx.R;
 
 public class LaunchActivity extends AppCompatActivity {
 
-    private static final String TEMP_PASS = "123455" ;
+    private static final String TEMP_PASS = "123455";
     CodeInput passwordCode;
-    Button btn_login;
+    Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public class LaunchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launch);
         passwordCode = (CodeInput) findViewById(R.id.ci_password);
 
-        btn_login = (Button)findViewById(R.id.btn_login);
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btnLogin = (Button)findViewById(R.id.btn_login);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginTask loginTask = new LoginTask();
@@ -45,18 +45,19 @@ public class LaunchActivity extends AppCompatActivity {
     }
 
 
-    private class LoginTask extends AsyncTask<String, Void, Integer> {
+    //TODO: Send "startLogin" to controller
+    private class LoginTask extends AsyncTask<String, Void, Boolean> {
 
         ProgressBar pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            btn_login.setVisibility(View.GONE);
+            btnLogin.setVisibility(View.GONE);
             pbLoading.setVisibility(View.VISIBLE);
         }
 
-        protected Integer doInBackground(String... params) {
+        protected Boolean doInBackground(String... params) {
 
             try {
                 TimeUnit.SECONDS.sleep(2);
@@ -64,18 +65,13 @@ public class LaunchActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if (TEMP_PASS.equals(params[0])){
-                return 1;
-            }
-            else {
-                return 0;
-            }
+            return TEMP_PASS.equals(params[0]);
         }
 
-        protected void onPostExecute(Integer result) {
+        protected void onPostExecute(Boolean result) {
             pbLoading.setVisibility(View.GONE);
-            btn_login.setVisibility(View.VISIBLE);
-            if (result == 1){
+            btnLogin.setVisibility(View.VISIBLE);
+            if (result){
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
             else{

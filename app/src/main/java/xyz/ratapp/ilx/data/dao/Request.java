@@ -1,5 +1,7 @@
 package xyz.ratapp.ilx.data.dao;
 
+import android.support.annotation.ColorInt;
+
 /**
  * Created by timtim on 07/08/2017.
  *
@@ -13,6 +15,7 @@ public class Request {
     private String comment;
     private String time;
     private String cost;
+    @ColorInt
     private int difficult;
 
     public Request(String address, String task, String comment,

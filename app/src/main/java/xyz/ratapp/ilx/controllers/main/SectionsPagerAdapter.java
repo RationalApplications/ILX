@@ -37,7 +37,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
             recent.setData(data);
         }
         else if(position == 2) {
-            //history.setData(data);
+            history.setData(data);
         }
     }
 

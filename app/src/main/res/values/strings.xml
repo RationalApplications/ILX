@@ -1,17 +1,18 @@
 <resources>
-    <string name="app_name">ILX</string>
+    <string name="title_activity_main">ILX</string>
 
     <!--Navigation Drawer strings:-->
     <string name="requests">Заявки</string>
     <string name="nav_drawer_open_desc">Navigation Bar Open</string>
     <string name="nav_drawer_close_desc">Navigation Bar Close</string>
-    <string name="title_activity_launch">Sign in</string>
+    <string name="title_activity_launch">ILX</string>
 
     <!-- Login Screen:-->
     <string name="pin_to_login">Введите код доступа</string>
     <string name="tv_launch_text">Платформа управления заявками и исполнителями</string>
     <string name="btn_text_login">Войти</string>
     <string name="toast_wrong_password">Неверно введен пароль</string>
+    <string name="iv_logo_desc">Descriptor for logo on launch screen</string>
 
     <!-- Main Screen:-->
     <string name="online">Онлайн</string>
