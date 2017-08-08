@@ -26,7 +26,7 @@ public class DetailsActivity extends AppCompatActivity {
         DetailsController controller = new DetailsController(this);
     }
 
-    static public Intent getIntent(Request request){
+    public static Intent getIntent(Request request){
         Intent intent = new Intent();
         intent.setAction(SHOW_DETAILS_OF_REQUEST_ACTION);
         intent.putExtra(DetailsController.STR_ADDRESS, request.getAddress());

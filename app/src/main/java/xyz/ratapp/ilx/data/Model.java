@@ -23,12 +23,49 @@ public class Model {
         curRequests = new ArrayList<>();
         histRequests = new ArrayList<>();
 
-        Request requestNew = new Request("Садовая ул.", "", "3 адреса, предоплата 3500 руб.", "", "130р.", "", "", Color.GREEN);
-        Request requestNew2 = new Request("Егорова ул., 102", "", "2 адреса, нужен паспорт", "", "180р.", "", "", Color.BLUE);
+        Request requestNew = new Request("Садовая ул.", //address
+                "", //task
+                "3 адреса, предоплата 3500 руб.", //comment
+                "", //time
+                "130р.", //cost
+                "", //name
+                "", //phone
+                Color.GREEN); //difficult
 
-        Request requestCur = new Request("Садовая ул.", "Выкупить товар -3200 руб", "3 адреса, предоплата 3500 руб.", "10:00-12:00", "180р.", "", "", Color.BLUE);
-        Request requestCur2 = new Request("Садовая ул.", "", "3 адреса, предоплата 3500 руб.", "", "180р.", "", "", Color.BLUE);
-        Request requestCur3 = new Request("Садовая ул.", "", "3 адреса, предоплата 3500 руб.", "", "", "", "", Color.BLUE);
+        Request requestNew2 = new Request("Егорова ул., 102",
+                "",
+                "2 адреса, нужен паспорт",
+                "",
+                "180р.",
+                "",
+                "",
+                Color.BLUE);
+
+
+
+        Request requestCur = new Request("Садовая ул.",
+                "Выкупить товар -3200 руб",
+                "Забрать два заказа, иметь паспорт при себе",
+                "10:00-12:00",
+                "",
+                "Ольга Ивановна",
+                "+79811421523",
+                Color.BLUE);
+        Request requestCur2 = new Request("Невский пр., 109, кв.122",
+                "Принять оплату +1500 руб",
+                "Не звонить! заказ оплачен",
+                "10:00-12:00",
+                "",
+                "Олег Иванович",
+                "+78255232551",
+                Color.BLUE);
+        Request requestCur3 = new Request("Пр. Ветеранов, 55, кв. 13",
+                "Принять оплату +1700 руб",
+                "",
+                "10:00-12:00",
+                "",
+                "Александр Викторович",
+                "+79252412512", Color.BLUE);
 
         newRequests.add(requestNew);
         newRequests.add(requestNew2);
