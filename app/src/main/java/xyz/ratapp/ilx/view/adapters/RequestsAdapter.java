@@ -1,6 +1,7 @@
 package xyz.ratapp.ilx.view.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.data.dao.Request;
+import xyz.ratapp.ilx.view.activities.DetailsActivity;
 
 /**
  * Created by timtim on 08/08/2017.
@@ -45,7 +47,7 @@ public class RequestsAdapter extends
 
     @Override
     public void onBindViewHolder(RequestsViewHolder holder, int position) {
-        Request r = requests.get(position);
+        final Request r = requests.get(position);
 
         holder.title.setText(r.getAddress());
         holder.comment.setText(r.getComment());
@@ -62,6 +64,14 @@ public class RequestsAdapter extends
         else {
             holder.cost.setText(r.getCost());
         }
+
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent next = DetailsActivity.getIntent(r);
+                //context.startActivity(next);
+            }
+        });
     }
 
     @Override
@@ -79,11 +89,13 @@ public class RequestsAdapter extends
         private TextView comment;
         private TextView time;
         private View difficult;
+        private View item;
 
 
         RequestsViewHolder(View itemView, boolean isRecent) {
             super(itemView);
 
+            item = itemView;
             requests = itemView.findViewById(R.id.rl_requests);
             title = itemView.findViewById(R.id.tv_title);
             comment = itemView.findViewById(R.id.tv_comment);
