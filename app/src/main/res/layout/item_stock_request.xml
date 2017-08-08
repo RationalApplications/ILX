@@ -9,14 +9,14 @@
     android:layout_marginBottom="6dp">
 
     <RelativeLayout
+        android:id="@+id/rl_requests"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rl_requests">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp" >
+            android:layout_margin="10dp">
 
             <TextView
                 android:id="@+id/tv_cost"
@@ -46,10 +46,10 @@
                 android:id="@+id/tv_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_below="@+id/tv_title"
+                android:layout_toEndOf="@+id/tv_cost"
                 android:layout_toRightOf="@+id/tv_cost"
-                android:layout_toEndOf="@+id/tv_cost" />
+                android:textSize="16sp" />
 
         </RelativeLayout>
 

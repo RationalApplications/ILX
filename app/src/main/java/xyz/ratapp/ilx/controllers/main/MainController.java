@@ -69,14 +69,10 @@ public class MainController
     }
 
     private void setupData() {
-        try {
-            Model model = new Model();
-            adapter.setData(0, model.getNewRequests());
-            adapter.setData(1, model.getUser().getCurrentRequests());
-            adapter.setData(2, model.getUser().getHistoryOfRequests());
-        } catch (IOException e) {
-
-        }
+        Model model = new Model();
+        adapter.setData(0, model.getNewRequests());
+        adapter.setData(1, model.getUser().getCurrentRequests());
+        adapter.setData(2, model.getUser().getHistoryOfRequests());
     }
 
     /**

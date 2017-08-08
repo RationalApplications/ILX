@@ -62,7 +62,7 @@ public class DetailsController {
         (activity.findViewById(R.id.img_phone)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + activity.findViewById(R.id.tv_telephone)));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + ((TextView)activity.findViewById(R.id.tv_telephone)).getText().toString()));
                 activity.startActivity(intent);
             }
         });
