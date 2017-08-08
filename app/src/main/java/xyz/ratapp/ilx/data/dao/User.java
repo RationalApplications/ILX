@@ -63,4 +63,8 @@ public class User implements Serializable {
     public List<Request> getHistoryOfRequests() {
         return historyOfRequests;
     }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
 }

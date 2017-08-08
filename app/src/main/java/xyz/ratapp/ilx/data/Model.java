@@ -18,7 +18,7 @@ public class Model {
 
     private ArrayList<Request> newRequests, curRequests, histRequests;
 
-    public Model() throws IOException {
+    public Model() {
         newRequests = new ArrayList<>();
         curRequests = new ArrayList<>();
         histRequests = new ArrayList<>();
@@ -41,7 +41,7 @@ public class Model {
         histRequests.add(requestCur2);
         histRequests.add(requestCur3);
 
-        user = new User("Олег", "Диденко", "1sq2", "https://mycodeandlife.files.wordpress.com/2013/01/384088_2317070728022_2086719259_n.jpg", histRequests, curRequests);
+        user = new User("Олег", "Диденко", "1sq2", "https://pbs.twimg.com/media/CYtAGQPWMAAbUYH.jpg", histRequests, curRequests);
     }
 
     public User getUser(){

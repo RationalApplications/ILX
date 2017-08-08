@@ -2,18 +2,13 @@ package xyz.ratapp.ilx.view.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.List;
-
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.view.activities.DetailsActivity;
