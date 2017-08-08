@@ -15,8 +15,8 @@ import xyz.ratapp.ilx.data.dao.Request;
 
 public class DetailsActivity extends AppCompatActivity {
 
-
-
+    public static String SHOW_DETAILS_OF_REQUEST_ACTION =
+            "xyz.ratapp.ilx.SHOW_DETAILS_OF_REQUEST_ACTION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     static public Intent getIntent(Request request){
         Intent intent = new Intent();
+        intent.setAction(SHOW_DETAILS_OF_REQUEST_ACTION);
         intent.putExtra(DetailsController.STR_ADDRESS, request.getAddress());
         intent.putExtra(DetailsController.STR_TIME, request.getTime());
         intent.putExtra(DetailsController.STR_TASK, request.getTask());

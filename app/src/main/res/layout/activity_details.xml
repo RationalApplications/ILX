@@ -125,7 +125,7 @@
         android:layout_alignEnd="@+id/linearLayout2"
         android:layout_alignRight="@+id/linearLayout2"
         android:layout_below="@+id/linearLayout2"
-        android:layout_marginRight="8do"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="30dp"
         android:orientation="vertical"
         android:layout_alignLeft="@+id/linearLayout2"

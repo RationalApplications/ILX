@@ -68,8 +68,8 @@ public class RequestsAdapter extends
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent next = DetailsActivity.getIntent(r);
-                //context.startActivity(next);
+                Intent next = DetailsActivity.getIntent(r);
+                context.startActivity(next);
             }
         });
     }
