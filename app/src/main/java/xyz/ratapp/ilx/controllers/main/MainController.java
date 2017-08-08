@@ -97,6 +97,7 @@ public class MainController
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_requests) {
+
             //TODO: send intent to requests?
         }
 
