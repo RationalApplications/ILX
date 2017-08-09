@@ -38,6 +38,8 @@ public class RequestInfoController {
         ((TextView) (activity.findViewById(R.id.include_hadder)).findViewById(R.id.tv_title)).setText(
                 activity.getIntent().getStringExtra(RequestInfoActivity.STR_TITLE)
         );
+
+        //TODO: color line
     }
 
     private void setUI() {
