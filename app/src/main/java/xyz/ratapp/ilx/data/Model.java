@@ -2,6 +2,8 @@ package xyz.ratapp.ilx.data;
 
 import android.graphics.Color;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -31,6 +33,7 @@ public class Model {
                 "8р.", //commission
                 "", //name
                 "", //phone
+
                 Color.GREEN); //difficult
 
         Request requestNew2 = new Request("Егорова ул., 102",
@@ -41,6 +44,7 @@ public class Model {
                 "8р.", //commission
                 "",
                 "",
+
                 Color.BLUE);
 
 
