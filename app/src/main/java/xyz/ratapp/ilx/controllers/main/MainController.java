@@ -5,7 +5,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -52,33 +51,16 @@ public class MainController
         final Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.requests);
         toolbar.setBackgroundResource(R.color.grey);
-        //status switch
-        StatusSwitch status = new StatusSwitch(activity,
-                new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                compoundButton.setText(b ?
-                        R.string.online :
-                        R.string.offline);
-                toolbar.setBackgroundResource(b ?
-                        R.color.colorPrimary :
-                        R.color.grey);
-
-                model.getUser().setOnline(b);
-                setupUser();
-            }
-        });
-        toolbar.addView(status,
-                new Toolbar.LayoutParams(Gravity.END));
         activity.setSupportActionBar(toolbar);
 
         //tabs
-        SlidingTabLayout slidingTabLayout = (SlidingTabLayout)
+        final SlidingTabLayout slidingTabLayout = (SlidingTabLayout)
                 activity.findViewById(R.id.stl_tabs);
         slidingTabLayout.setSelectedIndicatorColors(
                 activity.getResources().getColor(R.color.white));
         slidingTabLayout.setDistributeEvenly(true);
         slidingTabLayout.setViewPager(container);
+        slidingTabLayout.setBackgroundResource(R.color.grey);
 
         //drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, layout, toolbar,
@@ -87,8 +69,34 @@ public class MainController
         toggle.syncState();
         setupUser();
 
-        NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
+        final NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getHeaderView(0).setBackgroundResource(R.drawable.side_passive_nav_bar);
+
+        //status switch
+        StatusSwitch status = new StatusSwitch(activity,
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        compoundButton.setText(b ?
+                                R.string.online :
+                                R.string.offline);
+                        toolbar.setBackgroundResource(b ?
+                                R.color.colorPrimary :
+                                R.color.grey);
+                        slidingTabLayout.setBackgroundResource(b ?
+                                R.color.colorPrimary :
+                                R.color.grey);
+                        navigationView.getHeaderView(0).setBackgroundResource(b ?
+                                R.drawable.side_active_nav_bar :
+                                R.drawable.side_passive_nav_bar);
+
+                        model.getUser().setOnline(b);
+                        setupUser();
+                    }
+                });
+        toolbar.addView(status,
+                new Toolbar.LayoutParams(Gravity.END));
     }
 
     private void setupUser() {

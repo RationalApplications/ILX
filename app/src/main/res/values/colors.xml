@@ -6,4 +6,7 @@
     <color name="textColor">#000</color>
     <color name="grey">#555</color>
     <color name="white">#FFF</color>
+    <color name="colorPassiveAccent">#444</color>
+    <color name="colorPassivePrimaryDark">#222</color>
+    <color name="colorPassivePrimary">#333</color>
 </resources>

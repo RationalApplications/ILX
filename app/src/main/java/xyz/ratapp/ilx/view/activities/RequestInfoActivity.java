@@ -12,11 +12,11 @@ public class RequestInfoActivity extends AppCompatActivity {
     public static final String SHOW_DETAILS_OF_STOCK_REQUEST_ACTION =
             "xyz.ratapp.ilx.SHOW_DETAILS_OF_STOCK_REQUEST_ACTION";
 
-    private static final String STR_TITLE = "title";
+    public static final String STR_TITLE = "title";
     public static  final String STR_COST = "cost";
     public static  final String STR_COMMISSION = "commission";
-    private static final String STR_COMMENT = "comment";
-    private static final String STR_DIFFICULT = "difficult";
+    public static final String STR_COMMENT = "comment";
+    public static final String STR_DIFFICULT = "difficult";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
