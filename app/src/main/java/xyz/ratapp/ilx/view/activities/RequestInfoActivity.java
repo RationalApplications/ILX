@@ -9,11 +9,11 @@ import xyz.ratapp.ilx.data.dao.Request;
 
 public class RequestInfoActivity extends AppCompatActivity {
 
-    private static final String STR_TITLE = "title";
-    public static  final String STR_COST = "cost";
-    public static  final String STR_COMMISSION = "commission";
-    private static final String STR_COMMENT = "comment";
-    private static final String STR_DIFFICULT = "difficult";
+    public static final String STR_TITLE = "title";
+    public static final String STR_COST = "cost";
+    public static final String STR_COMMISSION = "commission";
+    public static final String STR_COMMENT = "comment";
+    public static final String STR_DIFFICULT = "difficult";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
