@@ -12,6 +12,7 @@ import java.util.List;
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.view.activities.DetailsActivity;
+import xyz.ratapp.ilx.view.activities.RequestInfoActivity;
 
 /**
  * Created by timtim on 08/08/2017.
@@ -63,7 +64,10 @@ public class RequestsAdapter extends
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent next = DetailsActivity.getIntent(r);
+                Intent next = recent ?
+                        DetailsActivity.getIntent(r) :
+                        RequestInfoActivity.getIntent(r);
+
                 context.startActivity(next);
             }
         });

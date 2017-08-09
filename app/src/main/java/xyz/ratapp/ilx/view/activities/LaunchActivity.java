@@ -25,9 +25,9 @@ public class LaunchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-        passwordCode = (CodeInput) findViewById(R.id.ci_password);
+        passwordCode = findViewById(R.id.ci_password);
 
-        btnLogin = (Button)findViewById(R.id.btn_login);
+        btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +73,7 @@ public class LaunchActivity extends AppCompatActivity {
 
             if (result){
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
             }
             else{
                 Toast.makeText(getApplicationContext(), R.string.toast_wrong_password , Toast.LENGTH_LONG).show();

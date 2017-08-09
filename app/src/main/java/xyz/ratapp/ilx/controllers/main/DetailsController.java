@@ -28,7 +28,9 @@ public class DetailsController {
         (activity.findViewById(R.id.btn_way)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Map way
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?daddr=20.5666,45.345"));
+                activity.startActivity(intent);
             }
         });
 
