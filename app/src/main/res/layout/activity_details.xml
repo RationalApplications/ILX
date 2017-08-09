@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#fafafa"
     android:elevation="0dp"
     tools:context="xyz.ratapp.ilx.view.activities.DetailsActivity">
 
@@ -56,7 +56,7 @@
             android:layout_alignStart="@+id/linearLayout2"
             android:layout_below="@+id/linearLayout2"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="8dp"
             android:orientation="vertical">
 
             <TextView
@@ -165,20 +165,21 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btn_write_logist"
-            android:layout_alignLeft="@+id/btn_write_logist"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/btn_write_logist"
-            android:layout_alignStart="@+id/btn_write_logist"
             android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
 
             <Button
                 android:id="@+id/btn_start_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
+                style="@style/Base.Widget.AppCompat.Button"
                 android:background="#92d36e"
                 android:text="@string/get_order"
                 android:textSize="14sp" />
@@ -187,9 +188,10 @@
                 android:id="@+id/btn_issue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="#ff3822"
+                style="@style/Base.Widget.AppCompat.Button"
                 android:text="@string/issue"
                 android:textSize="14sp" />
         </LinearLayout>
