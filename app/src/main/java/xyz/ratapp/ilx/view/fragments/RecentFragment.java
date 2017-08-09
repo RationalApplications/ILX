@@ -1,5 +1,6 @@
 package xyz.ratapp.ilx.view.fragments;
 
+import android.app.Dialog;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
@@ -28,6 +39,7 @@ public class RecentFragment extends Fragment
 
     private RecyclerView recentList;
     private List<Request> requests;
+    private Button showMap;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -43,6 +55,31 @@ public class RecentFragment extends Fragment
 
     private void setupUI(View view) {
         recentList = view.findViewById(R.id.rv_recent);
+        showMap = view.findViewById(R.id.btn_on_the_map);
+        showMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_map);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+
+                MapView mMapView = dialog.findViewById(R.id.mv_dialog);
+                MapsInitializer.initialize(getActivity());
+                mMapView.onCreate(dialog.onSaveInstanceState());
+                mMapView.onResume();
+                mMapView.getMapAsync(new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        LatLng sydney = new LatLng(-33.852, 151.211);
+                        googleMap.addMarker(new MarkerOptions().position(sydney)
+                                .title("Marker in Sydney"));
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                    }
+                });
+            }
+        });
 
         //refresh
         final SwipeRefreshLayout srl = view.findViewById(R.id.srl_recent);

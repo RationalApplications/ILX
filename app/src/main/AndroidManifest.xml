@@ -16,16 +16,18 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.activities.LaunchActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_launch"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.activities.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.activities.DetailsActivity">
@@ -35,7 +37,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.RequestInfoActivity"></activity>
+
+        <activity android:name=".view.activities.RequestInfoActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="xyz.ratapp.ilx.SHOW_DETAILS_OF_STOCK_REQUEST_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>

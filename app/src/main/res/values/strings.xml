@@ -1,5 +1,8 @@
 <resources>
+    <!-- app strings -->
+    <string name="app_name">ILX</string>
     <string name="title_activity_main">ILX</string>
+    <string name="google_maps_key">AIzaSyAlh6st_AiTPEQA4lBQH8QIoLV93pUQZos</string>
 
     <!--Navigation Drawer strings:-->
     <string name="requests">Заявки</string>
