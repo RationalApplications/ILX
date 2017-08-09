@@ -15,6 +15,13 @@ import xyz.ratapp.ilx.data.dao.Request;
 
 public class DetailsActivity extends AppCompatActivity {
 
+    public final static String STR_ADDRESS = "address";
+    public final static String STR_TIME = "time";
+    public final static String STR_TASK = "task";
+    public final static String STR_DESCRIPTION = "description";
+    public final static String STR_NAME = "name";
+    public final static String STR_PHONE = "phone";
+
     public static String SHOW_DETAILS_OF_REQUEST_ACTION =
             "xyz.ratapp.ilx.SHOW_DETAILS_OF_REQUEST_ACTION";
 
@@ -29,12 +36,12 @@ public class DetailsActivity extends AppCompatActivity {
     public static Intent getIntent(Request request){
         Intent intent = new Intent();
         intent.setAction(SHOW_DETAILS_OF_REQUEST_ACTION);
-        intent.putExtra(DetailsController.STR_ADDRESS, request.getAddress());
-        intent.putExtra(DetailsController.STR_TIME, request.getTime());
-        intent.putExtra(DetailsController.STR_TASK, request.getTask());
-        intent.putExtra(DetailsController.STR_DESCRIPTION, request.getComment());
-        intent.putExtra(DetailsController.STR_NAME, request.getName());
-        intent.putExtra(DetailsController.STR_PHONE, request.getPhone());
+        intent.putExtra(STR_ADDRESS, request.getAddress());
+        intent.putExtra(STR_TIME, request.getTime());
+        intent.putExtra(STR_TASK, request.getTask());
+        intent.putExtra(STR_DESCRIPTION, request.getComment());
+        intent.putExtra(STR_NAME, request.getName());
+        intent.putExtra(STR_PHONE, request.getPhone());
 
         return intent;
     }

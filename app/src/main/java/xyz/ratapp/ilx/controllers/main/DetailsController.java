@@ -13,12 +13,6 @@ import xyz.ratapp.ilx.view.activities.DetailsActivity;
  */
 
 public class DetailsController {
-    public final static String STR_ADDRESS = "address";
-    public final static String STR_TIME = "time";
-    public final static String STR_TASK = "task";
-    public final static String STR_DESCRIPTION = "description";
-    public final static String STR_NAME = "name";
-    public final static String STR_PHONE = "phone";
 
     private DetailsActivity activity;
 
@@ -69,12 +63,12 @@ public class DetailsController {
     }
 
     private void setData() {
-        ((TextView)activity.findViewById(R.id.tv_address)).setText(activity.getIntent().getStringExtra(STR_ADDRESS));
-        ((TextView)activity.findViewById(R.id.tv_time)).setText(activity.getIntent().getStringExtra(STR_TIME));
-        ((TextView)activity.findViewById(R.id.tv_task)).setText(activity.getIntent().getStringExtra(STR_TASK));
-        ((TextView)activity.findViewById(R.id.tv_description)).setText(activity.getIntent().getStringExtra(STR_DESCRIPTION));
+        ((TextView)activity.findViewById(R.id.tv_address)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_ADDRESS));
+        ((TextView)activity.findViewById(R.id.tv_time)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_TIME));
+        ((TextView)activity.findViewById(R.id.tv_task)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_TASK));
+        ((TextView)activity.findViewById(R.id.tv_description)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_DESCRIPTION));
 
-        ((TextView)activity.findViewById(R.id.tv_name)).setText(activity.getIntent().getStringExtra(STR_NAME));
-        ((TextView)activity.findViewById(R.id.tv_telephone)).setText(activity.getIntent().getStringExtra(STR_PHONE));
+        ((TextView)activity.findViewById(R.id.tv_name)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_NAME));
+        ((TextView)activity.findViewById(R.id.tv_telephone)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_PHONE));
     }
 }

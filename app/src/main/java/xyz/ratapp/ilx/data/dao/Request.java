@@ -17,11 +17,13 @@ public class Request {
     private String cost;
     private String name;
     private String phone;
+    private String commission;
     @ColorInt
     private int difficult;
 
+
     public Request(String address, String task, String comment, String time,
-                   String cost, String name, String phone, int difficult) {
+                   String cost, String commission, String name, String phone, int difficult) {
         this.address = address;
         this.task = task;
         this.comment = comment;
@@ -30,6 +32,7 @@ public class Request {
         this.name = name;
         this.phone = phone;
         this.difficult = difficult;
+        this.commission = commission;
     }
 
     public String getName() {
@@ -62,5 +65,9 @@ public class Request {
 
     public int getDifficult() {
         return difficult;
+    }
+
+    public String getCommission() {
+        return commission;
     }
 }

@@ -28,6 +28,7 @@ public class Model {
                 "3 адреса, предоплата 3500 руб.", //comment
                 "", //time
                 "130р.", //cost
+                "8р.", //commission
                 "", //name
                 "", //phone
                 Color.GREEN); //difficult
@@ -37,6 +38,7 @@ public class Model {
                 "2 адреса, нужен паспорт",
                 "",
                 "180р.",
+                "8р.", //commission
                 "",
                 "",
                 Color.BLUE);
@@ -48,6 +50,7 @@ public class Model {
                 "Забрать два заказа, иметь паспорт при себе",
                 "10:00-12:00",
                 "",
+                "8р.", //commission
                 "Ольга Ивановна",
                 "+79811421523",
                 Color.BLUE);
@@ -56,6 +59,7 @@ public class Model {
                 "Не звонить! заказ оплачен",
                 "10:00-12:00",
                 "",
+                "8р.", //commission
                 "Олег Иванович",
                 "+78255232551",
                 Color.BLUE);
@@ -64,6 +68,7 @@ public class Model {
                 "",
                 "10:00-12:00",
                 "",
+                "8р.", //commission
                 "Александр Викторович",
                 "+79252412512", Color.BLUE);
 
