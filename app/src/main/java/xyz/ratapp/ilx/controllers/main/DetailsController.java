@@ -29,7 +29,7 @@ public class DetailsController {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?daddr=20.5666,45.345"));
+                        Uri.parse("http://maps.google.com/maps?daddr=59.955761,30.313146"));
                 activity.startActivity(intent);
             }
         });

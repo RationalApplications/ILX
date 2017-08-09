@@ -72,10 +72,10 @@ public class RecentFragment extends Fragment
                 mMapView.getMapAsync(new OnMapReadyCallback() {
                     @Override
                     public void onMapReady(GoogleMap googleMap) {
-                        LatLng sydney = new LatLng(-33.852, 151.211);
-                        googleMap.addMarker(new MarkerOptions().position(sydney)
-                                .title("Marker in Sydney"));
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                        LatLng spb = new LatLng(59.955761, 30.313146);
+                        googleMap.addMarker(new MarkerOptions().position(spb)
+                                .title("Marker in Spb"));
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(spb));
                     }
                 });
             }

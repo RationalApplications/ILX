@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.controllers.main.RequestInfoController;
 import xyz.ratapp.ilx.data.dao.Request;
 
 public class RequestInfoActivity extends AppCompatActivity {
@@ -22,6 +23,8 @@ public class RequestInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_info);
+
+        RequestInfoController controller = new RequestInfoController(this);
     }
 
     public static Intent getIntent(Request request){

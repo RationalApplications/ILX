@@ -1,5 +1,8 @@
 package xyz.ratapp.ilx.controllers.main;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
 import android.widget.TextView;
 
 import com.ebanx.swipebtn.OnStateChangeListener;
@@ -24,8 +27,8 @@ public class RequestInfoController {
     }
 
     private void setData() {
-        ((TextView)activity.findViewById(R.id.tv_cost)).setText(activity.getIntent().getStringExtra(RequestInfoActivity.STR_COST));
-        ((TextView)activity.findViewById(R.id.tv_comission)).setText(activity.getIntent().getStringExtra(RequestInfoActivity.STR_COMMISSION));
+        ((TextView)activity.findViewById(R.id.tv_delivery_cost)).setText("За доставку: " + activity.getIntent().getStringExtra(RequestInfoActivity.STR_COST));
+        ((TextView)activity.findViewById(R.id.tv_comission)).setText("Коммисия: " + activity.getIntent().getStringExtra(RequestInfoActivity.STR_COMMISSION));
 
         ((TextView) (activity.findViewById(R.id.include_hadder)).findViewById(R.id.tv_cost)).setText(
                 activity.getIntent().getStringExtra(RequestInfoActivity.STR_COST)
@@ -38,6 +41,15 @@ public class RequestInfoController {
         ((TextView) (activity.findViewById(R.id.include_hadder)).findViewById(R.id.tv_title)).setText(
                 activity.getIntent().getStringExtra(RequestInfoActivity.STR_TITLE)
         );
+
+        activity.findViewById(R.id.img_map_holder).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?daddr=59.955761,30.313146"));
+                activity.startActivity(intent);
+            }
+        });
 
         //TODO: color line
     }
