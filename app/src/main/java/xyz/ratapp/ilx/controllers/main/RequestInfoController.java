@@ -27,7 +27,17 @@ public class RequestInfoController {
         ((TextView)activity.findViewById(R.id.tv_cost)).setText(activity.getIntent().getStringExtra(RequestInfoActivity.STR_COST));
         ((TextView)activity.findViewById(R.id.tv_comission)).setText(activity.getIntent().getStringExtra(RequestInfoActivity.STR_COMMISSION));
 
+        ((TextView) (activity.findViewById(R.id.include_hadder)).findViewById(R.id.tv_cost)).setText(
+                activity.getIntent().getStringExtra(RequestInfoActivity.STR_COST)
+        );
 
+        ((TextView) (activity.findViewById(R.id.include_hadder)).findViewById(R.id.tv_comment)).setText(
+                activity.getIntent().getStringExtra(RequestInfoActivity.STR_COMMENT)
+        );
+
+        ((TextView) (activity.findViewById(R.id.include_hadder)).findViewById(R.id.tv_title)).setText(
+                activity.getIntent().getStringExtra(RequestInfoActivity.STR_TITLE)
+        );
     }
 
     private void setUI() {
