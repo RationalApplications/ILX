@@ -2,6 +2,10 @@ package xyz.ratapp.ilx.data.dao;
 
 import android.support.annotation.ColorInt;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+
 /**
  * Created by timtim on 07/08/2017.
  *
@@ -20,6 +24,7 @@ public class Request {
     private String commission;
     @ColorInt
     private int difficult;
+    private ArrayList listCoords;
 
 
     public Request(String address, String task, String comment, String time,
@@ -69,5 +74,18 @@ public class Request {
 
     public String getCommission() {
         return commission;
+    }
+
+    public ArrayList getCoords(){
+        LatLng latlng1 = new LatLng(59.9251684, 30.3118085);
+        LatLng latlng2 = new LatLng(59.9323387, 30.3481368);
+        LatLng latlng3 = new LatLng(59.833029, 30.1891884);
+
+        ArrayList list = new ArrayList();
+        list.add(latlng1);
+        list.add(latlng2);
+        list.add(latlng3);
+
+        return list;
     }
 }
