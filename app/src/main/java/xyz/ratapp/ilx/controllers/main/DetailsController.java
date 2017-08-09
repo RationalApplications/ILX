@@ -70,7 +70,7 @@ public class DetailsController {
         ((TextView)activity.findViewById(R.id.tv_task)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_TASK));
         ((TextView)activity.findViewById(R.id.tv_description)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_DESCRIPTION));
 
-        ((TextView)activity.findViewById(R.id.tv_name)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_NAME));
-        ((TextView)activity.findViewById(R.id.tv_telephone)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_PHONE));
+        ((TextView)activity.findViewById(R.id.tv_name)).setText("Имя: " + activity.getIntent().getStringExtra(DetailsActivity.STR_NAME));
+        ((TextView)activity.findViewById(R.id.tv_telephone)).setText("Телефон: " + activity.getIntent().getStringExtra(DetailsActivity.STR_PHONE));
     }
 }
