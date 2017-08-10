@@ -3,10 +3,12 @@
     <color name="colorPrimary">#9acbf5</color>
     <color name="colorPrimaryDark">#000001</color>
     <color name="colorAccent">#75a9f9</color>
+    <color name="colorDarkBlue">#024f9c</color>
     <color name="colorCard">#e8ebf5</color>
     <color name="textColor">#000</color>
     <color name="grey">#aaaaaa</color>
     <color name="white">#FFF</color>
+    <color name="whiteGrey">#fcfcfc</color>
     <color name="colorPassiveAccent">#444</color>
     <color name="colorPassivePrimaryDark">#606060</color>
     <color name="colorPassivePrimary">#333</color>

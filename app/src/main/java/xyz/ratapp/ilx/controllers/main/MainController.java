@@ -1,5 +1,6 @@
 package xyz.ratapp.ilx.controllers.main;
 
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -50,15 +51,16 @@ public class MainController
         //toolbar
         final Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.requests);
-        toolbar.setBackgroundResource(R.color.darkGrey);
+        toolbar.setBackgroundResource(R.color.colorPassivePrimaryDark);
         activity.setSupportActionBar(toolbar);
 
         //tabs
         final SlidingTabLayout slidingTabLayout = (SlidingTabLayout)
                 activity.findViewById(R.id.stl_tabs);
         slidingTabLayout.setSelectedIndicatorColors(
-                activity.getResources().getColor(R.color.white));
-        slidingTabLayout.setDistributeEvenly(true);
+                activity.getResources().getColor(R.color.colorDarkBlue));
+        slidingTabLayout.setCustomTabView(R.layout.tab_layout, R.id.tv_tab_item);
+        slidingTabLayout.setDistributeEvenly(false);
         slidingTabLayout.setViewPager(container);
         slidingTabLayout.setBackgroundResource(R.color.grey);
 
@@ -107,7 +109,7 @@ public class MainController
         User user = model.getUser();
         Glide.with(activity).load(user.getImage()).asBitmap().into(photo);
         name.setText(user.getName() + " " + user.getLastName());
-        text.setText(user.isOnline() ? "Online" : "Offline");
+        text.setText(user.isOnline() ? R.string.online : R.string.offline);
     }
 
     private void setupData() {
