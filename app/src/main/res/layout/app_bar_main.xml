@@ -19,6 +19,8 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            android:paddingRight="12dp"
+            android:paddingEnd="12dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <xyz.ratapp.ilx.view.SlidingTabLayout

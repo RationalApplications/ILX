@@ -13,4 +13,8 @@
     <color name="colorPassivePrimaryDark">#606060</color>
     <color name="colorPassivePrimary">#333</color>
     <color name="darkGrey">#606060</color>
+
+    <color name="underline_default_color">#CCCCCC</color>
+    <color name="underline_selected_color">#000</color>
+    <color name="hintColor">#CCCCCC</color>
 </resources>

@@ -30,7 +30,7 @@
         android:textColor="@color/textColor" />
 
 
-    <com.github.glomadrian.codeinputlib.CodeInput
+    <xyz.ratapp.ilx.view.CodeInput
         android:id="@+id/ci_password"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
@@ -40,20 +40,8 @@
         app:hint_text="@string/pin_to_login"
         app:text_color="#b12eff"
         app:underline_color="#457ad1"
-        app:underline_selected_color="#9e1ace">
+        app:underline_selected_color="#9e1ace" />
 
-        <requestFocus />
-    </com.github.glomadrian.codeinputlib.CodeInput>
-
-    <Button
-        android:id="@+id/btn_login"
-        android:textColor="@color/textColor"
-        android:background="@color/colorAccent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="80dp"
-        android:text="@string/btn_text_login" />
 
     <ProgressBar
         android:id="@+id/pb_loading"

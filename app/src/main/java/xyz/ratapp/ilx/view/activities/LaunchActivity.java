@@ -1,36 +1,33 @@
 package xyz.ratapp.ilx.view.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.github.glomadrian.codeinputlib.CodeInput;
-
 import java.util.concurrent.TimeUnit;
 
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.view.CodeInput;
 
 public class LaunchActivity extends AppCompatActivity {
 
     private static final String TEMP_PASS = "123455";
     CodeInput passwordCode;
-    Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
         passwordCode = findViewById(R.id.ci_password);
-
-        btnLogin = findViewById(R.id.btn_login);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        passwordCode.setCodeReadyListener(new CodeInput.codeReadyListener() {
             @Override
-            public void onClick(View view) {
+            public void onCodeReady(Character[] code) {
                 LoginTask loginTask = new LoginTask();
 
                 StringBuilder sb = new StringBuilder(passwordCode.getCode().length);
@@ -40,6 +37,13 @@ public class LaunchActivity extends AppCompatActivity {
                 String string = sb.toString();
 
                 loginTask.execute(string);
+
+                //hide keyboard
+                View view = LaunchActivity.this.getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
             }
         });
     }
@@ -53,7 +57,6 @@ public class LaunchActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            btnLogin.setVisibility(View.GONE);
             pbLoading.setVisibility(View.VISIBLE);
         }
 
@@ -77,7 +80,6 @@ public class LaunchActivity extends AppCompatActivity {
             }
             else{
                 Toast.makeText(getApplicationContext(), R.string.toast_wrong_password , Toast.LENGTH_LONG).show();
-                btnLogin.setVisibility(View.VISIBLE);
             }
         }
     }
