@@ -17,12 +17,12 @@ import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
+import com.github.glomadrian.codeinputlib.data.FixedStack;
+import com.github.glomadrian.codeinputlib.model.Underline;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.view.data.FixedStack;
-import xyz.ratapp.ilx.view.model.Underline;
 
 /**
  * Created by timtim on 10/08/2017.
@@ -101,7 +101,7 @@ public class CodeInput extends View {
     public interface codeReadyListener {
         // These methods are the different events and
         // need to pass relevant arguments related to the event triggered
-        public void onCodeReady(Character[] code);
+        void onCodeReady(Character[] code);
 
     }
 
@@ -143,7 +143,7 @@ public class CodeInput extends View {
 
     private void initDataStructures() {
         underlines = new Underline[underlineAmount];
-        characters = new FixedStack();
+        characters = new FixedStack<>();
         characters.setMaxSize(underlineAmount);
     }
 
@@ -407,8 +407,7 @@ public class CodeInput extends View {
     private class ReductionAnimatorListener implements ValueAnimator.AnimatorUpdateListener {
 
         public void onAnimationUpdate(ValueAnimator valueanimator) {
-            float value = ((Float) valueanimator.getAnimatedValue()).floatValue();
-            reduction = value;
+            reduction = (float) (Float) valueanimator.getAnimatedValue();
         }
     }
 
