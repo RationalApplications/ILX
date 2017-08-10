@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="14dp"
     tools:context="xyz.ratapp.ilx.view.activities.RequestInfoActivity">
 
     <include
@@ -18,6 +17,8 @@
         android:id="@+id/rv_addresses"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="14dp"
+        android:layout_marginLeft="14dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_weight="1" />
@@ -25,12 +26,16 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginLeft="14dp"
         android:background="@color/darkGrey" />
 
     <ImageView
         android:id="@+id/iv_map_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="14dp"
+        android:layout_marginLeft="14dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_weight="1.1"
@@ -40,31 +45,31 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginLeft="14dp"
         android:background="@color/darkGrey" />
 
 
     <TextView
         android:id="@+id/tv_delivery_cost"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="18dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
         android:minHeight="18dp"
         android:layout_weight="1.4"
-        android:layout_marginLeft="2dp"
         android:layout_marginStart="2dp"
         android:textColor="@color/textColor"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_comission"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="18dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
         android:minHeight="18dp"
         android:layout_weight="1.4"
-        android:layout_marginLeft="2dp"
         android:layout_marginStart="2dp"
         android:textColor="@color/textColor"
         android:textSize="18sp" />
@@ -73,6 +78,7 @@
         android:id="@+id/swipe_accept"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="18dp"
         android:layout_weight="1.35"
         app:button_background="@drawable/shape_button_swipe"
         app:button_bottom_padding="6dp"
