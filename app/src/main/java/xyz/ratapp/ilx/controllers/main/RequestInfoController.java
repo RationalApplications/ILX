@@ -2,9 +2,13 @@ package xyz.ratapp.ilx.controllers.main;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ebanx.swipebtn.OnStateChangeListener;
@@ -60,7 +64,6 @@ public class RequestInfoController {
 
         //rv
         Model model = new Model();
-
         RecyclerView rvAddresses = activity.findViewById(R.id.rv_addresses);
         GridLayoutManager glm = new GridLayoutManager(activity, 1);
         rvAddresses.setLayoutManager(glm);
@@ -68,10 +71,18 @@ public class RequestInfoController {
     }
 
     private void setUI() {
-        ((SwipeButton)activity.findViewById(R.id.swipe_accept)).setOnStateChangeListener(new OnStateChangeListener() {
+        final SwipeButton btn = (SwipeButton) activity.findViewById(R.id.swipe_accept);
+
+        btn.setOnStateChangeListener(new OnStateChangeListener() {
             @Override
             public void onStateChange(boolean active) {
                 //TODO: Accept order
+                btn.setEnabled(false);
+                TextView tv = new TextView(activity);
+                tv.setText("Принято");
+                tv.setGravity(Gravity.CENTER);
+                tv.setTextColor(activity.getResources().getColor(R.color.textColor));
+                btn.addView(tv, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             }
         });
     }
