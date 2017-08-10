@@ -1,6 +1,7 @@
 package xyz.ratapp.ilx.view;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -26,6 +27,7 @@ public class StatusSwitch extends Switch {
 
         final float scale = this.getResources().getDisplayMetrics().density;
         setSwitchPadding(((int) (12 * scale)));
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
     }
 
     private void setText() {
