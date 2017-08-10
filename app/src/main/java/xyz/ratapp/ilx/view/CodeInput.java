@@ -13,16 +13,13 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.inputmethod.BaseInputConnection;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
-import com.github.glomadrian.codeinputlib.data.FixedStack;
-import com.github.glomadrian.codeinputlib.model.Underline;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.view.data.FixedStack;
+import xyz.ratapp.ilx.view.model.Underline;
 
 /**
  * Created by timtim on 10/08/2017.
@@ -239,14 +236,6 @@ public class CodeInput extends View {
      */
     public void setInputType(int inputType) {
         mInputType = inputType;
-    }
-
-    @Override
-    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
-        outAttrs.actionLabel = null;
-        outAttrs.inputType = mInputType;
-        outAttrs.imeOptions = EditorInfo.IME_ACTION_DONE;
-        return new BaseInputConnection(this, true);
     }
 
     @Override

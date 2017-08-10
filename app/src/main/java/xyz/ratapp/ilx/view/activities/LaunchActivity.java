@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
@@ -23,6 +24,7 @@ public class LaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
         passwordCode = findViewById(R.id.ci_password);
+        passwordCode.setInputType(InputType.TYPE_CLASS_NUMBER);
         passwordCode.setCodeReadyListener(new CodeInput.codeReadyListener() {
             @Override
             public void onCodeReady(Character[] code) {
