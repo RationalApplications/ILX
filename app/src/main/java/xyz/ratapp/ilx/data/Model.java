@@ -28,7 +28,7 @@ public class Model {
         Request requestNew = new Request("Садовая ул.", //address
                 "", //task
                 "3 адреса, предоплата 3500 руб.", //comment
-                "", //time
+                "12:00-16:00", //time
                 "130р.", //cost
                 "8р.", //commission
                 "", //name
@@ -38,7 +38,7 @@ public class Model {
         Request requestNew2 = new Request("Егорова ул., 102",
                 "",
                 "2 адреса, нужен паспорт",
-                "",
+                "12:00-13:00",
                 "180р.",
                 "8р.", //commission
                 "",

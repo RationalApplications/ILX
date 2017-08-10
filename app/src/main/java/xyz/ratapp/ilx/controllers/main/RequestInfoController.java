@@ -2,6 +2,7 @@ package xyz.ratapp.ilx.controllers.main;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -10,7 +11,10 @@ import com.ebanx.swipebtn.OnStateChangeListener;
 import com.ebanx.swipebtn.SwipeButton;
 
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.data.Model;
 import xyz.ratapp.ilx.view.activities.RequestInfoActivity;
+import xyz.ratapp.ilx.view.adapters.AddressesAdapter;
+import xyz.ratapp.ilx.view.adapters.RequestsAdapter;
 
 /**
  * Created by Олег on 09.08.2017.
@@ -53,8 +57,14 @@ public class RequestInfoController {
         });
 
         //TODO: color line
-        RecyclerView rvAddresses = activity.findViewById(R.id.rv_addresses);
 
+        //rv
+        Model model = new Model();
+
+        RecyclerView rvAddresses = activity.findViewById(R.id.rv_addresses);
+        GridLayoutManager glm = new GridLayoutManager(activity, 1);
+        rvAddresses.setLayoutManager(glm);
+        rvAddresses.setAdapter(new AddressesAdapter(activity, model.getNewRequests()));
     }
 
     private void setUI() {
