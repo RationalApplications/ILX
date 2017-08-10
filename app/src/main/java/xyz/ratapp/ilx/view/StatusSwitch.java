@@ -7,6 +7,8 @@ import android.widget.Switch;
 
 import xyz.ratapp.ilx.R;
 
+import static android.support.design.R.attr.theme;
+
 /**
  * Created by timtim on 07/08/2017.
  */

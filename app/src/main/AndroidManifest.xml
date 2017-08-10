@@ -34,8 +34,7 @@
 
         <activity android:name=".view.activities.DetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/title_activity_main">
+            android:label="Детали">
             <intent-filter>
                 <action android:name="xyz.ratapp.ilx.SHOW_DETAILS_OF_REQUEST_ACTION" />
 
