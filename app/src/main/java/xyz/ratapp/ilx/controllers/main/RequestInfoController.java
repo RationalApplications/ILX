@@ -79,7 +79,7 @@ public class RequestInfoController {
                 //TODO: Accept order
                 btn.setEnabled(false);
                 TextView tv = new TextView(activity);
-                tv.setText("Принято");
+                tv.setText(R.string.accepted);
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(activity.getResources().getColor(R.color.textColor));
                 btn.addView(tv, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
