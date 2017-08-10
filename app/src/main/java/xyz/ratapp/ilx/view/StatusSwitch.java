@@ -22,6 +22,8 @@ public class StatusSwitch extends Switch {
         super(context);
         setText(R.string.offline);
         setOnCheckedChangeListener(listener);
+        setTextAppearance(context, R.style.TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse);
+        setTextSize(context.getResources().getDimension(R.dimen.switch_text_size));
     }
 
     private void setText() {
