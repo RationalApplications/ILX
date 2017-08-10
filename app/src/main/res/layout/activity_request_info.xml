@@ -1,111 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="14dp"
     tools:context="xyz.ratapp.ilx.view.activities.RequestInfoActivity">
 
-    <LinearLayout
-        android:id="@+id/ll_header"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginLeft="14dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <include
-            layout="@layout/item_stock_request"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+    <include
+        android:id="@+id/inc_header"
+        layout="@layout/item_stock_request"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_addresses"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_below="@+id/ll_header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="14dp"
-        android:layout_marginLeft="14dp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_weight="1" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/darkGrey"
-        android:layout_marginRight="14dp"
-        android:layout_marginLeft="14dp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/iv_map_holder" />
+        android:background="@color/darkGrey" />
 
     <ImageView
         android:id="@+id/iv_map_holder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/rv_addresses"
-        android:layout_marginRight="14dp"
-        android:layout_marginLeft="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
         app:srcCompat="@drawable/example_map" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/darkGrey"
-        android:layout_marginRight="14dp"
-        android:layout_marginLeft="14dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/iv_map_holder" />
+        android:background="@color/darkGrey" />
 
 
     <TextView
         android:id="@+id/tv_delivery_cost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_comission"
-        android:layout_alignLeft="@+id/tv_comission"
-        android:layout_alignStart="@+id/tv_comission"
-        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:minHeight="18dp"
+        android:layout_weight="1.45"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
         android:textColor="@color/textColor"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_comission"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/swipe_accept"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="11dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:minHeight="18dp"
+        android:layout_weight="1.45"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
         android:textColor="@color/textColor"
         android:textSize="18sp" />
 
     <com.ebanx.swipebtn.SwipeButton
         android:id="@+id/swipe_accept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.35"
         app:button_background="@drawable/shape_button"
-        app:button_bottom_padding="20dp"
+        app:button_bottom_padding="6dp"
         app:button_image_height="60dp"
-        app:button_image_width="140dp"
+        app:button_image_width="100dp"
         app:button_right_padding="20dp"
         app:button_top_padding="20dp"
         app:has_activate_state="true"
+        app:button_trail_enabled="false"
         app:initial_state="disabled"
         app:inner_text="@string/accept_order"
         app:inner_text_background="@drawable/shape_rounded"
         app:inner_text_bottom_padding="18dp"
         app:inner_text_color="@android:color/darker_gray"
         app:inner_text_size="16sp"
-        app:inner_text_left_padding="120dp"
+        app:inner_text_left_padding="90dp"
         app:inner_text_top_padding="18dp" />
 
-</RelativeLayout>
+</LinearLayout>
