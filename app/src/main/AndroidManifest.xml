@@ -34,7 +34,7 @@
 
         <activity android:name=".view.activities.DetailsActivity"
             android:screenOrientation="portrait"
-            android:label="Детали">
+            android:label="@string/title_details">
             <intent-filter>
                 <action android:name="xyz.ratapp.ilx.SHOW_DETAILS_OF_REQUEST_ACTION" />
 
@@ -44,7 +44,7 @@
 
         <activity android:name=".view.activities.RequestInfoActivity"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_main">
+            android:label="@string/title_details">
             <intent-filter>
                 <action android:name="xyz.ratapp.ilx.SHOW_DETAILS_OF_STOCK_REQUEST_ACTION" />
 

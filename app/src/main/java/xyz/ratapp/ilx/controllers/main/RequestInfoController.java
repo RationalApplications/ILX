@@ -2,6 +2,7 @@ package xyz.ratapp.ilx.controllers.main;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,8 +28,8 @@ public class RequestInfoController {
     }
 
     private void setData() {
-        ((TextView)activity.findViewById(R.id.tv_delivery_cost)).setText("За доставку: " + activity.getIntent().getStringExtra(RequestInfoActivity.STR_COST));
-        ((TextView)activity.findViewById(R.id.tv_comission)).setText("Коммисия: " + activity.getIntent().getStringExtra(RequestInfoActivity.STR_COMMISSION));
+        ((TextView) activity.findViewById(R.id.tv_delivery_cost)).setText("За доставку: " + activity.getIntent().getStringExtra(RequestInfoActivity.STR_COST));
+        ((TextView) activity.findViewById(R.id.tv_comission)).setText("Коммисия: " + activity.getIntent().getStringExtra(RequestInfoActivity.STR_COMMISSION));
 
         ((TextView) (activity.findViewById(R.id.ll_header)).findViewById(R.id.tv_cost)).setText(
                 activity.getIntent().getStringExtra(RequestInfoActivity.STR_COST)
@@ -42,7 +43,7 @@ public class RequestInfoController {
                 activity.getIntent().getStringExtra(RequestInfoActivity.STR_TITLE)
         );
 
-        activity.findViewById(R.id.img_map_holder).setOnClickListener(new View.OnClickListener() {
+        activity.findViewById(R.id.iv_map_holder).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
@@ -52,6 +53,8 @@ public class RequestInfoController {
         });
 
         //TODO: color line
+        RecyclerView rvAddresses = activity.findViewById(R.id.rv_addresses);
+
     }
 
     private void setUI() {

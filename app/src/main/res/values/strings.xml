@@ -26,4 +26,5 @@
     <string name="write_logist">Написать логисту</string>
     <string name="on_the_map">На карте</string>
     <string name="accept_order">Принять заказ</string>
+    <string name="title_details">Детали</string>
 </resources>
