@@ -47,7 +47,10 @@ public class AddressesAdapter extends
 
         holder.title.setText(r.getAddress());
         holder.comment.setText(r.getComment());
-        holder.task.setText(r.getTask());
+        if(!r.getTask().isEmpty()) {
+            holder.task.setText(r.getTask());
+        }
+        holder.task.setVisibility(View.GONE);
         holder.time.setText(r.getTime());
     }
 
