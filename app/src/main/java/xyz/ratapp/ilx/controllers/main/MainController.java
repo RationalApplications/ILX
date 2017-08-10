@@ -50,7 +50,7 @@ public class MainController
         //toolbar
         final Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.requests);
-        toolbar.setBackgroundResource(R.color.grey);
+        toolbar.setBackgroundResource(R.color.darkGrey);
         activity.setSupportActionBar(toolbar);
 
         //tabs
@@ -83,10 +83,7 @@ public class MainController
                                 R.string.offline);
                         toolbar.setBackgroundResource(b ?
                                 R.color.colorPrimary :
-                                R.color.grey);
-                        slidingTabLayout.setBackgroundResource(b ?
-                                R.color.colorPrimary :
-                                R.color.grey);
+                                R.color.darkGrey);
                         navigationView.getHeaderView(0).setBackgroundResource(b ?
                                 R.drawable.side_active_nav_bar :
                                 R.drawable.side_passive_nav_bar);

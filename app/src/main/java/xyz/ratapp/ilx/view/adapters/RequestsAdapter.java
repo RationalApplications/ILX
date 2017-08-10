@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.List;
@@ -34,9 +35,20 @@ public class RequestsAdapter extends
 
     @Override
     public RequestsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(
+        final View v = LayoutInflater.from(context).inflate(
                 recent ? R.layout.item_recent_request : R.layout.item_stock_request,
                 parent, false);
+        v.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener(){
+
+                    @Override
+                    public void onGlobalLayout() {
+                        int height = v.getHeight();
+                        v.findViewById(R.id.v_difficult).setMinimumHeight(height);
+
+                        v.getViewTreeObserver().removeGlobalOnLayoutListener( this );
+                    }
+                });
 
         return new RequestsViewHolder(v, recent);
     }

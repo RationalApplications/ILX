@@ -27,7 +27,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/tv_launch_text"
-        android:textColor="@color/textColor" />
+        android:textColor="@color/colorBlack" />
 
 
     <com.github.glomadrian.codeinputlib.CodeInput
@@ -44,7 +44,7 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:textColor="@color/white"
+        android:textColor="@color/textColor"
         android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
