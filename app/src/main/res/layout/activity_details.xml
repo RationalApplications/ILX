@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fafafa"
-    android:elevation="0dp"
     tools:context="xyz.ratapp.ilx.view.activities.DetailsActivity">
 
     <RelativeLayout
@@ -14,8 +13,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="130dp"
-        android:layout_marginTop="20dp"
         android:background="#e8eaf6">
 
 
@@ -68,7 +65,7 @@
                 android:layout_below="@+id/linearLayout2"
                 android:layout_marginTop="0dp"
                 android:text="TextView"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/textColor"
                 android:textScaleX="1.01"
                 android:textSize="16sp" />
 
@@ -80,7 +77,7 @@
                 android:layout_toLeftOf="@+id/linearLayout3"
                 android:layout_toStartOf="@+id/linearLayout3"
                 android:text="TextView"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/textColor"
                 android:textScaleX="1.01"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -120,7 +117,7 @@
                 android:layout_marginLeft="17dp"
                 android:layout_marginStart="0dp"
                 android:text="TextView"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/textColor"
                 android:textScaleX="1.01"
                 android:textSize="16sp" />
 
