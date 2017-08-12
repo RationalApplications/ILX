@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
+    <!-- this attributes need for CodeInput-view work -->
     <declare-styleable name="core_area">
         <attr name="underline_color"
             format="color"/>

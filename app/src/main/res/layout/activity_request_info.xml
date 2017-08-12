@@ -28,7 +28,7 @@
         android:layout_height="1dp"
         android:layout_marginRight="14dp"
         android:layout_marginLeft="14dp"
-        android:background="@color/darkGrey" />
+        android:background="@color/passivePrimaryDarkColor" />
 
     <ImageView
         android:id="@+id/iv_map_holder"
@@ -47,7 +47,7 @@
         android:layout_height="1dp"
         android:layout_marginRight="14dp"
         android:layout_marginLeft="14dp"
-        android:background="@color/darkGrey" />
+        android:background="@color/passivePrimaryDarkColor" />
 
 
     <TextView

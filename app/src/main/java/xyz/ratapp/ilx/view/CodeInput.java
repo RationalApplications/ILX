@@ -108,8 +108,8 @@ public class CodeInput extends View {
         underlineReduction = getContext().getResources().getDimension(R.dimen.section_reduction);
         textSize = getContext().getResources().getDimension(R.dimen.text_size);
         textMarginBottom = getContext().getResources().getDimension(R.dimen.text_margin_bottom);
-        underlineColor = getContext().getResources().getColor(R.color.underline_default_color);
-        underlineSelectedColor = getContext().getResources().getColor(R.color.underline_selected_color);
+        underlineColor = getContext().getResources().getColor(R.color.underlineDefaultColor);
+        underlineSelectedColor = getContext().getResources().getColor(R.color.underlineSelectedColor);
         hintColor = getContext().getResources().getColor(R.color.hintColor);
         textColor = getContext().getResources().getColor(R.color.textColor);
         hintMarginBottom = getContext().getResources().getDimension(R.dimen.hint_margin_bottom);

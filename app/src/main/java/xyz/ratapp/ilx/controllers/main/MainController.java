@@ -1,6 +1,5 @@
 package xyz.ratapp.ilx.controllers.main;
 
-import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -51,18 +50,18 @@ public class MainController
         //toolbar
         final Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.requests);
-        toolbar.setBackgroundResource(R.color.colorPassivePrimaryDark);
+        toolbar.setBackgroundResource(R.color.passivePrimaryDarkColor);
         activity.setSupportActionBar(toolbar);
 
         //tabs
         final SlidingTabLayout slidingTabLayout = (SlidingTabLayout)
                 activity.findViewById(R.id.stl_tabs);
         slidingTabLayout.setSelectedIndicatorColors(
-                activity.getResources().getColor(R.color.colorDarkBlue));
+                activity.getResources().getColor(R.color.primaryDarkColor));
         slidingTabLayout.setCustomTabView(R.layout.tab_layout, R.id.tv_tab_item);
         slidingTabLayout.setDistributeEvenly(false);
         slidingTabLayout.setViewPager(container);
-        slidingTabLayout.setBackgroundResource(R.color.grey);
+        slidingTabLayout.setBackgroundResource(R.color.tabBarBackgroundColor);
 
         //drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, layout, toolbar,
@@ -84,8 +83,8 @@ public class MainController
                                 R.string.online :
                                 R.string.offline);
                         toolbar.setBackgroundResource(b ?
-                                R.color.colorPrimary :
-                                R.color.darkGrey);
+                                R.color.primaryColor :
+                                R.color.passivePrimaryDarkColor);
                         navigationView.getHeaderView(0).setBackgroundResource(b ?
                                 R.drawable.side_active_nav_bar :
                                 R.drawable.side_passive_nav_bar);

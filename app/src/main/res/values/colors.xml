@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#75a9f9</color>
-    <color name="colorPrimaryDark">#000001</color>
-    <color name="colorAccent">#90caf9</color>
-    <color name="colorDarkBlue">#024f9c</color>
-    <color name="colorCard">#e8ebf5</color>
+    <!-- text colors -->
     <color name="textColor">#000</color>
-    <color name="grey">#aaaaaa</color>
-    <color name="white">#FFF</color>
-    <color name="whiteGrey">#fcfcfc</color>
-    <color name="colorPassiveAccent">#444</color>
-    <color name="colorPassivePrimaryDark">#606060</color>
-    <color name="colorPassivePrimary">#333</color>
-    <color name="darkGrey">#606060</color>
 
-    <color name="underline_default_color">#CCCCCC</color>
-    <color name="underline_selected_color">#000</color>
+    <!-- base colors -->
+    <color name="primaryColor">#75a9f9</color>
+    <color name="primaryDarkColor">#024f9c</color>
+    <color name="accentColor">#90caf9</color>
+
+    <!-- base colors(offline mode) -->
+    <color name="passiveAccentColor">#444</color>
+    <color name="passivePrimaryDarkColor">#606060</color>
+    <color name="passivePrimaryColor">#333</color>
+
+    <!-- support colors -->
+    <color name="statusBarColor">#000</color>
+    <color name="cardColor">#e8ebf5</color>
+
+    <!-- tabs colors -->
+    <color name="tabBarBackgroundColor">#aaaaaa</color>
+    <color name="tabTextColor">#fcfcfc</color>
+
+    <!-- CodeInput view colors -->
+    <color name="underlineDefaultColor">#CCCCCC</color>
+    <color name="underlineSelectedColor">#000</color>
     <color name="hintColor">#CCCCCC</color>
 </resources>

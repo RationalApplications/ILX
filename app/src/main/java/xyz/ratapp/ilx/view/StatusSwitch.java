@@ -16,7 +16,6 @@ import static android.support.design.R.attr.theme;
 
 public class StatusSwitch extends Switch {
 
-    private View view;
     private boolean online;
 
     public StatusSwitch(Context context, OnCheckedChangeListener listener) {
@@ -34,9 +33,6 @@ public class StatusSwitch extends Switch {
         setText(online ?
                 R.string.online :
                 R.string.offline);
-        view.setBackgroundResource(online ?
-        R.color.colorPrimary :
-        R.color.grey);
     }
 
     public boolean isOnline() {
