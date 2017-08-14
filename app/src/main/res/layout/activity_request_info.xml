@@ -8,6 +8,7 @@
     tools:context="xyz.ratapp.ilx.ui.activities.RequestInfoActivity">
 
     <include
+        android:id="@+id/incHeader"
         layout="@layout/item_stock_request"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/request_item_size" />

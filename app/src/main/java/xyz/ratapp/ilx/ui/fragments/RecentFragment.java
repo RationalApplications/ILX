@@ -30,15 +30,15 @@ public class RecentFragment extends RequestFragment {
 
         //create button
         Button showMap = new Button(context);
-        RelativeLayout.LayoutParams params
-                = new RelativeLayout.LayoutParams(context, null);
 
         //setup button:
         //sizes
         final float scale = getContext().getResources().getDisplayMetrics().density;
         final float ON_THE_MAP_WIDTH = getResources().getDimension(R.dimen.button_on_the_map_width);
-        params.width = (int) (ON_THE_MAP_WIDTH * scale + 0.5f);
-        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        RelativeLayout.LayoutParams params
+                = new RelativeLayout.LayoutParams(
+                        (int) (ON_THE_MAP_WIDTH * scale + 0.5f),
+                ViewGroup.LayoutParams.WRAP_CONTENT);
         //margins
         final float LEFT_MARGIN = getResources().getDimension(R.dimen.default_screen_margin);
         final float BOTTOM_MARGIN = getResources().getDimension(R.dimen.default_large_margin);
@@ -60,6 +60,12 @@ public class RecentFragment extends RequestFragment {
         });
     }
 
+    private void showOnMap() {
+        DialogMap dialog = new DialogMap(getContext());
+        dialog.setData(Arrays.asList(new LatLng(59.955761, 30.313146)));
+        dialog.show();
+    }
+
     @Override
     protected void preSetupRefreshLayout() {
         Context context = getContext();
@@ -79,14 +85,12 @@ public class RecentFragment extends RequestFragment {
     }
 
     @Override
-    protected void setupScreen() {
-        screen = Screens.RECENT;
+    public Screens getScreen() {
+        return Screens.RECENT;
     }
 
-    private void showOnMap() {
-        DialogMap dialog = new DialogMap(getContext());
-        dialog.setData(Arrays.asList(new LatLng(59.955761, 30.313146)));
-        dialog.show();
+    @Override
+    public String getTitle() {
+        return controller.getContext().getString(R.string.recent);
     }
-
 }

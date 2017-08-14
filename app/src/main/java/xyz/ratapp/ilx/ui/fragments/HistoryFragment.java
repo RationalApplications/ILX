@@ -1,5 +1,6 @@
 package xyz.ratapp.ilx.ui.fragments;
 
+import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.Screens;
 
 /**
@@ -9,7 +10,12 @@ import xyz.ratapp.ilx.controllers.Screens;
 public class HistoryFragment extends RequestFragment {
 
     @Override
-    protected void setupScreen() {
-        screen = Screens.HISTORY;
+    public Screens getScreen() {
+        return Screens.HISTORY;
+    }
+
+    @Override
+    public String getTitle() {
+        return controller.getContext().getString(R.string.history);
     }
 }

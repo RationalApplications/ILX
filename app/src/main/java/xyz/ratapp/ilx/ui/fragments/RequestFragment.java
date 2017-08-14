@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.List;
 import xyz.ratapp.ilx.controllers.Screens;
 import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
+import xyz.ratapp.ilx.controllers.main.MainController;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
 
@@ -40,9 +41,8 @@ public abstract class RequestFragment extends Fragment
 
     protected RecyclerView requestList;
     protected SwipeRefreshLayout refreshLayout;
+    protected MainController controller;
     protected List<Request> data;
-    //need to setup in child classes
-    protected Screens screen = null;
 
 
     @Override
@@ -152,6 +152,14 @@ public abstract class RequestFragment extends Fragment
     }
 
     /**
+     * Method that binds fragment
+     * to controller
+     */
+    public void bindController(MainController controller) {
+        this.controller = controller;
+    }
+
+    /**
      * In this method you need to
      * setup data as fragment-data.
      * Also you need to update RV
@@ -165,20 +173,17 @@ public abstract class RequestFragment extends Fragment
         if(requestList != null) {
             GridLayoutManager glm = new GridLayoutManager(getActivity(), 1);
             requestList.setLayoutManager(glm);
-            requestList.setAdapter(new RequestsAdapter(getActivity(), screen, data));
+            requestList.setAdapter(new RequestsAdapter(controller, getScreen(), data));
         }
     }
 
     /**
-     * At this you need to
-     * setup Screen.
-     * Override this method as
-     * hardcoded setter
-     *
-     * ex:
-     * {
-     *      screen = Screens.RECENT;
-     * }
+     * @return title of fragment
      */
-    protected abstract void setupScreen();
+    public abstract String getTitle();
+
+    /**
+     * @return screen of fragment
+     */
+    public abstract Screens getScreen();
 }

@@ -9,6 +9,11 @@
     <string name="nav_drawer_open_desc">Navigation Bar Open</string>
     <string name="nav_drawer_close_desc">Navigation Bar Close</string>
 
+    <!-- Fragment names -->
+    <string name="stock">Биржа</string>
+    <string name="recent">Текущие</string>
+    <string name="history">История</string>
+
     <!-- Login Screen:-->
     <string name="fill_pin_code">Введите код доступа</string>
     <string name="app_descriptor">Платформа управления заявками и исполнителями</string>
@@ -33,5 +38,7 @@
 
     <!-- API strings -->
     <string name="google_maps_key">AIzaSyAlh6st_AiTPEQA4lBQH8QIoLV93pUQZos</string>
+    <string name="commission_mask">Коммисия: %s</string>
+    <string name="delivery_mask">За доставку: %s</string>
 
 </resources>

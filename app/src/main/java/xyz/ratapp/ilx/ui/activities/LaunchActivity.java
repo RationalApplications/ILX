@@ -23,7 +23,7 @@ public class LaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
 
-        CodeInput passwordCode = findViewById(R.id.ci_password);
+        CodeInput passwordCode = findViewById(R.id.ciPassword);
         passwordCode.setInputType(InputType.TYPE_CLASS_NUMBER);
         passwordCode.setCodeReadyListener(new CodeInput.codeReadyListener() {
             @Override

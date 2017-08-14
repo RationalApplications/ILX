@@ -99,7 +99,6 @@ public class RequestsAdapter extends
             super(itemView);
 
             item = itemView;
-            requests = itemView.findViewById(R.id.rlRequests);
             title = itemView.findViewById(R.id.tvTitle);
             comment = itemView.findViewById(R.id.tvComment);
             difficult = itemView.findViewById(R.id.vDifficult);
@@ -126,12 +125,14 @@ public class RequestsAdapter extends
                 cost.setText(r.getCost());
             }
 
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    controller.next(screen, r);
-                }
-            });
+            if(controller != null) {
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        controller.next(screen, r);
+                    }
+                });
+            }
         }
     }
 }
