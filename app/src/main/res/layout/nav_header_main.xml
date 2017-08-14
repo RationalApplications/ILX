@@ -6,30 +6,28 @@
     android:background="@drawable/side_active_nav_bar"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:padding="@dimen/default_screen_padding"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/iv_nav_icon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/ivNavIcon"
+        android:layout_width="@dimen/nav_header_person_image_size"
+        android:layout_height="@dimen/nav_header_person_image_size"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:contentDescription="@string/iv_person_descr"
         android:scaleType="center"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView
+        android:id="@+id/tvNavHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_nav_header"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/tv_nav_text"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvNavText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

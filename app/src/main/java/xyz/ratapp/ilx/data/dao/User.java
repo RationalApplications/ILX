@@ -3,6 +3,8 @@ package xyz.ratapp.ilx.data.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import xyz.ratapp.ilx.R;
+
 /**
  * Created by timtim on 07/08/2017.
  *
@@ -44,12 +46,20 @@ public class User implements Serializable {
         return lastName;
     }
 
+    public String getFullName() {
+        return String.format("%s %s", name, lastName);
+    }
+
     public String getSessionKey() {
         return sessionKey;
     }
 
     public String getImage() {
         return image;
+    }
+
+    public int getStateText() {
+        return online ? R.string.online : R.string.offline;
     }
 
     public boolean isOnline() {

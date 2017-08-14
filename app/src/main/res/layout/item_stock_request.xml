@@ -4,57 +4,57 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
-    android:layout_marginBottom="4dp"
-    app:cardBackgroundColor="@color/colorCard">
+    android:layout_marginBottom="@dimen/default_small_margin"
+    app:cardBackgroundColor="@color/background_color">
 
     <RelativeLayout
-        android:id="@+id/rl_requests"
+        android:id="@+id/rlRequests"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp">
+            android:layout_margin="@dimen/item_margin">
 
             <TextView
-                android:id="@+id/tv_cost"
+                android:id="@+id/tvCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="@dimen/item_margin"
+                android:layout_marginRight="@dimen/item_margin"
                 android:fontFamily="sans-serif"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="36sp"
+                android:textSize="@dimen/large_title_text_size"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/tv_cost"
-                android:layout_toRightOf="@+id/tv_cost"
+                android:layout_toEndOf="@+id/tvCost"
+                android:layout_toRightOf="@+id/tvCost"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="20sp" />
+                android:textSize="@dimen/title_text_size" />
 
             <TextView
-                android:id="@+id/tv_comment"
+                android:id="@+id/tvComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_title"
-                android:layout_toEndOf="@+id/tv_cost"
-                android:layout_toRightOf="@+id/tv_cost"
-                android:textSize="14sp" />
+                android:layout_below="@+id/tvTitle"
+                android:layout_toEndOf="@+id/tvCost"
+                android:layout_toRightOf="@+id/tvCost"
+                android:textSize="@dimen/sub_text_size" />
 
         </RelativeLayout>
 
         <View
-            android:id="@+id/v_difficult"
-            android:layout_width="10dp"
+            android:id="@+id/vDifficult"
+            android:layout_width="@dimen/difficult_line_size"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true" />

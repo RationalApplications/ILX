@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 import xyz.ratapp.ilx.data.dao.Request;
-import xyz.ratapp.ilx.view.fragments.HistoryFragment;
-import xyz.ratapp.ilx.view.fragments.RecentFragment;
-import xyz.ratapp.ilx.view.fragments.StockFragment;
+import xyz.ratapp.ilx.ui.fragments.HistoryFragment;
+import xyz.ratapp.ilx.ui.fragments.RecentFragment;
+import xyz.ratapp.ilx.ui.fragments.StockFragment;
 
 /**
  * Created by timtim on 12/06/2017.

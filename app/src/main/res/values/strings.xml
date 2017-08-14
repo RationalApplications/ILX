@@ -2,30 +2,36 @@
     <!-- app strings -->
     <string name="app_name">ILX</string>
     <string name="title_activity_main">ILX</string>
-    <string name="google_maps_key">AIzaSyAlh6st_AiTPEQA4lBQH8QIoLV93pUQZos</string>
+    <string name="title_activity_launch">ILX</string>
 
-    <!--Navigation Drawer strings:-->
+    <!--Navigation Drawer & Toolbar strings:-->
     <string name="requests">Заявки</string>
     <string name="nav_drawer_open_desc">Navigation Bar Open</string>
     <string name="nav_drawer_close_desc">Navigation Bar Close</string>
-    <string name="title_activity_launch">ILX</string>
 
     <!-- Login Screen:-->
-    <string name="pin_to_login">Введите код доступа</string>
-    <string name="tv_launch_text">Платформа управления заявками и исполнителями</string>
-    <string name="btn_text_login">Войти</string>
-    <string name="toast_wrong_password">Неверно введен пароль</string>
-    <string name="iv_logo_desc">Descriptor for logo on launch screen</string>
+    <string name="fill_pin_code">Введите код доступа</string>
+    <string name="app_descriptor">Платформа управления заявками и исполнителями</string>
+    <string name="wrong_password">Неверно введен пароль</string>
 
     <!-- Main Screen:-->
     <string name="online">Онлайн</string>
     <string name="offline">Оффлайн</string>
-    <string name="way">Маршрут</string>
-    <string name="get_order">Выполнить</string>
+    <string name="path">Маршрут</string>
+    <string name="perform">Выполнить</string>
     <string name="issue">Проблема</string>
     <string name="write_logist">Написать логисту</string>
     <string name="on_the_map">На карте</string>
     <string name="accept_order">Принять заказ</string>
     <string name="title_details">Детали</string>
     <string name="accepted">ПРИНЯТО</string>
+
+    <!-- ImageViews descriptors -->
+    <string name="iv_logo_descr">Description for logo ImageView</string>
+    <string name="iv_person_descr">Descriptor for person image</string>
+    <string name="iv_map_descr">Descriptor for map</string>
+
+    <!-- API strings -->
+    <string name="google_maps_key">AIzaSyAlh6st_AiTPEQA4lBQH8QIoLV93pUQZos</string>
+
 </resources>

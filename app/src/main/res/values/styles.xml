@@ -1,14 +1,27 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/statusBarColor</item>
-        <item name="colorAccent">@color/accentColor</item>
-        <item name="online">false</item>
+    <attr name="sideNavBar" format="reference"/>
+
+    <style name="AppTheme.Active" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">@color/status_bar_color</item>
+        <item name="colorAccent">@color/accent_color</item>
+        <item name="sideNavBar">@drawable/side_active_nav_bar</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.Passive" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/passive_primary_color</item>
+        <item name="colorPrimaryDark">@color/status_bar_color</item>
+        <item name="colorAccent">@color/passive_accent_color</item>
+        <item name="sideNavBar">@drawable/side_passive_nav_bar</item>
+    </style>
+
+    <style name="AppTheme.Active.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Passive.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

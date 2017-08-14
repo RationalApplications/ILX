@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- text colors -->
-    <color name="textColor">#000</color>
-
     <!-- base colors -->
-    <color name="primaryColor">#75a9f9</color>
-    <color name="primaryDarkColor">#024f9c</color>
-    <color name="accentColor">#90caf9</color>
+    <color name="primary_color">#75a9f9</color>
+    <color name="primary_dark_color">#024f9c</color>
+    <color name="accent_color">#90caf9</color>
 
     <!-- base colors(offline mode) -->
-    <color name="passiveAccentColor">#444</color>
-    <color name="passivePrimaryDarkColor">#606060</color>
-    <color name="passivePrimaryColor">#333</color>
+    <color name="passive_primary_color">#444</color>
+    <color name="passive_primary_dark_color">#333</color>
+    <color name="passive_accent_color">#666</color>
+
+    <!-- text colors -->
+    <color name="text_color">#000</color>
 
     <!-- support colors -->
-    <color name="statusBarColor">#000</color>
-    <color name="cardColor">#e8ebf5</color>
+    <color name="status_bar_color">#000</color>
+    <color name="background_color">#e8ebf5</color>
+
+    <!-- buttons colors -->
+    <color name="perform_button_color">#92d36e</color>
+    <color name="issue_button_color">#ff3822</color>
 
     <!-- tabs colors -->
-    <color name="tabBarBackgroundColor">#aaaaaa</color>
-    <color name="tabTextColor">#fcfcfc</color>
+    <color name="tab_bar_background_color">#aaaaaa</color>
+    <color name="tab_text_selected_color">#024f9c</color>
+    <color name="tab_text_unselected_color">#fcfcfc</color>
 
-    <!-- CodeInput view colors -->
-    <color name="underlineDefaultColor">#CCCCCC</color>
-    <color name="underlineSelectedColor">#000</color>
-    <color name="hintColor">#CCCCCC</color>
+    <!-- CODE INPUT -->
+    <!-- default CodeInput view colors -->
+    <color name="default_underline_default_color">#CCCCCC</color>
+    <color name="default_underline_selected_color">#000</color>
+    <color name="default_hint_color">#CCCCCC</color>
+
+    <!-- our CodeInput view colors -->
+    <color name="code_input_hint_color">#77ce9d</color>
+    <color name="code_input_text_color">#b12eff</color>
+    <color name="code_input_underline_color">#457ad1</color>
+    <color name="code_input_underline_selected_color">#9e1ace</color>
+    <!-- END CODE INPUT -->
+
 </resources>

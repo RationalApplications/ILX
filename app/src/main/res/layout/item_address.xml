@@ -2,47 +2,47 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="@dimen/item_margin"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:id="@+id/tv_address_title"
+        android:id="@+id/tvAddressTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="20sp" />
+        android:textSize="@dimen/title_text_size" />
 
     <TextView
-        android:id="@+id/tv_address_task"
+        android:id="@+id/tvAddressTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tv_address_title"
-        android:textSize="14sp" />
+        android:layout_below="@+id/tvAddressTitle"
+        android:textSize="@dimen/sub_text_size" />
 
     <TextView
-        android:id="@+id/tv_address_comment"
+        android:id="@+id/tvAddressComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tv_address_task"
-        android:textSize="14sp"
+        android:layout_below="@+id/tvAddressTask"
+        android:textSize="@dimen/sub_text_size"
         android:textStyle="italic" />
 
     <TextView
-        android:id="@+id/tv_address_time"
+        android:id="@+id/tvAddressTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:textSize="14sp" />
+        android:layout_marginEnd="@dimen/item_margin"
+        android:layout_marginRight="@dimen/item_margin"
+        android:textSize="@dimen/sub_text_size" />
 
 </RelativeLayout>

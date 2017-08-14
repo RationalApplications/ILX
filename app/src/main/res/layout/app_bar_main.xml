@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="xyz.ratapp.ilx.view.activities.MainActivity">
+    tools:context="xyz.ratapp.ilx.ui.activities.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -19,20 +19,19 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:paddingRight="12dp"
-            android:paddingEnd="12dp"
+            android:padding="@dimen/toolbar_padding"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <xyz.ratapp.ilx.view.SlidingTabLayout
-            android:id="@+id/stl_tabs"
+        <xyz.ratapp.ilx.ui.views.SlidingTabLayout
+            android:id="@+id/stlTabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary" />
+            android:background="@color/tab_bar_background_color" />
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/vp_container"
+        android:id="@+id/vpContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
