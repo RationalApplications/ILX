@@ -19,6 +19,9 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
+import xyz.ratapp.ilx.controllers.data.DataController;
+import xyz.ratapp.ilx.data.dao.UserLocation;
+
 public class GeoService extends Service {
 
 
@@ -86,13 +89,15 @@ public class GeoService extends Service {
             public void onLocationResult(LocationResult locationResult) {
                 log("Loc: " + locationResult.getLastLocation());
 
-                Intent intent = new Intent("location_update");
-                intent.putExtra("long", locationResult.getLastLocation().getLongitude());
-                intent.putExtra("lat", locationResult.getLastLocation().getLatitude());
-                intent.putExtra("time", locationResult.getLastLocation().getTime());
-                intent.putExtra("acc", locationResult.getLastLocation().getAccuracy());
-                intent.putExtra("speed", locationResult.getLastLocation().getSpeed());
-                sendBroadcast(intent);
+                UserLocation location = new UserLocation(locationResult.getLastLocation().getLatitude() + "",
+                        locationResult.getLastLocation().getLongitude() + "",
+                        locationResult.getLastLocation().getTime() + "",
+                        locationResult.getLastLocation().getSpeed() + "",
+                        locationResult.getLastLocation().getAccuracy() + "");
+
+                DataController controller = DataController.getInstance();
+
+                controller.courierLocation(location);
             }
         };
     }
