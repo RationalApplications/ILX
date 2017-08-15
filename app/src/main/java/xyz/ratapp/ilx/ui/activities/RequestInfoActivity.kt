@@ -25,9 +25,10 @@ class RequestInfoActivity : InfoActivity() {
         val STR_COMMENT = "comment"
         val STR_DIFFICULT = "difficult"
 
-        fun getIntent(request: Request): Intent {
+        fun getIntent(id: String, request: Request): Intent {
             val i = Intent()
             i.action = SHOW_DETAILS_OF_STOCK_REQUEST_ACTION
+            i.putExtra("id", id)
             i.putExtra(STR_COST, request.cost)
             i.putExtra(STR_COMMISSION, request.commission)
             i.putExtra(STR_TITLE, request.address)

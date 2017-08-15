@@ -134,7 +134,9 @@ public abstract class RequestFragment extends Fragment
                 @Override
                 public void run() {
                     try {
-                        wait(2000);
+                        synchronized (this) {
+                            wait(2000);
+                        }
                     } catch (InterruptedException e) {
                         Log.e("MyTag", e.toString());
                     }

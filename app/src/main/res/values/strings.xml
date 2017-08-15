@@ -17,7 +17,6 @@
     <!-- Login Screen:-->
     <string name="fill_pin_code">Введите код доступа</string>
     <string name="app_descriptor">Платформа управления заявками и исполнителями</string>
-    <string name="wrong_password">Неверно введен пароль</string>
 
     <!-- Main Screen:-->
     <string name="online">Онлайн</string>
@@ -31,14 +30,17 @@
     <string name="title_details">Детали</string>
     <string name="accepted">ПРИНЯТО</string>
 
+    <!-- RequestInfo Screen -->
+    <string name="commission_mask">Коммисия: %s</string>
+    <string name="delivery_mask">За доставку: %s</string>
+
     <!-- ImageViews descriptors -->
     <string name="iv_logo_descr">Description for logo ImageView</string>
     <string name="iv_person_descr">Descriptor for person image</string>
     <string name="iv_map_descr">Descriptor for map</string>
+    <string name="iv_details_action_descr">Descriptor for iv of action in DetailsActivity, rv</string>
 
     <!-- API strings -->
     <string name="google_maps_key">AIzaSyAlh6st_AiTPEQA4lBQH8QIoLV93pUQZos</string>
-    <string name="commission_mask">Коммисия: %s</string>
-    <string name="delivery_mask">За доставку: %s</string>
 
 </resources>

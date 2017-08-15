@@ -5,6 +5,8 @@ import android.support.annotation.ColorInt;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by timtim on 07/08/2017.
@@ -25,6 +27,7 @@ public class Request {
     @ColorInt
     private int difficult;
     private ArrayList listCoords;
+    private List<Details> details;
 
 
     public Request(String address, String task, String comment, String time,
@@ -87,5 +90,28 @@ public class Request {
         list.add(latlng3);
 
         return list;
+    }
+
+    public List<Details> getDetails() {
+        Details address = new Details(
+                Details.Type.ADDRESS,
+                "Садовая ул., 54, офис 19");
+        Details time = new Details(
+                Details.Type.TIME,
+                "10:00-12:00");
+        Details cost = new Details(
+                Details.Type.TEXT,
+                "Выкупить товар: -3200 руб");
+        Details task = new Details(
+                Details.Type.TEXT,
+                "Забрать два заказа, иметь паспорт при себе");
+        Details name = new Details(
+                Details.Type.TEXT,
+                "Имя: Ольга Ивановна");
+        Details phone = new Details(
+                Details.Type.PHONE,
+                "Телефон: +7(905)207-22-87");
+
+        return Arrays.asList(address, time, cost, task, name, phone);
     }
 }

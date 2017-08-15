@@ -20,6 +20,7 @@ import xyz.ratapp.ilx.controllers.data.DataController;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.data.dao.User;
+import xyz.ratapp.ilx.data.dao.Uuser;
 import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.activities.MainActivity;
 import xyz.ratapp.ilx.ui.activities.RequestInfoActivity;
@@ -37,7 +38,7 @@ import xyz.ratapp.ilx.ui.views.StatusSwitch;
 
 public class MainController
         implements NavigationView.OnNavigationItemSelectedListener,
-        DataSettable<User> {
+        DataSettable<Uuser> {
 
     private List<RequestFragment> fragments;
     private DataController data;
@@ -86,7 +87,7 @@ public class MainController
      * Method that setup data to fragments
      */
     private void setupData() {
-        data = new DataController();
+        data = DataController.getInstance();
         ViewPager container = activity.findViewById(R.id.vpContainer);
         RequestSectionsPagerAdapter adapter = new RequestSectionsPagerAdapter(
                 activity.getSupportFragmentManager());
@@ -118,9 +119,10 @@ public class MainController
         if(RequestsAdapter.screenItemMap.containsKey(from)) {
             Request r = (Request) data;
             boolean recent = from.equals(Screens.RECENT);
+            String id = this.data.idOf(r, from);
             Intent next = recent ?
-                    DetailsActivity.Companion.getIntent(r) :
-                    RequestInfoActivity.Companion.getIntent(r);
+                    DetailsActivity.Companion.getIntent(id) :
+                    RequestInfoActivity.Companion.getIntent(id, r);
 
             //TODO: hardcoded
             int theme = this.data.getLastState() ?
@@ -141,7 +143,7 @@ public class MainController
      *              false if offline
      */
     public void setStateChanged(boolean state) {
-        User u = data.setState(state);
+        Uuser u = data.setState(state);
         activity.bind(u);
     }
 
@@ -151,7 +153,7 @@ public class MainController
      * @param user - User data
      */
     @Override
-    public void setData(User user) {
+    public void setData(Uuser user) {
         activity.bind(user);
     }
 

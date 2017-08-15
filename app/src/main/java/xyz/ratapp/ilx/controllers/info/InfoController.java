@@ -6,23 +6,35 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.util.List;
+
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.controllers.data.DataController;
+import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
 import xyz.ratapp.ilx.data.Model;
+import xyz.ratapp.ilx.data.dao.Details;
 import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.activities.InfoActivity;
 import xyz.ratapp.ilx.ui.activities.RequestInfoActivity;
 import xyz.ratapp.ilx.ui.adapters.AddressesAdapter;
+import xyz.ratapp.ilx.ui.adapters.DetailsAdapter;
+import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
 
 /**
  * Created by timtim on 14/08/2017.
  */
 
-public class InfoController {
+public class InfoController implements ListSettable<Details> {
 
+    private DataController data;
     private InfoActivity activity;
+    //request id
+    private String id;
 
     public InfoController(InfoActivity activity) {
         this.activity = activity;
+        id = activity.getIntent().getStringExtra("id");
+        data = DataController.getInstance();
         setupData();
     }
 
@@ -31,20 +43,20 @@ public class InfoController {
             setupReqInfoData();
         }
         else if(activity instanceof DetailsActivity) {
-            setupDetailsData();
+            data.bindDetails(this, id);
         }
     }
 
-    private void setupDetailsData() {
-        /*
-        ((TextView)activity.findViewById(R.id.tv_address)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_ADDRESS));
-        ((TextView)activity.findViewById(R.id.tv_time)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_TIME));
-        ((TextView)activity.findViewById(R.id.tv_task)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_TASK));
-        ((TextView)activity.findViewById(R.id.tv_description)).setText(activity.getIntent().getStringExtra(DetailsActivity.STR_DESCRIPTION));
+    @Override
+    public void setData(List<Details> data) {
+        setupDetailsData(data);
+    }
 
-        ((TextView)activity.findViewById(R.id.tv_name)).setText("Имя: " + activity.getIntent().getStringExtra(DetailsActivity.STR_NAME));
-        ((TextView)activity.findViewById(R.id.tv_telephone)).setText("Телефон: " + activity.getIntent().getStringExtra(DetailsActivity.STR_PHONE));
-        */
+    private void setupDetailsData(List<Details> data) {
+        RecyclerView rv = activity.findViewById(R.id.rvTasks);
+        GridLayoutManager glm = new GridLayoutManager(activity, 1);
+        rv.setLayoutManager(glm);
+        rv.setAdapter(new DetailsAdapter(activity, data));
     }
 
     private void setupReqInfoData() {

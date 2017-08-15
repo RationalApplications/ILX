@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/btnDetailsAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/ivDetailsAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toLeftOf="@id/btnDetailsAction"
+        android:layout_toStartOf="@id/btnDetailsAction"
+        android:contentDescription="@string/iv_details_action_descr"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvDetailsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/ivDetailsAction"
+        android:layout_toLeftOf="@id/ivDetailsAction"
+        android:text="hello world"/>
+
+</RelativeLayout>

@@ -57,9 +57,9 @@
             android:value="@string/google_maps_key" />
 
         <service
-            android:name=".controllers.MyService"
+            android:name=".controllers.GeoService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
     </application>
 
 </manifest>

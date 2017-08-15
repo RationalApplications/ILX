@@ -1,6 +1,5 @@
 package xyz.ratapp.ilx.ui.activities
 
-import android.app.TaskStackBuilder
 import android.os.Bundle
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -13,9 +12,8 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import xyz.ratapp.ilx.R
 import xyz.ratapp.ilx.controllers.main.MainController
-import xyz.ratapp.ilx.data.dao.User
+import xyz.ratapp.ilx.data.dao.Uuser
 import xyz.ratapp.ilx.ui.helpers.ThemePicker
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -60,10 +58,11 @@ class MainActivity : AppCompatActivity() {
         toolbar.addView(customView, Toolbar.LayoutParams(Gravity.END))
     }
 
-    fun bind(user: User) {
-        Glide.with(this).load(user.image).asBitmap().into(navView.getHeaderView(0).ivNavIcon)
-        navView.getHeaderView(0).tvNavHeader.text = user.fullName
-        navView.getHeaderView(0).tvNavText.setText(user.stateText)
+    fun bind(user: Uuser) {
+        Glide.with(this).load(user.preview).error(R.mipmap.ic_launcher).
+                into(navView.getHeaderView(0).ivNavIcon)
+        navView.getHeaderView(0).tvNavHeader.text = user.courierName
+        navView.getHeaderView(0).tvNavText.text = user.workStatus
 
         picker!!.setTheme(user.isOnline)
     }
