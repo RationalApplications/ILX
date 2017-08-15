@@ -18,9 +18,11 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:padding="@dimen/toolbar_padding"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            android:paddingLeft="@dimen/toolbar_padding"
+            android:paddingStart="@dimen/toolbar_padding"
+            android:paddingRight="@dimen/toolbar_padding"
+            android:paddingEnd="@dimen/toolbar_padding"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <xyz.ratapp.ilx.ui.views.SlidingTabLayout
             android:id="@+id/stlTabs"

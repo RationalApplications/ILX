@@ -71,6 +71,7 @@ class RequestInfoActivity : InfoActivity() {
         val cost = data.getStringExtra(STR_COST)
         var commission = data.getStringExtra(STR_COMMISSION)
         val comment = data.getStringExtra(STR_COMMENT)
+        val difficult = data.getIntExtra(STR_DIFFICULT, -1)
         val delivery = getString(R.string.delivery_mask, cost)
         commission = getString(R.string.delivery_mask, commission)
 
@@ -80,5 +81,8 @@ class RequestInfoActivity : InfoActivity() {
         tvCost.text = cost
         tvComment.text = comment
         tvTitle.text = title
+        if(difficult != -1) {
+            vDifficult.setBackgroundColor(difficult)
+        }
     }
 }
