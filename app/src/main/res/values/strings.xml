@@ -39,6 +39,7 @@
     <string name="iv_person_descr">Descriptor for person image</string>
     <string name="iv_map_descr">Descriptor for map</string>
     <string name="iv_details_action_descr">Descriptor for iv of action in DetailsActivity, rv</string>
+    <string name="iv_splash_logo_descr">Descriptor for logo in splash screen</string>
 
     <!-- API strings -->
     <string name="google_maps_key">AIzaSyAlh6st_AiTPEQA4lBQH8QIoLV93pUQZos</string>

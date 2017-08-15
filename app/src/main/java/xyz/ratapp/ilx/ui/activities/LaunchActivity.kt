@@ -14,12 +14,12 @@ class LaunchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_launch)
-        setupUI()
+        setContentView(R.layout.activity_splash)
         LaunchController(this)
     }
 
-    private fun setupUI() {
+    fun setAuthorizeScreen() {
+        setContentView(R.layout.activity_launch)
         ciPassword.setInputType(InputType.TYPE_CLASS_NUMBER)
     }
 

@@ -1,5 +1,9 @@
 package xyz.ratapp.ilx.controllers.data;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 
 
@@ -39,6 +43,7 @@ public class DataController {
     private static DataController data;
     private final static Model model = new Model();
     private final static Map<Screens, List<Request>> screenRequestsMap;
+    private final static String PREFS = "ilx.preferences";
 
     static {
         Map<Screens, List<Request>> tmp = new HashMap<>();
@@ -82,12 +87,12 @@ public class DataController {
                 enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
+                Log.e("MyTag", response.message());
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                Log.e("MyTag", t.toString());
             }
         });
     }
@@ -160,7 +165,8 @@ public class DataController {
                                 clientPhone, authProperty, authMd, sessionId, cid,
                                 wareHouseProperty, gps, workStatus, courierType);
 
-                        controller.authSucceseed();
+                        savePrefs(controller.getContext());
+                        controller.next();
                     }
                     else {
                         //TODO: hardcoded
@@ -255,4 +261,28 @@ public class DataController {
         return state;
     }
 
+    public boolean getPrefs(LaunchController controller) {
+        Context context = controller.getContext();
+        SharedPreferences prefs = context.getSharedPreferences(
+                PREFS, Context.MODE_PRIVATE);
+        String sessionId = prefs.getString("session_id", "");
+        domainName = prefs.getString("domain_name", "");
+
+        if(sessionId.isEmpty() ||
+                domainName.isEmpty()) {
+            return true;
+        }
+
+        auth(controller, sessionId);
+        return false;
+    }
+
+    private void savePrefs(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(
+                PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("session_id", user.getSessionId());
+        editor.putString("domain_name", domainName);
+        editor.apply();
+    }
 }

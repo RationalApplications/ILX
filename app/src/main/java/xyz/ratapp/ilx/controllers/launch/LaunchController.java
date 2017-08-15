@@ -1,6 +1,8 @@
 package xyz.ratapp.ilx.controllers.launch;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import xyz.ratapp.ilx.R;
@@ -17,27 +19,28 @@ public class LaunchController {
 
     private LaunchActivity activity;
     private DataController data;
+    private boolean firstStart = false;
 
     public LaunchController(LaunchActivity launchActivity) {
         this.activity = launchActivity;
         data = DataController.getInstance();
+        firstStart = data.getPrefs(this);
         setupData();
     }
 
     private void setupData() {
-        CodeInput passwordCode = activity.findViewById(R.id.ciPassword);
+        if(firstStart) {
+            activity.setAuthorizeScreen();
 
-        passwordCode.setCodeReadyListener(new CodeInput.codeReadyListener() {
-            @Override
-            public void onCodeReady(String code) {
-                activity.onStartAuth();
-                data.authAccessCode(LaunchController.this, code);
-            }
-        });
-    }
-
-    public void authSucceseed() {
-        next();
+            CodeInput passwordCode = activity.findViewById(R.id.ciPassword);
+            passwordCode.setCodeReadyListener(new CodeInput.codeReadyListener() {
+                @Override
+                public void onCodeReady(String code) {
+                    activity.onStartAuth();
+                    data.authAccessCode(LaunchController.this, code);
+                }
+            });
+        }
     }
 
     public void authFailed(String throwable) {
@@ -54,5 +57,9 @@ public class LaunchController {
         Intent next = new Intent(activity, MainActivity.class);
         activity.startActivity(next);
         activity.finish();
+    }
+
+    public Context getContext() {
+        return activity;
     }
 }
