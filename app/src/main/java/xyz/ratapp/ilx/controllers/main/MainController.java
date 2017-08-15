@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.controllers.GeoService;
 import xyz.ratapp.ilx.controllers.Screens;
 import xyz.ratapp.ilx.controllers.data.DataController;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
@@ -146,6 +147,18 @@ public class MainController
     public void setStateChanged(boolean state) {
         Uuser u = data.setState(state);
         activity.bind(u);
+
+        toggleUpdatingGPS(state);
+    }
+
+    private void toggleUpdatingGPS(boolean state) {
+        Intent i =new Intent(activity, GeoService.class);
+        if (state) {
+            activity.startService(i);
+        }
+        else{
+            activity.stopService(i);
+        }
     }
 
     /**
