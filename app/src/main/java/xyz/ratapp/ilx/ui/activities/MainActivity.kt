@@ -27,14 +27,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupUI()
-        picker = ThemePicker(this)
+
         controller = MainController(this)
     }
 
     fun setupUI() {
-        setSupportActionBar(toolbar)
-
         //tabs
         stlTabs.setSelectedIndicatorColors(
                 resources.getColor(R.color.primary_dark_color))
@@ -50,10 +47,12 @@ class MainActivity : AppCompatActivity() {
 
         //navigationView
         navView.setNavigationItemSelectedListener(controller)
+        picker = ThemePicker(this)
     }
 
     fun setupToolbar(customView: View) {
         //toolbar
+        setSupportActionBar(toolbar)
         toolbar.setTitle(R.string.requests)
         toolbar.addView(customView, Toolbar.LayoutParams(Gravity.END))
     }

@@ -44,10 +44,16 @@ public class LaunchController {
     }
 
     public void authFailed(String throwable) {
-        Toast.makeText(activity,
-                throwable,
-                Toast.LENGTH_LONG).show();
-        activity.onAuthFailed();
+        if (firstStart) {
+            Toast.makeText(activity,
+                    throwable,
+                    Toast.LENGTH_LONG).show();
+            activity.onAuthFailed();
+        }
+        else {
+            firstStart = true;
+            setupData();
+        }
     }
 
     /**

@@ -54,6 +54,7 @@ public class MainController
         StatusSwitch status = new StatusSwitch(activity);
         status.setController(this);
         activity.setupToolbar(status);
+        activity.setupUI();
 
         //data
         createFragments();
