@@ -19,6 +19,9 @@ import retrofit2.http.Query;
  *
  * Метод		work_status_update
  * URL		    https://{domain_name}/api/courier/v2/?method=work_status_update&session_id= {session_id}&work_status={work_status}
+ *
+ * Метод		order_list_trading
+ * URL		    https://{domain_name}/api/courier/v2/?method=order_list_trading&session_id= {session_id}
  */
 
 public interface API {
@@ -44,4 +47,7 @@ public interface API {
     @GET("?method=work_status_update")
     Call<JsonObject> workStatusUpdate(@Query("session_id") String sessionId,
                                       @Query("work_status") String workStatus);
+
+    @GET("?method=order_list_trading")
+    Call<JsonObject> orderListTrading(@Query("session_id") String sessionId);
 }

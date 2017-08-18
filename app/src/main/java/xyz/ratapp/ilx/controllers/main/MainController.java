@@ -7,8 +7,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -20,7 +18,6 @@ import xyz.ratapp.ilx.controllers.Screens;
 import xyz.ratapp.ilx.controllers.data.DataController;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
 import xyz.ratapp.ilx.data.dao.Request;
-import xyz.ratapp.ilx.data.dao.User;
 import xyz.ratapp.ilx.data.dao.Uuser;
 import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.activities.MainActivity;
@@ -77,7 +74,7 @@ public class MainController
     }
 
     /**
-     * Method bind fragment to current screen(controller)
+     * Method bindUser fragment to current screen(controller)
      */
     private void bindFragments() {
         for (RequestFragment f : fragments) {
@@ -97,18 +94,23 @@ public class MainController
         container.setAdapter(adapter);
         SlidingTabLayout stlTabs = activity.findViewById(R.id.stlTabs);
         stlTabs.setViewPager(container);
-        bindData();
+        data.orderListTrading(this);
     }
 
     /**
-     * Method that bind data to all of fragments
+     * Method that bindUser data to all of fragments
      */
-    private void bindData() {
+    public void bindData() {
         for (RequestFragment f : fragments) {
             data.bindRequests(f.getScreen(), f);
         }
 
         data.bindUser(this);
+    }
+
+    public void bindUser(Uuser user) {
+        toggleUpdatingGPS(user.isOnline());
+        activity.bindUser(user);
     }
 
     /**
@@ -145,14 +147,12 @@ public class MainController
      *              false if offline
      */
     public void setStateChanged(boolean state) {
-        Uuser u = data.setState(state);
-        activity.bind(u);
-
-        toggleUpdatingGPS(state);
+        data.setState(this, state);
+        data.orderListTrading(this);
     }
 
     private void toggleUpdatingGPS(boolean state) {
-        Intent i =new Intent(activity, GeoService.class);
+        Intent i = new Intent(activity, GeoService.class);
         if (state) {
             activity.startService(i);
         }
@@ -168,22 +168,7 @@ public class MainController
      */
     @Override
     public void setData(Uuser user) {
-        activity.bind(user);
-    }
-
-    /**
-     * Process pressing to back-key
-     *
-     * @return true if close Drawer
-     */
-    public boolean back() {
-        if (layout.isDrawerOpen(GravityCompat.START)) {
-            layout.closeDrawer(GravityCompat.START);
-
-            return true;
-        }
-
-        return false;
+        activity.bindUser(user);
     }
 
     /**
@@ -204,5 +189,10 @@ public class MainController
      */
     public Context getContext() {
         return activity;
+    }
+
+    //TODO: сунуть в параметры скрин
+    public void refresh() {
+        data.orderListTrading(this);
     }
 }

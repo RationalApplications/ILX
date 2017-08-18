@@ -18,4 +18,5 @@ public class StockFragment extends RequestFragment {
     public Screens getScreen() {
         return Screens.STOCK;
     }
+
 }

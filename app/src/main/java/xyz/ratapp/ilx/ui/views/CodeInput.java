@@ -214,14 +214,14 @@ public class CodeInput extends View {
         return new Underline(fromX, height, fromX + sectionWidth, height);
     }
 
-    private void showKeyboard() {
+    public void showKeyboard() {
         InputMethodManager inputmethodmanager =
                 (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputmethodmanager.showSoftInput(this, InputMethodManager.RESULT_UNCHANGED_SHOWN);
         inputmethodmanager.viewClicked(this);
     }
 
-    private void hideKeyBoard(){
+    public void hideKeyBoard(){
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
     }

@@ -1,6 +1,10 @@
 package xyz.ratapp.ilx.ui.views;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.SwitchCompat;
 import android.util.TypedValue;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -15,31 +19,88 @@ import xyz.ratapp.ilx.controllers.main.MainController;
  * depending on the state of switch
  */
 
-public class StatusSwitch extends Switch {
+public class StatusSwitch extends SwitchCompat {
 
-    //TODO: вынести в integers
-    public static final int SWITCH_PADDING = 12;
+    public static int SWITCH_PADDING;
+    public static int TEXT_SIZE;
+    public static float SCALE;
 
     private Context context;
     private MainController controller;
+    private final StatusListener listener =
+            new StatusListener();
 
     public StatusSwitch(Context context) {
         super(context);
         this.context = context;
-        setText(R.string.offline);
-        setTextAppearance(context, R.style.TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse);
-        float scale = this.getResources().getDisplayMetrics().density;
-        int switchPadding = (int) (SWITCH_PADDING * scale);
-        setSwitchPadding(switchPadding);
-        //TODO: вынести захардкоженное
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
-        setOnCheckedChangeListener(new StatusListener());
+        setupScales();
+        setupSizes();
+        setupColors();
+
+        setText(R.string.offline);
+        setOnCheckedChangeListener(listener);
+    }
+
+    private void setupSizes() {
+        if (SWITCH_PADDING == 0) {
+            SWITCH_PADDING = getResources().
+                    getInteger(R.integer.switch_padding);
+        }
+
+        if (TEXT_SIZE == 0) {
+            TEXT_SIZE = getResources().
+                    getInteger(R.integer.switch_text_size);
+        }
+
+        if(SCALE == 0) {
+            SCALE = getResources().
+                    getDisplayMetrics().density;
+        }
+    }
+
+    private void setupScales() {
+        //TODO: do something - deprecated
+        //setup text style
+        setTextAppearance(context, R.style.TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse);
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
+        //setup padding
+        int switchPadding = (int) (SWITCH_PADDING * SCALE);
+        setSwitchPadding(switchPadding);
+    }
+
+    private void setupColors() {
+        int[][] states = new int[][] {
+                new int[] {-android.R.attr.state_checked},
+                new int[] {android.R.attr.state_checked},
+        };
+
+        int[] thumbColors = new int[] {
+                getResources().
+                        getColor(R.color.status_switch_background_color),
+                getResources().
+                        getColor(R.color.status_switch_background_color)
+        };
+
+        int[] trackColors = new int[] {
+                context.getResources().
+                        getColor(R.color.passive_accent_color),
+                context.getResources().
+                        getColor(R.color.accent_color),
+        };
+
+        SwitchCompat switchCompat = this;
+        DrawableCompat.setTintList(DrawableCompat.wrap(
+                switchCompat.getThumbDrawable()), new ColorStateList(states, thumbColors));
+        DrawableCompat.setTintList(DrawableCompat.wrap(
+                switchCompat.getTrackDrawable()), new ColorStateList(states, trackColors));
+
     }
 
     public void setController(MainController controller) {
         this.controller = controller;
     }
+
 
     /**
      * Class that provides change theme of app

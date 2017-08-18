@@ -23,6 +23,8 @@ import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
 
 /**
  * Created by timtim on 13/08/2017.
+ *
+ * Dialog that contain a map into view holder
  */
 
 public class DialogMap extends Dialog
@@ -42,6 +44,12 @@ public class DialogMap extends Dialog
         setupDialog();
     }
 
+    private void setupDialog() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(layout);
+        setCanceledOnTouchOutside(true);
+    }
+
     private void setupLayout() {
         layout = new RelativeLayout(context);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
@@ -56,12 +64,6 @@ public class DialogMap extends Dialog
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         layout.addView(map, mapParams);
-    }
-
-    private void setupDialog() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(layout);
-        setCanceledOnTouchOutside(true);
     }
 
     private void setupMapData(GoogleMap googleMap) {

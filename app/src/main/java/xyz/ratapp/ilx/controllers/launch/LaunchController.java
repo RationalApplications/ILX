@@ -2,7 +2,6 @@ package xyz.ratapp.ilx.controllers.launch;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import xyz.ratapp.ilx.R;
@@ -36,7 +35,7 @@ public class LaunchController {
             passwordCode.setCodeReadyListener(new CodeInput.codeReadyListener() {
                 @Override
                 public void onCodeReady(String code) {
-                    activity.onStartAuth();
+                    activity.onStartLogin();
                     data.authAccessCode(LaunchController.this, code);
                 }
             });
@@ -48,7 +47,7 @@ public class LaunchController {
             Toast.makeText(activity,
                     throwable,
                     Toast.LENGTH_LONG).show();
-            activity.onAuthFailed();
+            activity.onLoginFailed();
         }
         else {
             firstStart = true;

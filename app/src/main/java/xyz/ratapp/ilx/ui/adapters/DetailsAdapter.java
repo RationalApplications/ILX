@@ -15,6 +15,8 @@ import java.util.List;
 
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.data.dao.Details;
+import xyz.ratapp.ilx.ui.adapters.listeners.CallerClickListener;
+import xyz.ratapp.ilx.ui.adapters.listeners.MapClickListener;
 
 /**
  * Created by timtim on 15/08/2017.
@@ -34,7 +36,8 @@ public class DetailsAdapter extends
 
     @Override
     public DetailsAdapter.DetailsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View v = LayoutInflater.from(context).inflate(R.layout.item_details, parent, false);
+        final View v = LayoutInflater.from(context).
+                inflate(R.layout.item_details, parent, false);
         return new DetailsAdapter.DetailsViewHolder(v);
     }
 
@@ -50,14 +53,15 @@ public class DetailsAdapter extends
     }
 
 
+
     class DetailsViewHolder
             extends RecyclerView.ViewHolder {
 
         private TextView title;
         private Button btnAction;
         private ImageView ivAction;
-        private Caller caller;
-        private Pather pather;
+        private CallerClickListener caller;
+        private MapClickListener pather;
 
 
         DetailsViewHolder(View itemView) {
@@ -83,7 +87,7 @@ public class DetailsAdapter extends
                 btnAction.setText(R.string.path);
 
                 if(pather == null) {
-                    pather = new Pather();
+                    pather = new MapClickListener(context);
                 }
 
                 btnAction.setOnClickListener(pather);
@@ -94,7 +98,7 @@ public class DetailsAdapter extends
                 ivAction.setImageResource(R.drawable.phone);
 
                 if(caller == null) {
-                    caller = new Caller(text);
+                    caller = new CallerClickListener(context, text);
                 }
                 else {
                     caller.setText(text);
@@ -103,37 +107,6 @@ public class DetailsAdapter extends
             }
             else if(t.equals(Details.Type.TIME)) {
                 //typefont???
-            }
-        }
-
-
-        private class Caller implements View.OnClickListener {
-            private String text;
-
-            Caller(String text) {
-                this.text = text;
-            }
-
-            public void setText(String text) {
-                this.text = text;
-            }
-
-            @Override
-            public void onClick(View view) {
-                String phone = text.substring(text.indexOf('+'));
-                Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("tel:" + phone));
-                context.startActivity(intent);
-            }
-        }
-
-        private class Pather implements View.OnClickListener {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?daddr=59.955761,30.313146"));
-                context.startActivity(intent);
             }
         }
     }

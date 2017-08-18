@@ -17,6 +17,9 @@
     <color name="status_bar_color">#000</color>
     <color name="background_color">#e8ebf5</color>
 
+    <!-- statusSwitch colors -->
+    <color name="status_switch_background_color">#f1f1f1</color>
+
     <!-- buttons colors -->
     <color name="perform_button_color">#92d36e</color>
     <color name="issue_button_color">#ff3822</color>

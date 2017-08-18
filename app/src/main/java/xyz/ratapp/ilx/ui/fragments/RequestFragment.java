@@ -78,7 +78,8 @@ public abstract class RequestFragment extends Fragment
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view,
+                              @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupUI();
     }
@@ -94,7 +95,7 @@ public abstract class RequestFragment extends Fragment
                 };
         refreshLayout.setOnRefreshListener(refresh);
 
-        if(requestList != null) {
+        if(data != null) {
             setData(data);
         }
     }
@@ -129,28 +130,9 @@ public abstract class RequestFragment extends Fragment
         Toast.makeText(getActivity(), "Вот так будет работать обновление",
                 Toast.LENGTH_SHORT).show();
 
-        try {
-            Thread th = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        synchronized (this) {
-                            wait(2000);
-                        }
-                    } catch (InterruptedException e) {
-                        Log.e("MyTag", e.toString());
-                    }
-                }
-            });
-            th.start();
-            th.join();
+        controller.refresh();
 
-            return true;
-        } catch (InterruptedException e) {
-            Log.e("MyTag", e.toString());
-
-            return false;
-        }
+        return true;
     }
 
     /**

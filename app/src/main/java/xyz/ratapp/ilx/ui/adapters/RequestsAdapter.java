@@ -35,8 +35,7 @@ public class RequestsAdapter extends
         Map<Screens, Integer> tmp = new HashMap<>();
         tmp.put(Screens.RECENT, R.layout.item_recent_request);
         tmp.put(Screens.STOCK, R.layout.item_stock_request);
-        tmp.put(Screens.HISTORY, R.layout.item_stock_request);
-        //TODO: tmp.put(Screens.HISTORY, R.layout.???);
+        tmp.put(Screens.HISTORY, R.layout.item_recent_request);
 
         screenItemMap = Collections.unmodifiableMap(tmp);
     }
@@ -56,24 +55,32 @@ public class RequestsAdapter extends
 
     @Override
     public RequestsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View v = LayoutInflater.from(context).inflate(screenItemMap.get(screen), parent, false);
+        View v = LayoutInflater.from(context).
+                inflate(screenItemMap.get(screen), parent, false);
+        setupDifficultHeight(v);
+
+        return new RequestsViewHolder(v);
+    }
+
+    private void setupDifficultHeight(final View v) {
         v.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener(){
 
                     @Override
                     public void onGlobalLayout() {
                         int height = v.getHeight();
-                        v.findViewById(R.id.vDifficult).setMinimumHeight(height);
-                        v.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        v.findViewById(R.id.vDifficult).
+                                setMinimumHeight(height);
+                        v.getViewTreeObserver().
+                                removeGlobalOnLayoutListener(this);
                     }
                 });
-
-        return new RequestsViewHolder(v);
     }
+
 
     @Override
     public void onBindViewHolder(RequestsViewHolder holder, int position) {
-        final Request r = requests.get(position);
+        Request r = requests.get(position);
         holder.bind(r);
     }
 

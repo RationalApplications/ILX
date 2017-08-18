@@ -33,17 +33,18 @@ public class RecentFragment extends RequestFragment {
 
         //setup button:
         //sizes
-        final float scale = getContext().getResources().getDisplayMetrics().density;
+        final float SCALE = getContext().getResources().
+                getDisplayMetrics().density;
         final float ON_THE_MAP_WIDTH = getResources().getDimension(R.dimen.button_on_the_map_width);
-        RelativeLayout.LayoutParams params
-                = new RelativeLayout.LayoutParams(
-                        (int) (ON_THE_MAP_WIDTH * scale + 0.5f),
+        RelativeLayout.LayoutParams params =
+                new RelativeLayout.LayoutParams(
+                        (int) (ON_THE_MAP_WIDTH * SCALE + 0.5f),
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         //margins
         final float LEFT_MARGIN = getResources().getDimension(R.dimen.default_screen_margin);
         final float BOTTOM_MARGIN = getResources().getDimension(R.dimen.default_large_margin);
-        params.leftMargin = (int) (LEFT_MARGIN * scale + 0.5f);
-        params.bottomMargin = (int) (BOTTOM_MARGIN * scale + 0.5f);
+        params.leftMargin = (int) (LEFT_MARGIN * SCALE + 0.5f);
+        params.bottomMargin = (int) (BOTTOM_MARGIN * SCALE + 0.5f);
         //align
         params.addRule(RelativeLayout.ALIGN_LEFT, requestList.getId());
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);

@@ -1,6 +1,7 @@
 package xyz.ratapp.ilx.ui.activities
 
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -18,9 +19,7 @@ import xyz.ratapp.ilx.ui.helpers.ThemePicker
 
 class MainActivity : AppCompatActivity() {
 
-    //controller
     private var controller: MainController? = null
-    //ui
     private var picker: ThemePicker? = null
 
 
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.addView(customView, Toolbar.LayoutParams(Gravity.END))
     }
 
-    fun bind(user: Uuser) {
+    fun bindUser(user: Uuser) {
         Glide.with(this).load(user.preview).error(R.mipmap.ic_launcher).
                 into(navView.getHeaderView(0).ivNavIcon)
         navView.getHeaderView(0).tvNavHeader.text = user.courierName
@@ -67,7 +66,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (!controller!!.back()) {
+        if (dlMain.isDrawerOpen(GravityCompat.START)) {
+            dlMain.closeDrawer(GravityCompat.START)
+        }
+        else {
             super.onBackPressed()
         }
     }

@@ -20,15 +20,17 @@ class LaunchActivity : AppCompatActivity() {
 
     fun setAuthorizeScreen() {
         setContentView(R.layout.activity_launch)
+        //TODO: make keyboard with only numbers
         ciPassword.setInputType(InputType.TYPE_CLASS_NUMBER)
     }
 
-    fun onStartAuth() {
+    fun onStartLogin() {
         ciPassword.isEnabled = false
+        ciPassword.hideKeyBoard()
         pbLoading.visibility = View.VISIBLE
     }
 
-    fun onAuthFailed() {
+    fun onLoginFailed() {
         ciPassword.isEnabled = true
         pbLoading.visibility = View.INVISIBLE
     }

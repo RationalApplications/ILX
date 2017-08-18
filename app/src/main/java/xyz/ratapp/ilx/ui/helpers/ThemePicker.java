@@ -17,10 +17,13 @@ import xyz.ratapp.ilx.ui.activities.MainActivity;
 
 
 public class ThemePicker {
+
     @StyleRes
-    private static final int STATE_ACTIVE_THEME = R.style.AppTheme_Active_NoActionBar;
+    private static final int STATE_ACTIVE_THEME =
+            R.style.AppTheme_Active_NoActionBar;
     @StyleRes
-    private static final int STATE_PASSIVE_THEME = R.style.AppTheme_Passive_NoActionBar;
+    private static final int STATE_PASSIVE_THEME =
+            R.style.AppTheme_Passive_NoActionBar;
     @StyleRes
     private int currentTheme;
     private MainActivity activity;
@@ -51,12 +54,14 @@ public class ThemePicker {
         return currentTheme;
     }
 
+
     public int getPrimaryColor() {
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = activity.getTheme();
         theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
         return typedValue.resourceId;
     }
+
 
     public int getPrimaryDarkColor() {
         TypedValue typedValue = new TypedValue();
@@ -65,12 +70,14 @@ public class ThemePicker {
         return typedValue.resourceId;
     }
 
+
     public int getAccentColor() {
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = activity.getTheme();
         theme.resolveAttribute(R.attr.colorAccent, typedValue, true);
         return typedValue.resourceId;
     }
+
 
     @DrawableRes
     public int getSideNavBar() {

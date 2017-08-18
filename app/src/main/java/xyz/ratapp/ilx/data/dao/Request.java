@@ -30,6 +30,21 @@ public class Request {
     private List<Details> details;
 
 
+    public Request(String address, String comment,
+                   String cost) {
+        this.address = address;
+        this.comment = comment;
+        this.cost = cost;
+    }
+
+    public Request(String address, String comment,
+                   String cost, int difficult) {
+        this.address = address;
+        this.comment = comment;
+        this.cost = cost;
+        this.difficult = difficult;
+    }
+
     public Request(String address, String task, String comment, String time,
                    String cost, String commission, String name, String phone, int difficult) {
         this.address = address;

@@ -29,13 +29,16 @@ public class AddressesAdapter extends
     }
 
     @Override
-    public AddressesAdapter.AddressessViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View v = LayoutInflater.from(context).inflate(R.layout.item_address, parent, false);
+    public AddressesAdapter.AddressessViewHolder
+    onCreateViewHolder(ViewGroup parent, int viewType) {
+        final View v = LayoutInflater.from(context).
+                inflate(R.layout.item_address, parent, false);
         return new AddressesAdapter.AddressessViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(AddressesAdapter.AddressessViewHolder holder, int position) {
+    public void onBindViewHolder(AddressesAdapter.AddressessViewHolder holder,
+                                 int position) {
         Request r = requests.get(position);
         holder.bind(r);
     }
@@ -44,6 +47,7 @@ public class AddressesAdapter extends
     public int getItemCount() {
         return requests.size();
     }
+
 
     static class AddressessViewHolder
             extends RecyclerView.ViewHolder {

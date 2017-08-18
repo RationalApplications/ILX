@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.data.dao.User;
@@ -18,7 +19,7 @@ public class Model {
 
     private User user;
 
-    private ArrayList<Request> newRequests, curRequests, histRequests;
+    private List<Request> newRequests, curRequests, histRequests;
 
     public Model() {
         newRequests = new ArrayList<>();
@@ -92,7 +93,11 @@ public class Model {
         return user;
     }
 
-    public ArrayList<Request> getNewRequests(){
+    public List<Request> getNewRequests(){
         return newRequests;
+    }
+
+    public void setNewRequests(List<Request> newRequests) {
+        this.newRequests = newRequests;
     }
 }

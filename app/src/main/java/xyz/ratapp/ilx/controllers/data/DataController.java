@@ -2,11 +2,17 @@ package xyz.ratapp.ilx.controllers.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +30,7 @@ import xyz.ratapp.ilx.controllers.main.MainController;
 import xyz.ratapp.ilx.data.Model;
 import xyz.ratapp.ilx.data.dao.Details;
 import xyz.ratapp.ilx.data.dao.Request;
-import xyz.ratapp.ilx.data.dao.User;
+import xyz.ratapp.ilx.data.dao.Rerequest;
 import xyz.ratapp.ilx.data.dao.UserLocation;
 import xyz.ratapp.ilx.data.dao.Uuser;
 import xyz.ratapp.ilx.data.retrofit.API;
@@ -36,7 +42,6 @@ import static xyz.ratapp.ilx.data.retrofit.API.USER_URL_MASK;
  * Created by timtim on 14/08/2017.
  */
 
-//TODO: в синглтон
 public class DataController {
 
     private boolean state = false;
@@ -60,6 +65,7 @@ public class DataController {
             .build(), retrofitUser;
     private API apiBase = retrofitBase.create(API.class),
             apiUser;
+    private List<Rerequest> stock;
     private String domainName;
     private Uuser user;
 
@@ -73,6 +79,54 @@ public class DataController {
         }
 
         return data;
+    }
+
+    public void orderListTrading(final MainController controller) {
+        String sessionId = user.getSessionId();
+
+        apiUser.orderListTrading(sessionId).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                Log.e("MyTag", response.message());
+                int status = response.body().getAsJsonObject("response").
+                        get("status").getAsInt();
+
+                if(status == 1) {
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<Map<String, Rerequest>>(){}.getType();
+                    Map<String, Rerequest> orderMap = gson.fromJson(response.body().
+                            getAsJsonObject("response").getAsJsonObject("order_list").
+                            toString(), type);
+                    stock = new ArrayList<>();
+                    stock.addAll(orderMap.values());
+
+                    List<Request> newRequests = new ArrayList<>();
+                    for (Rerequest r : stock) {
+                        String diff = r.getDifficult();
+                        Request req;
+                        if(diff.isEmpty()) {
+                            req = new Request(r.getH2(), r.getH3(), r.getH1());
+
+                        }
+                        else {
+                            req = new Request(r.getH2(), r.getH3(),
+                                    r.getH1(), Color.parseColor(diff));
+                        }
+
+                        newRequests.add(req);
+                    }
+
+                    model.setNewRequests(newRequests);
+                    controller.bindData();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.e("MyTag", t.toString());
+            }
+        });
     }
 
     public void courierLocation(UserLocation location) {
@@ -158,8 +212,8 @@ public class DataController {
                         String cid = obj.get("cid").getAsString();
                         int wareHouseProperty = obj.get("warehouse_property").getAsInt();
                         int gps = obj.get("gps").getAsInt();
-                        String workStatus = response.body().get("work_status").getAsString();
-                        String courierType = response.body().get("courier_type").getAsString();
+                        String workStatus = obj.get("work_status").getAsString();
+                        String courierType = obj.get("courier_type").getAsString();
 
                         user = new Uuser(courierName, ava, preview, courierPhone, clientName,
                                 clientPhone, authProperty, authMd, sessionId, cid,
@@ -229,16 +283,34 @@ public class DataController {
         return null;
     }
 
-    public Uuser setState(boolean state) {
-        user.setOnline(state);
-        this.state = state;
+    public Uuser setState(final MainController controller, final boolean state) {
+        apiUser.workStatusUpdate(user.getSessionId(), state ? "1" : "0").
+                enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.e("MyTag", response.message());
+                user.setOnline(state);
+                DataController.this.state = state;
+                controller.bindUser(user);
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.e("MyTag", t.toString());
+            }
+        });
 
         return user;
     }
 
     public void bindRequests(Screens screen,
                              ListSettable<Request> settable) {
-        settable.setData(screenRequestsMap.get(screen));
+        if(screen.equals(Screens.STOCK)) {
+            settable.setData(model.getNewRequests());
+        }
+        else {
+            settable.setData(screenRequestsMap.get(screen));
+        }
     }
 
     public void bindUser(MainController controller) {

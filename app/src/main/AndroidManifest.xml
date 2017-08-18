@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Active">
+
         <activity
             android:name=".ui.activities.LaunchActivity"
             android:label="@string/title_activity_launch"
@@ -22,44 +23,45 @@
             android:theme="@style/AppTheme.Active.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activities.MainActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.Passive.NoActionBar" />
+
         <activity
             android:name=".ui.activities.DetailsActivity"
             android:label="@string/title_details"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="xyz.ratapp.ilx.SHOW_DETAILS_OF_REQUEST_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activities.RequestInfoActivity"
             android:label="@string/title_details"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="xyz.ratapp.ilx.SHOW_DETAILS_OF_STOCK_REQUEST_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".controllers.GeoService"
+            android:enabled="true"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <service
-            android:name=".controllers.GeoService"
-            android:enabled="true"
-            android:exported="true"/>
     </application>
 
 </manifest>
