@@ -7,9 +7,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -17,6 +15,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +27,6 @@ import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
 import xyz.ratapp.ilx.controllers.launch.LaunchController;
 import xyz.ratapp.ilx.controllers.main.MainController;
 import xyz.ratapp.ilx.data.Model;
-import xyz.ratapp.ilx.data.dao.Details;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.data.dao.Rerequest;
 import xyz.ratapp.ilx.data.dao.UserLocation;
@@ -93,11 +91,12 @@ public class DataController {
                         get("status").getAsInt();
 
                 if(status == 1) {
+
                     Gson gson = new Gson();
                     Type type = new TypeToken<Map<String, Rerequest>>(){}.getType();
-                    Map<String, Rerequest> orderMap = gson.fromJson(response.body().
-                            getAsJsonObject("response").getAsJsonObject("order_list").
-                            toString(), type);
+                    JsonObject orderList = response.body().getAsJsonObject("response").
+                            getAsJsonObject("order_list");
+                    Map<String, Rerequest> orderMap = gson.fromJson(orderList, type);
                     stock = new ArrayList<>();
                     stock.addAll(orderMap.values());
 
@@ -106,12 +105,18 @@ public class DataController {
                         String diff = r.getDifficult();
                         Request req;
                         if(diff.isEmpty()) {
-                            req = new Request(r.getH2(), r.getH3(), r.getH1());
 
+                            req = new Request(r.getH2(), r.getH3(), r.getH1(),
+                                    r.getImage(), new ArrayList<>(r.getComments().values()),
+                                    new ArrayList<>(r.getAddress().values()),
+                                    r.getBtn());
                         }
                         else {
-                            req = new Request(r.getH2(), r.getH3(),
-                                    r.getH1(), Color.parseColor(diff));
+                            req = new Request(r.getH2(), r.getH3(), r.getH1(),
+                                    Color.parseColor(r.getDifficult()),
+                                    r.getImage(), new ArrayList<>(r.getComments().values()),
+                                    new ArrayList<>(r.getAddress().values()),
+                                    r.getBtn());
                         }
 
                         newRequests.add(req);
@@ -200,24 +205,24 @@ public class DataController {
                     int status = obj.get("status").getAsInt();
 
                     if(status == 1) {
-                        String courierName = obj.get("courier_name").getAsString();
+
                         String ava = obj.get("ava_url").getAsString();
                         String preview = obj.get("ava_url_preview").getAsString();
-                        String courierPhone = obj.get("courier_phone").getAsString();
                         String clientName = obj.get("client_name").getAsString();
                         String clientPhone = obj.get("client_phone").getAsString();
                         String authProperty = obj.get("auth_property").getAsString();
-                        String authMd = obj.get("auth_md").getAsString();
                         String sessionId = obj.get("session_id").getAsString();
-                        String cid = obj.get("cid").getAsString();
-                        int wareHouseProperty = obj.get("warehouse_property").getAsInt();
                         int gps = obj.get("gps").getAsInt();
                         String workStatus = obj.get("work_status").getAsString();
+                        String gpsTimeout = obj.get("gps_timeout").getAsString();
+                        String cid = obj.get("cid").getAsString();
+                        int wareHouseProperty = obj.get("warehouse_property").getAsInt();
+                        String courierName = obj.get("courier_name").getAsString();
                         String courierType = obj.get("courier_type").getAsString();
 
-                        user = new Uuser(courierName, ava, preview, courierPhone, clientName,
-                                clientPhone, authProperty, authMd, sessionId, cid,
-                                wareHouseProperty, gps, workStatus, courierType);
+                        user = new Uuser(ava, preview, clientName, clientPhone,
+                                authProperty, sessionId, gps, workStatus, gpsTimeout,
+                                cid, wareHouseProperty, courierName, courierType);
 
                         savePrefs(controller.getContext());
                         controller.next();
@@ -323,8 +328,17 @@ public class DataController {
         Request r = getRequest(id);
 
         if(r != null) {
-            List<Details> details = r.getDetails();
+            List<String> details = r.getDetails();
             infoController.setData(details);
+        }
+    }
+
+    public void bindReqInfo(InfoController infoController,
+                            String id) {
+        Request r = getRequest(id);
+
+        if(r != null) {
+            infoController.setData(r);
         }
     }
 

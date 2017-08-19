@@ -5,26 +5,31 @@ import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.ebanx.swipebtn.SwipeButton;
 
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.data.DataController;
+import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
 import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
-import xyz.ratapp.ilx.data.Model;
-import xyz.ratapp.ilx.data.dao.Details;
+import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.activities.InfoActivity;
 import xyz.ratapp.ilx.ui.activities.RequestInfoActivity;
 import xyz.ratapp.ilx.ui.adapters.AddressesAdapter;
 import xyz.ratapp.ilx.ui.adapters.DetailsAdapter;
-import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
 
 /**
  * Created by timtim on 14/08/2017.
  */
 
-public class InfoController implements ListSettable<Details> {
+public class InfoController implements ListSettable<String>,
+        DataSettable<Request> {
 
     private DataController data;
     private InfoActivity activity;
@@ -40,7 +45,7 @@ public class InfoController implements ListSettable<Details> {
 
     private void setupData() {
         if(activity instanceof RequestInfoActivity) {
-            setupReqInfoData();
+            data.bindReqInfo(this, id);
         }
         else if(activity instanceof DetailsActivity) {
             data.bindDetails(this, id);
@@ -48,31 +53,51 @@ public class InfoController implements ListSettable<Details> {
     }
 
     @Override
-    public void setData(List<Details> data) {
+    public void setData(List<String> data) {
         setupDetailsData(data);
     }
 
-    private void setupDetailsData(List<Details> data) {
+    @Override
+    public void setData(Request data) {
+        setupReqInfoData(data);
+    }
+
+    private void setupDetailsData(List<String> data) {
         RecyclerView rv = activity.findViewById(R.id.rvTasks);
         GridLayoutManager glm = new GridLayoutManager(activity, 1);
         rv.setLayoutManager(glm);
         rv.setAdapter(new DetailsAdapter(activity, data));
     }
 
-    private void setupReqInfoData() {
-        activity.findViewById(R.id.ivMap).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callMap();
-            }
-        });
+    private void setupReqInfoData(Request request) {
+        //map
+        if(!request.getImage().isEmpty()) {
+            ImageView map = activity.findViewById(R.id.ivMap);
+            Glide.with(activity).load(request.getImage()).asBitmap().into(map);
+            map.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callMap();
+                }
+            });
+        }
+
+        //tv
+        //TODO: костыли
+        TextView deliveryCost = activity.findViewById(R.id.tvDeliveryCost);
+        TextView commission = activity.findViewById(R.id.tvCommission);
+        deliveryCost.setText(deliveryCost.getText() + " " + request.getCost());
+        commission.setText(commission.getText() + " " + request.getCommission());
+
+        //button
+        SwipeButton btn = activity.findViewById(R.id.swipeAccept);
+        btn.setText(request.getBtn().getName());
 
         //rv
-        Model model = new Model();
         RecyclerView rvAddresses = activity.findViewById(R.id.rvAddresses);
         GridLayoutManager glm = new GridLayoutManager(activity, 1);
         rvAddresses.setLayoutManager(glm);
-        rvAddresses.setAdapter(new AddressesAdapter(activity, model.getNewRequests()));
+        rvAddresses.setAdapter(new AddressesAdapter(activity, request.getAddresses()));
     }
 
     private void callMap() {

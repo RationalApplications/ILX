@@ -21,7 +21,6 @@ class RequestInfoActivity : InfoActivity() {
 
         val STR_TITLE = "title"
         val STR_COST = "cost"
-        val STR_COMMISSION = "commission"
         val STR_COMMENT = "comment"
         val STR_DIFFICULT = "difficult"
 
@@ -30,7 +29,6 @@ class RequestInfoActivity : InfoActivity() {
             i.action = SHOW_DETAILS_OF_STOCK_REQUEST_ACTION
             i.putExtra("id", id)
             i.putExtra(STR_COST, request.cost)
-            i.putExtra(STR_COMMISSION, request.commission)
             i.putExtra(STR_TITLE, request.address)
             i.putExtra(STR_COMMENT, request.comment)
             i.putExtra(STR_DIFFICULT, request.difficult)
@@ -69,14 +67,8 @@ class RequestInfoActivity : InfoActivity() {
 
         val title = data.getStringExtra(STR_TITLE)
         val cost = data.getStringExtra(STR_COST)
-        var commission = data.getStringExtra(STR_COMMISSION)
         val comment = data.getStringExtra(STR_COMMENT)
         val difficult = data.getIntExtra(STR_DIFFICULT, -1)
-        val delivery = getString(R.string.delivery_mask, cost)
-        commission = getString(R.string.delivery_mask, commission)
-
-        tvDeliveryCost.text = delivery
-        tvCommission.text = commission
 
         tvCost.text = cost
         tvComment.text = comment

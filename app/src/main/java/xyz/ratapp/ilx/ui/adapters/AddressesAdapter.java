@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.data.dao.Address;
 import xyz.ratapp.ilx.data.dao.Request;
 
 /**
@@ -20,12 +21,12 @@ public class AddressesAdapter extends
         RecyclerView.Adapter<AddressesAdapter.AddressessViewHolder> {
 
     private Context context;
-    private List<Request> requests;
+    private List<Address> addresses;
 
     public AddressesAdapter(Context context,
-                            List<Request> requests) {
+                            List<Address> requests) {
         this.context = context;
-        this.requests = requests;
+        this.addresses = requests;
     }
 
     @Override
@@ -39,13 +40,13 @@ public class AddressesAdapter extends
     @Override
     public void onBindViewHolder(AddressesAdapter.AddressessViewHolder holder,
                                  int position) {
-        Request r = requests.get(position);
-        holder.bind(r);
+        Address a = addresses.get(position);
+        holder.bind(a);
     }
 
     @Override
     public int getItemCount() {
-        return requests.size();
+        return addresses.size();
     }
 
 
@@ -67,16 +68,16 @@ public class AddressesAdapter extends
             time = itemView.findViewById(R.id.tvAddressTime);
         }
 
-        void bind(Request r) {
-            title.setText(r.getAddress());
-            comment.setText(r.getComment());
-            time.setText(r.getTime());
+        void bind(Address a) {
+            title.setText(a.getH10());
+            time.setText(a.getH11());
+            task.setText(a.getH12());
 
-            if(!r.getTask().isEmpty()) {
-                task.setText(r.getTask());
+            if(!a.getH13().isEmpty()) {
+                comment.setText(a.getH13());
             }
             else {
-                task.setVisibility(View.GONE);
+                comment.setVisibility(View.GONE);
             }
         }
     }

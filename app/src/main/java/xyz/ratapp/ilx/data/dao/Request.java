@@ -26,27 +26,15 @@ public class Request {
     private String commission;
     @ColorInt
     private int difficult;
-    private ArrayList listCoords;
-    private List<Details> details;
+    private String image;
+    private List<String> details;
+    private List<Address> addresses;
+    private Button btn;
 
 
-    public Request(String address, String comment,
-                   String cost) {
-        this.address = address;
-        this.comment = comment;
-        this.cost = cost;
-    }
-
-    public Request(String address, String comment,
-                   String cost, int difficult) {
-        this.address = address;
-        this.comment = comment;
-        this.cost = cost;
-        this.difficult = difficult;
-    }
-
-    public Request(String address, String task, String comment, String time,
-                   String cost, String commission, String name, String phone, int difficult) {
+    public Request(String address, String task, String comment,
+                   String time, String cost, String commission,
+                   String name, String phone, int difficult) {
         this.address = address;
         this.task = task;
         this.comment = comment;
@@ -54,16 +42,33 @@ public class Request {
         this.cost = cost;
         this.name = name;
         this.phone = phone;
-        this.difficult = difficult;
         this.commission = commission;
+        this.difficult = difficult;
     }
 
-    public String getName() {
-        return name;
+    public Request(String address, String comment, String cost,
+                   String image, List<String> details,
+                   List<Address> addresses, Button btn) {
+        this.address = address;
+        this.comment = comment;
+        this.cost = cost;
+        this.image = image;
+        this.details = details;
+        this.addresses = addresses;
+        this.btn = btn;
     }
 
-    public String getPhone() {
-        return phone;
+    public Request(String address, String comment, String cost,
+                   int difficult, String image, List<String> details,
+                   List<Address> addresses, Button btn) {
+        this.address = address;
+        this.comment = comment;
+        this.cost = cost;
+        this.difficult = difficult;
+        this.image = image;
+        this.details = details;
+        this.addresses = addresses;
+        this.btn = btn;
     }
 
     public String getAddress() {
@@ -86,47 +91,35 @@ public class Request {
         return cost;
     }
 
-    public int getDifficult() {
-        return difficult;
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public String getCommission() {
         return commission;
     }
 
-    public ArrayList getCoords(){
-        LatLng latlng1 = new LatLng(59.9251684, 30.3118085);
-        LatLng latlng2 = new LatLng(59.9323387, 30.3481368);
-        LatLng latlng3 = new LatLng(59.833029, 30.1891884);
-
-        ArrayList list = new ArrayList();
-        list.add(latlng1);
-        list.add(latlng2);
-        list.add(latlng3);
-
-        return list;
+    public int getDifficult() {
+        return difficult;
     }
 
-    public List<Details> getDetails() {
-        Details address = new Details(
-                Details.Type.ADDRESS,
-                "Садовая ул., 54, офис 19");
-        Details time = new Details(
-                Details.Type.TIME,
-                "10:00-12:00");
-        Details cost = new Details(
-                Details.Type.TEXT,
-                "Выкупить товар: -3200 руб");
-        Details task = new Details(
-                Details.Type.TEXT,
-                "Забрать два заказа, иметь паспорт при себе");
-        Details name = new Details(
-                Details.Type.TEXT,
-                "Имя: Ольга Ивановна");
-        Details phone = new Details(
-                Details.Type.PHONE,
-                "Телефон: +7(905)207-22-87");
+    public String getImage() {
+        return image;
+    }
 
-        return Arrays.asList(address, time, cost, task, name, phone);
+    public List<String> getDetails() {
+        return details;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public Button getBtn() {
+        return btn;
     }
 }

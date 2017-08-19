@@ -6,41 +6,37 @@ package xyz.ratapp.ilx.data.dao;
 
 public class Uuser {
 
-    private String courierName;
     private String ava;
     private String preview;
-    private String courierPhone;
     private String clientName;
     private String clientPhone;
     private String authProperty;
-    private String authMd;
     private String sessionId;
-    private String cid;
-    private int wareHouseProperty;
     private int gps;
     private String workStatus;
+    private String gpsTimeout;
+    private String cid;
+    private int wareHouseProperty;
+    private String courierName;
     private String courierType;
 
-    public Uuser(String courierName, String ava,
-                 String preview, String courierPhone,
-                 String clientName, String clientPhone,
-                 String authProperty, String authMd,
-                 String sessionId, String cid,
-                 int wareHouseProperty, int gps,
-                 String workStatus, String courierType) {
-        this.courierName = courierName;
+
+    public Uuser(String ava, String preview, String clientName, String clientPhone,
+                 String authProperty, String sessionId, int gps, String workStatus,
+                 String gpsTimeout, String cid, int wareHouseProperty,
+                 String courierName, String courierType) {
         this.ava = ava;
         this.preview = preview;
-        this.courierPhone = courierPhone;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
         this.authProperty = authProperty;
-        this.authMd = authMd;
         this.sessionId = sessionId;
-        this.cid = cid;
-        this.wareHouseProperty = wareHouseProperty;
         this.gps = gps;
         this.workStatus = workStatus;
+        this.gpsTimeout = gpsTimeout;
+        this.cid = cid;
+        this.wareHouseProperty = wareHouseProperty;
+        this.courierName = courierName;
         this.courierType = courierType;
     }
 
@@ -56,10 +52,6 @@ public class Uuser {
         return preview;
     }
 
-    public String getCourierPhone() {
-        return courierPhone;
-    }
-
     public String getClientName() {
         return clientName;
     }
@@ -70,10 +62,6 @@ public class Uuser {
 
     public String getAuthProperty() {
         return authProperty;
-    }
-
-    public String getAuthMd() {
-        return authMd;
     }
 
     public String getSessionId() {
@@ -90,6 +78,10 @@ public class Uuser {
 
     public int getGps() {
         return gps;
+    }
+
+    public String getGpsTimeout() {
+        return gpsTimeout;
     }
 
     public String getWorkStatus() {

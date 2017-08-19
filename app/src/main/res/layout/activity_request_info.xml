@@ -40,8 +40,7 @@
         android:layout_marginBottom="@dimen/default_small_margin"
         android:layout_weight="1.16"
         android:scaleType="fitCenter"
-        android:contentDescription="@string/iv_map_descr"
-        app:srcCompat="@drawable/example_map" />
+        android:contentDescription="@string/iv_map_descr" />
 
     <View
         android:layout_width="match_parent"

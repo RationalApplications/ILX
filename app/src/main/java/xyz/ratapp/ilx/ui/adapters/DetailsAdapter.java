@@ -1,8 +1,6 @@
 package xyz.ratapp.ilx.ui.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.data.dao.Details;
 import xyz.ratapp.ilx.ui.adapters.listeners.CallerClickListener;
 import xyz.ratapp.ilx.ui.adapters.listeners.MapClickListener;
 
@@ -26,10 +23,10 @@ public class DetailsAdapter extends
         RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder> {
 
     private Context context;
-    private List<Details> details;
+    private List<String> details;
 
     public DetailsAdapter(Context context,
-                            List<Details> details) {
+                            List<String> details) {
         this.context = context;
         this.details = details;
     }
@@ -43,8 +40,8 @@ public class DetailsAdapter extends
 
     @Override
     public void onBindViewHolder(DetailsAdapter.DetailsViewHolder holder, int position) {
-        Details d = details.get(position);
-        holder.bind(d);
+        String s = details.get(position);
+        holder.bind(s);
     }
 
     @Override
@@ -72,12 +69,10 @@ public class DetailsAdapter extends
             ivAction = itemView.findViewById(R.id.ivDetailsAction);
         }
 
-        void bind(Details d) {
-            Details.Type t = d.getType();
+        void bind(String s) {
+            title.setText(s);
 
-            final String text = d.getText();
-            title.setText(text);
-
+            /* TODO: action?
             if(t.equals(Details.Type.TEXT)) {
                 //typefont???
             }
@@ -107,7 +102,7 @@ public class DetailsAdapter extends
             }
             else if(t.equals(Details.Type.TIME)) {
                 //typefont???
-            }
+            }*/
         }
     }
 }
