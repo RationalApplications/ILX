@@ -112,6 +112,17 @@ public class Request {
     }
 
     public List<String> getDetails() {
+        if(details == null) {
+            String address = "Садовая ул., 54, офис 19";
+            String time = "10:00-12:00";
+            String cost = "Выкупить товар: -3200 руб";
+            String task = "Забрать два заказа, иметь паспорт при себе";
+            String name = "Имя: Ольга Ивановна";
+            String phone = "Телефон: +7(905)207-22-87";
+
+            return Arrays.asList(address, time, cost, task, name, phone);
+        }
+
         return details;
     }
 

@@ -9,7 +9,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,6 +32,7 @@ import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
 import xyz.ratapp.ilx.controllers.launch.LaunchController;
 import xyz.ratapp.ilx.controllers.main.MainController;
 import xyz.ratapp.ilx.data.Model;
+import xyz.ratapp.ilx.data.dao.Button;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.data.dao.Rerequest;
 import xyz.ratapp.ilx.data.dao.UserLocation;
@@ -306,6 +312,34 @@ public class DataController {
         });
 
         return user;
+    }
+
+    public void onPushButton(final Button btn) {
+        if(btn != null && btn.getUrl() != null) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String path = String.format(USER_URL_MASK, domainName) +
+                                btn.getUrl();
+                        URL url = new URL(path);
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        BufferedReader in = new BufferedReader(
+                                new InputStreamReader(con.getInputStream()));
+                        String inputLine;
+                        StringBuilder response = new StringBuilder();
+
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        in.close();
+
+                    } catch (Exception e) {
+                        Log.e("MyTag", e.toString());
+                    }
+                }
+            }).start();
+        }
     }
 
     public void bindRequests(Screens screen,

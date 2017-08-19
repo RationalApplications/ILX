@@ -42,6 +42,7 @@ public class MainController
     private DataController data;
     private MainActivity activity;
     private DrawerLayout layout;
+    private StatusSwitch status;
 
     public MainController(MainActivity activity) {
         //ui
@@ -49,7 +50,7 @@ public class MainController
         layout = activity.findViewById(R.id.dlMain);
 
         //setup status switch
-        StatusSwitch status = new StatusSwitch(activity);
+        status = new StatusSwitch(activity);
         status.setController(this);
         activity.setupToolbar(status);
         activity.setupUI();
@@ -127,6 +128,9 @@ public class MainController
             Intent next = recent ?
                     DetailsActivity.Companion.getIntent(id) :
                     RequestInfoActivity.Companion.getIntent(id, r);
+            next = from.equals(Screens.HISTORY) ?
+                    DetailsActivity.Companion.getIntent(id) :
+                    next;
 
             //TODO: hardcoded
             int theme = this.data.getLastState() ?
@@ -169,6 +173,7 @@ public class MainController
     @Override
     public void setData(Uuser user) {
         activity.bindUser(user);
+        status.setChecked(user.isOnline());
     }
 
     /**

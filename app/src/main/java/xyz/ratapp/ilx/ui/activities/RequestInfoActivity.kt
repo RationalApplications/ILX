@@ -37,12 +37,14 @@ class RequestInfoActivity : InfoActivity() {
         }
     }
 
+    private var controller: InfoController? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(intent.getIntExtra("THEME", R.style.AppTheme_Active))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request_info)
         setupUI()
-        InfoController(this)
+        controller = InfoController(this)
     }
 
     fun setupUI() {
@@ -59,6 +61,7 @@ class RequestInfoActivity : InfoActivity() {
             swipeAccept.addView(tv, RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT))
+            controller!!.acceptRequest()
         }
     }
 

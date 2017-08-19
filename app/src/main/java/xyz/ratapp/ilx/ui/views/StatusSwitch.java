@@ -34,8 +34,8 @@ public class StatusSwitch extends SwitchCompat {
         super(context);
         this.context = context;
 
-        setupScales();
         setupSizes();
+        setupScales();
         setupColors();
 
         setText(R.string.offline);
