@@ -50,7 +50,6 @@ public class DetailsAdapter extends
     }
 
 
-
     class DetailsViewHolder
             extends RecyclerView.ViewHolder {
 

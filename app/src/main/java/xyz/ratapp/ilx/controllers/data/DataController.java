@@ -327,7 +327,7 @@ public class DataController {
                             String id) {
         Request r = getRequest(id);
 
-        if(r != null) {
+        if(r != null && r.getDetails() != null) {
             List<String> details = r.getDetails();
             infoController.setData(details);
         }
