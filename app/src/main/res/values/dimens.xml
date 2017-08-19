@@ -35,8 +35,7 @@
     <!-- RequestInfoActivity dims -->
     <dimen name="divider_height">1dp</dimen>
     <dimen name="request_item_size">75dp</dimen>
-    <dimen name="request_info_text_margin">22dp</dimen>
-    <dimen name="request_info_text_min_height">18dp</dimen>
+    <dimen name="request_info_rv_min_height">36dp</dimen>
 
     <!-- swipe button dims -->
     <dimen name="swipe_button_right_left_margin">18dp</dimen>

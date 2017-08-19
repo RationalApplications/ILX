@@ -22,6 +22,7 @@ import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.activities.InfoActivity;
 import xyz.ratapp.ilx.ui.activities.RequestInfoActivity;
 import xyz.ratapp.ilx.ui.adapters.AddressesAdapter;
+import xyz.ratapp.ilx.ui.adapters.CommentsAdapter;
 import xyz.ratapp.ilx.ui.adapters.DetailsAdapter;
 
 /**
@@ -82,21 +83,20 @@ public class InfoController implements ListSettable<String>,
             });
         }
 
-        //tv
-        //TODO: костыли
-        TextView deliveryCost = activity.findViewById(R.id.tvDeliveryCost);
-        TextView commission = activity.findViewById(R.id.tvCommission);
-        deliveryCost.setText(deliveryCost.getText() + " " + request.getCost());
-        commission.setText(commission.getText() + " " + request.getCommission());
-
         //button
         SwipeButton btn = activity.findViewById(R.id.swipeAccept);
         btn.setText(request.getBtn().getName());
 
-        //rv
-        RecyclerView rvAddresses = activity.findViewById(R.id.rvAddresses);
+        //rv comments
+        RecyclerView rvComments = activity.findViewById(R.id.rvComments);
         GridLayoutManager glm = new GridLayoutManager(activity, 1);
-        rvAddresses.setLayoutManager(glm);
+        rvComments.setLayoutManager(glm);
+        rvComments.setAdapter(new CommentsAdapter(activity, request.getDetails()));
+
+        //rv addresses
+        RecyclerView rvAddresses = activity.findViewById(R.id.rvAddresses);
+        GridLayoutManager glmm = new GridLayoutManager(activity, 1);
+        rvAddresses.setLayoutManager(glmm);
         rvAddresses.setAdapter(new AddressesAdapter(activity, request.getAddresses()));
     }
 

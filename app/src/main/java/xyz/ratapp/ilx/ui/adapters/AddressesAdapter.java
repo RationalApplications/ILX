@@ -24,9 +24,9 @@ public class AddressesAdapter extends
     private List<Address> addresses;
 
     public AddressesAdapter(Context context,
-                            List<Address> requests) {
+                            List<Address> addresses) {
         this.context = context;
-        this.addresses = requests;
+        this.addresses = addresses;
     }
 
     @Override

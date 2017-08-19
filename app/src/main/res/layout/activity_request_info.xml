@@ -43,36 +43,23 @@
         android:contentDescription="@string/iv_map_descr" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
-        android:layout_marginRight="@dimen/default_large_margin"
         android:layout_marginLeft="@dimen/default_large_margin"
+        android:layout_marginRight="@dimen/default_large_margin"
         android:background="@color/passive_primary_dark_color" />
 
-
-    <TextView
-        android:id="@+id/tvDeliveryCost"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvComments"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/request_info_text_margin"
-        android:layout_marginStart="@dimen/request_info_text_margin"
         android:layout_marginTop="@dimen/default_small_margin"
-        android:minHeight="@dimen/request_info_text_min_height"
-        android:layout_weight="1.48"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/default_text_size" />
-
-    <TextView
-        android:id="@+id/tvCommission"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/request_info_text_margin"
-        android:layout_marginStart="@dimen/request_info_text_margin"
-        android:layout_marginTop="@dimen/default_small_margin"
-        android:minHeight="@dimen/request_info_text_min_height"
-        android:layout_weight="1.48"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/default_text_size" />
+        android:layout_marginBottom="@dimen/default_small_margin"
+        android:layout_marginRight="@dimen/default_large_margin"
+        android:layout_marginLeft="@dimen/default_large_margin"
+        android:minHeight="@dimen/request_info_rv_min_height"
+        android:layout_weight="1.4" />
 
     <com.ebanx.swipebtn.SwipeButton
         android:id="@+id/swipeAccept"
