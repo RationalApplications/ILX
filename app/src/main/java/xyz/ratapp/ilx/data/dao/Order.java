@@ -102,9 +102,11 @@ public class Order implements Serializable {
         return newMessages;
     }
 
-    public Map<String, Message> getMessages() {
-        return messages;
+    public List<Message> getMessages() {
+        return new ArrayList<>(messages.values());
     }
+
+
 
     public static class Message implements Serializable {
 

@@ -1,23 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.ratapp.ilx.ui.fragments.DetailsFragment"
-    android:orientation="vertical">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvTasks"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="1"
-        android:layout_margin="@dimen/default_margin"/>
+    android:background="@color/background_color"
+    tools:context="xyz.ratapp.ilx.ui.fragments.DetailsFragment">
 
     <LinearLayout
         android:id="@+id/llTaskButtons"
         android:layout_width="match_parent"
-        android:layout_weight="0.1"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/default_margin"
@@ -25,24 +16,34 @@
 
         <Button
             android:id="@+id/btnPerform"
-            style="@style/AppTheme.RoundedCornerMaterialButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/perform_button_color"
+            android:layout_margin="@dimen/default_margin"
+            style="@style/AppTheme.RoundedCornerMaterialButton"
+            android:background="@color/perform_button_color"
             android:text="@string/perform"
             android:textColor="@color/text_color" />
 
         <Button
             android:id="@+id/btnIssue"
-            style="@style/AppTheme.RoundedCornerMaterialButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/issue_button_color"
-            android:text="@string/issue"
-            android:textColor="@color/text_color" />
+            android:layout_margin="@dimen/default_margin"
+            style="@style/AppTheme.RoundedCornerMaterialButton"
+            android:background="@color/issue_button_color"
+            android:textColor="@color/text_color"
+            android:text="@string/issue" />
 
     </LinearLayout>
 
-</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvTasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/default_margin"/>
+
+</RelativeLayout>

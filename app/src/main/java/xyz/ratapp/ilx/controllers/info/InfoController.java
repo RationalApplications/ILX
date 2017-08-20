@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -82,12 +83,14 @@ public class InfoController implements DataSettable<Object> {
         perform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.e("MyTag", "OK");
                 data.onPushButton(ok);
             }
         });
         issue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.e("MyTag", "NOUP");
                 Dialog dialog = new Dialog(activity);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.setCancelable(true);
