@@ -39,7 +39,7 @@ public class CallerClickListener
 
     @Override
     public void onClick(View view) {
-        String phone = text.substring(text.indexOf('+'));
+        String phone = text;
         Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("tel:" + phone));
         context.startActivity(intent);

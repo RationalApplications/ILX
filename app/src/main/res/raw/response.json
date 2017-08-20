@@ -1,0 +1,153 @@
+{
+  "response": {
+    "status": 1,
+    "orders": {
+      "1": {
+        "h21": "Егорова ул, 12",
+        "h22": "Выкуп: -3300₽ ",
+        "h23": "Цветы!",
+        "h24": "09:00-20:00",
+        "color_label": "#90CAF9",
+        "lat": "59.914068800716",
+        "lng": "30.314388746033",
+        "md_key": "459a4e7acb462e3641072bf06776996a",
+        "items": {
+          "1": {
+            "text": "Егорова ул, 12, , 99",
+            "type": "address",
+            "lat": "59.914068800716",
+            "lng": "30.314388746033"
+          },
+          "2": {
+            "text": "09:00-20:00",
+            "type": "time"
+          },
+          "3": {
+            "text": "Выкупить товар: 3300₽ ",
+            "type": "text"
+          },
+          "4": {
+            "text": "Склад, Егор",
+            "type": "fio"
+          },
+          "5": {
+            "text": "89052072287",
+            "type": "phone"
+          },
+          "6": {
+            "text": "Цветы!",
+            "type": "text"
+          }
+        },
+        "buttons": {
+          "ok": {
+            "name": "ПРИНЯТЬ",
+            "url": "/api/courier/v2/?method=order_update&status=100&tom=459a4e7acb462e3641072bf06776996a"
+          },
+          "no": {
+            "name": "ПРОБЛЕМА",
+            "options": [
+              {
+                "name": "Недозвонился до отправителя",
+                "url": "/api/courier/v2/?method=order_update&status=101&tom=459a4e7acb462e3641072bf06776996a"
+              },
+              {
+                "name": "Перенос на другой день",
+                "url": "/api/courier/v2/?method=order_update&status=102&tom=459a4e7acb462e3641072bf06776996a"
+              },
+              {
+                "name": "Отказ от заказа",
+                "url": "/api/courier/v2/?method=order_update&status=103&tom=459a4e7acb462e3641072bf06776996a"
+              }
+            ]
+          }
+        },
+        "messages_new": 1,
+        "messages": {
+          "1": {
+            "author": "Оператор",
+            "author_id": "10",
+            "message": "В какое время будете у клиента?",
+            "date_add": "2017-08-19 18:01:58"
+          },
+          "2": {
+            "author": "Курьер",
+            "author_id": "56",
+            "message": "В 20:00 буду на месте",
+            "date_add": "2017-08-19 18:10:08"
+          },
+          "3": {
+            "author": "Оператор",
+            "author_id": "10",
+            "message": "Хорошо. Клиент просил связаться за 10 минут до доставки",
+            "date_add": "2017-08-19 18:15:05"
+          }
+        }
+      },
+      "2": {
+        "h21": "Большевиков пр., 64",
+        "h22": "Получить: 3300₽ ",
+        "h23": "Цветы!",
+        "h24": "09:00-20:00",
+        "color_label": "#90CAF9",
+        "lat": "59.874693906547",
+        "lng": "30.482839423279",
+        "md_key": "459a4e7acb462e3641072bf06776996a",
+        "items": {
+          "1": {
+            "text": "Большевиков пр., 64, , 50",
+            "type": "address",
+            "lat": "59.874693906547",
+            "lng": "30.482839423279"
+          },
+          "2": {
+            "text": "09:00-20:00",
+            "type": "time"
+          },
+          "3": {
+            "text": "Получить за товар: 3300₽ ",
+            "type": "text"
+          },
+          "4": {
+            "text": "Склад, Егор",
+            "type": "fio"
+          },
+          "5": {
+            "text": "89052072287",
+            "type": "phone"
+          },
+          "6": {
+            "text": "Цветы!",
+            "type": "text"
+          }
+        },
+        "buttons": {
+          "ok": {
+            "name": "ВЫДАТЬ",
+            "url": "/api/courier/v2/?method=order_update&status=100&tom=459a4e7acb462e3641072bf06776996a"
+          },
+          "no": {
+            "name": "ПРОБЛЕМА",
+            "options": [
+              {
+                "name": "Недозвонился до отправителя",
+                "url": "/api/courier/v2/?method=order_update&status=101&tom=459a4e7acb462e3641072bf06776996a"
+              },
+              {
+                "name": "Перенос на другой день",
+                "url": "/api/courier/v2/?method=order_update&status=102&tom=459a4e7acb462e3641072bf06776996a"
+              },
+              {
+                "name": "Отказ от заказа",
+                "url": "/api/courier/v2/?method=order_update&status=103&tom=459a4e7acb462e3641072bf06776996a"
+              }
+            ]
+          }
+        },
+        "messages_new": 0,
+        "messages": {
+        }
+      }
+    }
+  }
+}

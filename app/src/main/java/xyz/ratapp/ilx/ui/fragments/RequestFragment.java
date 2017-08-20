@@ -37,7 +37,7 @@ import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
  */
 
 public abstract class RequestFragment extends Fragment
-        implements ListSettable<Request> {
+        implements ListSettable {
 
     protected RecyclerView requestList;
     protected SwipeRefreshLayout refreshLayout;
@@ -130,7 +130,7 @@ public abstract class RequestFragment extends Fragment
         Toast.makeText(getActivity(), "Вот так будет работать обновление",
                 Toast.LENGTH_SHORT).show();
 
-        controller.refresh();
+        controller.refresh(getScreen());
 
         return true;
     }
@@ -151,8 +151,8 @@ public abstract class RequestFragment extends Fragment
      * @param data - List of dao for RV
      */
     @Override
-    public void setData(List<Request> data) {
-        this.data = data;
+    public void setData(List data) {
+        this.data = (List<Request>) data;
 
         if(requestList != null) {
             GridLayoutManager glm = new GridLayoutManager(getActivity(), 1);

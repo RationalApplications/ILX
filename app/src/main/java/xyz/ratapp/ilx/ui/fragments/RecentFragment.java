@@ -1,6 +1,8 @@
 package xyz.ratapp.ilx.ui.fragments;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -8,10 +10,16 @@ import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.Screens;
+import xyz.ratapp.ilx.data.dao.Order;
+import xyz.ratapp.ilx.data.dao.Request;
+import xyz.ratapp.ilx.ui.adapters.OrdersAdapter;
+import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
 import xyz.ratapp.ilx.ui.views.DialogMap;
 
 /**
@@ -21,10 +29,23 @@ import xyz.ratapp.ilx.ui.views.DialogMap;
 public class RecentFragment extends RequestFragment {
 
     private RelativeLayout container;
+    private List<Order> orders;
 
     @Override
     protected void setupUI() {
-        super.setupUI();
+        //refresh
+        SwipeRefreshLayout.OnRefreshListener refresh =
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        refreshLayout.setRefreshing(!refresh());
+                    }
+                };
+        refreshLayout.setOnRefreshListener(refresh);
+
+        if(orders != null) {
+            setData(orders);
+        }
 
         Context context = getContext();
 
@@ -62,9 +83,25 @@ public class RecentFragment extends RequestFragment {
     }
 
     private void showOnMap() {
+        List<LatLng> locations = new ArrayList<>();
+        for (Order o : orders) {
+            locations.add(o.getLocation());
+        }
+
         DialogMap dialog = new DialogMap(getContext());
-        dialog.setData(Arrays.asList(new LatLng(59.955761, 30.313146)));
+        dialog.setData(locations);
         dialog.show();
+    }
+
+    @Override
+    public void setData(List data) {
+        this.orders = (List<Order>) data;
+
+        if(requestList != null) {
+            GridLayoutManager glm = new GridLayoutManager(getActivity(), 1);
+            requestList.setLayoutManager(glm);
+            requestList.setAdapter(new OrdersAdapter(controller, getScreen(), orders));
+        }
     }
 
     @Override
