@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.data.dao.Order;
 import xyz.ratapp.ilx.ui.adapters.listeners.CallerClickListener;
 import xyz.ratapp.ilx.ui.adapters.listeners.MapClickListener;
 
@@ -23,10 +24,10 @@ public class DetailsAdapter extends
         RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder> {
 
     private Context context;
-    private List<String> details;
+    private List<Order.Item> details;
 
     public DetailsAdapter(Context context,
-                            List<String> details) {
+                            List<Order.Item> details) {
         this.context = context;
         this.details = details;
     }
@@ -40,8 +41,8 @@ public class DetailsAdapter extends
 
     @Override
     public void onBindViewHolder(DetailsAdapter.DetailsViewHolder holder, int position) {
-        String s = details.get(position);
-        holder.bind(s);
+        Order.Item item = details.get(position);
+        holder.bind(item);
     }
 
     @Override
@@ -68,26 +69,30 @@ public class DetailsAdapter extends
             ivAction = itemView.findViewById(R.id.ivDetailsAction);
         }
 
-        void bind(String s) {
-            title.setText(s);
+        void bind(Order.Item item) {
 
-            /* TODO: action?
-            if(t.equals(Details.Type.TEXT)) {
-                //typefont???
+            String text = item.getText();
+
+            if(item.getType().equals("text") ||
+                    item.getType().equals("time") ||
+                    item.getType().equals("fio")) {
+                title.setText(text);
             }
-            else if(t.equals(Details.Type.ADDRESS)) {
-                //typefont???
+            else if(item.getType().equals("address")) {
+                Order.GeoItem geo = ((Order.GeoItem) item);
+                title.setText(text);
                 btnAction.setVisibility(View.VISIBLE);
                 btnAction.setText(R.string.path);
 
                 if(pather == null) {
-                    pather = new MapClickListener(context);
+                    pather = new MapClickListener(context,
+                            geo.getLat(), geo.getLng());
                 }
 
                 btnAction.setOnClickListener(pather);
             }
-            else if(t.equals(Details.Type.PHONE)) {
-                //typefont???
+            else if(item.getType().equals("phone")) {
+                title.setText(text);
                 ivAction.setVisibility(View.VISIBLE);
                 ivAction.setImageResource(R.drawable.phone);
 
@@ -99,9 +104,6 @@ public class DetailsAdapter extends
                 }
                 ivAction.setOnClickListener(caller);
             }
-            else if(t.equals(Details.Type.TIME)) {
-                //typefont???
-            }*/
         }
     }
 }

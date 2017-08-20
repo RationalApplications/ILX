@@ -31,9 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_toStartOf="@id/ivDetailsAction"
-        android:layout_toLeftOf="@id/ivDetailsAction"
-        android:text="hello world"/>
+        android:layout_toLeftOf="@id/ivDetailsAction" />
 
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -96,17 +97,27 @@ public class MainController
         SlidingTabLayout stlTabs = activity.findViewById(R.id.stlTabs);
         stlTabs.setViewPager(container);
         data.orderListTrading(this);
+        data.orderList(this);
     }
 
     /**
      * Method that bindUser data to all of fragments
      */
-    public void bindData() {
-        for (RequestFragment f : fragments) {
-            data.bindRequests(f.getScreen(), f);
-        }
+    public void bindData(Screens screen) {
+        RequestFragment f = getFragment(screen);
+        data.bindRequests(f.getScreen(), f);
 
         data.bindUser(this);
+    }
+
+    private RequestFragment getFragment(Screens screen) {
+        for (RequestFragment rf : fragments) {
+            if(rf.getScreen().equals(screen)) {
+                return rf;
+            }
+        }
+
+        return null;
     }
 
     public void bindUser(Uuser user) {
@@ -122,12 +133,11 @@ public class MainController
      */
     public void next(Screens from, Object data) {
         if(RequestsAdapter.screenItemMap.containsKey(from)) {
-            Request r = (Request) data;
             boolean recent = from.equals(Screens.RECENT);
-            String id = this.data.idOf(r, from);
+            String id = this.data.idOf(data, from);
             Intent next = recent ?
                     DetailsActivity.Companion.getIntent(id) :
-                    RequestInfoActivity.Companion.getIntent(id, r);
+                    RequestInfoActivity.Companion.getIntent(id, ((Request) data));
             next = from.equals(Screens.HISTORY) ?
                     DetailsActivity.Companion.getIntent(id) :
                     next;
@@ -153,6 +163,7 @@ public class MainController
     public void setStateChanged(boolean state) {
         data.setState(this, state);
         data.orderListTrading(this);
+        data.orderList(this);
     }
 
     private void toggleUpdatingGPS(boolean state) {
@@ -197,7 +208,12 @@ public class MainController
     }
 
     //TODO: сунуть в параметры скрин
-    public void refresh() {
-        data.orderListTrading(this);
+    public void refresh(Screens screen) {
+        if(screen.equals(Screens.STOCK)) {
+            data.orderListTrading(this);
+        }
+        else if(screen.equals(Screens.RECENT)) {
+            data.orderList(this);
+        }
     }
 }

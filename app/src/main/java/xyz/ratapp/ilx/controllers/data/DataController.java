@@ -2,6 +2,7 @@ package xyz.ratapp.ilx.controllers.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.Log;
 
@@ -10,6 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
@@ -26,6 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.Screens;
 import xyz.ratapp.ilx.controllers.info.InfoController;
 import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
@@ -33,6 +36,7 @@ import xyz.ratapp.ilx.controllers.launch.LaunchController;
 import xyz.ratapp.ilx.controllers.main.MainController;
 import xyz.ratapp.ilx.data.Model;
 import xyz.ratapp.ilx.data.dao.Button;
+import xyz.ratapp.ilx.data.dao.Order;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.data.dao.Rerequest;
 import xyz.ratapp.ilx.data.dao.UserLocation;
@@ -70,6 +74,7 @@ public class DataController {
     private API apiBase = retrofitBase.create(API.class),
             apiUser;
     private List<Rerequest> stock;
+    private List<Order> recent;
     private String domainName;
     private Uuser user;
 
@@ -83,6 +88,52 @@ public class DataController {
         }
 
         return data;
+    }
+
+    public void orderList(final MainController controller) {
+        String sessionId = user.getSessionId();
+
+        apiUser.orderList(sessionId).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                Log.e("MyTag", response.message());
+                //tmp code
+                String resp = "";
+                try {
+                    Resources res = controller.getContext().getResources();
+                    InputStream in_s = res.openRawResource(R.raw.response);
+
+                    byte[] b = new byte[in_s.available()];
+                    in_s.read(b);
+                    resp = new String(b);
+                } catch (Exception e) {
+                    // e.printStackTrace();
+                }
+
+                Gson gson = new Gson();
+                JsonObject body = gson.fromJson(resp, JsonObject.class);
+                int status = body.getAsJsonObject("response").
+                        get("status").getAsInt();
+
+                if(status == 1) {
+                    Type type = new TypeToken<Map<String, Order>>(){}.getType();
+                    JsonObject orderList = body.getAsJsonObject("response").
+                            getAsJsonObject("orders");
+                    Map<String, Order> orderMap = gson.fromJson(orderList, type);
+                    recent = new ArrayList<>();
+                    recent.addAll(orderMap.values());
+
+                    user.setOrders(recent);
+                    controller.bindData(Screens.RECENT);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.e("MyTag", t.toString());
+            }
+        });
     }
 
     public void orderListTrading(final MainController controller) {
@@ -129,7 +180,7 @@ public class DataController {
                     }
 
                     model.setNewRequests(newRequests);
-                    controller.bindData();
+                    controller.bindData(Screens.STOCK);
                 }
             }
 
@@ -267,26 +318,26 @@ public class DataController {
         });
     }
 
-    public String idOf(Request r, Screens screen) {
+    public String idOf(Object data, Screens screen) {
         String id = "-1";
 
         if(screen.equals(Screens.STOCK)) {
             //s mean stock
-            id = "s" + model.getNewRequests().indexOf(r);
+            id = "s" + model.getNewRequests().indexOf(data);
         }
         else if(screen.equals(Screens.RECENT)) {
             //r mean recent
-            id = "r" + model.getUser().getCurrentRequests().indexOf(r);
+            id = "r" + user.getOrders().indexOf(data);
         }
         else if(screen.equals(Screens.HISTORY)) {
             //h mean history
-            id = "h" + model.getUser().getHistoryOfRequests().indexOf(r);
+            id = "h" + model.getUser().getHistoryOfRequests().indexOf(data);
         }
 
         return id;
     }
 
-    private Request getRequest(String id) {
+    private Object getRequest(String id) {
         if(id.equals("-1")) {
             return null;
         }
@@ -298,7 +349,7 @@ public class DataController {
         }
         if(id.startsWith("r")) {
             //recent
-            return model.getUser().getCurrentRequests().get(n);
+            return user.getOrders().get(n);
         }
         if(id.startsWith("h")) {
             //history
@@ -357,9 +408,13 @@ public class DataController {
     }
 
     public void bindRequests(Screens screen,
-                             ListSettable<Request> settable) {
+                             //TODO: АААААА, КОСТЫЛЬ, ЕБАТЬ МЕНЯ В РОТ
+                             ListSettable settable) {
         if(screen.equals(Screens.STOCK)) {
             settable.setData(model.getNewRequests());
+        }
+        else if(screen.equals(Screens.RECENT)) {
+            settable.setData(user.getOrders());
         }
         else {
             settable.setData(screenRequestsMap.get(screen));
@@ -371,22 +426,12 @@ public class DataController {
         controller.setData(user);
     }
 
-    public void bindDetails(InfoController infoController,
-                            String id) {
-        Request r = getRequest(id);
+    public void bindInfoData(InfoController infoController,
+                             String id) {
+        Object obj = getRequest(id);
 
-        if(r != null && r.getDetails() != null) {
-            List<String> details = r.getDetails();
-            infoController.setData(details);
-        }
-    }
-
-    public void bindReqInfo(InfoController infoController,
-                            String id) {
-        Request r = getRequest(id);
-
-        if(r != null) {
-            infoController.setData(r);
+        if(obj != null) {
+            infoController.setData(obj);
         }
     }
 

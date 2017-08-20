@@ -22,6 +22,12 @@ import retrofit2.http.Query;
  *
  * Метод		order_list_trading
  * URL		    https://{domain_name}/api/courier/v2/?method=order_list_trading&session_id= {session_id}
+ *
+ * Метод        register_gcm
+ * URL          https://{domain_name}/api/courier/v2/?method=register_gcm&session_id= {session_id}&registration_id={registration_id}
+ *
+ * Метод		order_list
+ * URL		    https://{domain_name}/api/courier/v2/?method=order_list&session_id= {session_id}
  */
 
 public interface API {
@@ -50,6 +56,9 @@ public interface API {
 
     @GET("?method=order_list_trading")
     Call<JsonObject> orderListTrading(@Query("session_id") String sessionId);
+
+    @GET("?method=order_list")
+    Call<JsonObject> orderList(@Query("session_id") String sessionId);
 
     @GET("?method=register_gcm")
     Call<JsonObject> registerFCM(@Query("session_id") String sessionId,

@@ -1,5 +1,7 @@
 package xyz.ratapp.ilx.data.dao;
 
+import java.util.List;
+
 /**
  * Created by timtim on 15/08/2017.
  */
@@ -19,6 +21,7 @@ public class Uuser {
     private int wareHouseProperty;
     private String courierName;
     private String courierType;
+    private List<Order> orders;
 
 
     public Uuser(String ava, String preview, String clientName, String clientPhone,
@@ -99,5 +102,13 @@ public class Uuser {
 
     public void setOnline(boolean online) {
         this.workStatus = online ? "1" : "0";
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

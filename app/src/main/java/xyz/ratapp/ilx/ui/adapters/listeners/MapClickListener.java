@@ -13,16 +13,24 @@ public class MapClickListener
         implements View.OnClickListener {
 
     private Context context;
+    private String lat;
+    private String lng;
 
-    public MapClickListener(Context context) {
+    public MapClickListener(Context context,
+                            String lat,
+                            String lng) {
         this.context = context;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     @Override
     public void onClick(View view) {
-        //TODO: change intent
+        String url = String.format(
+                "http://maps.google.com/maps?daddr=%s,%s",
+                lat, lng);
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("http://maps.google.com/maps?daddr=59.955761,30.313146"));
+                Uri.parse(url));
         context.startActivity(intent);
     }
 }
