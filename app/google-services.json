@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "340317961738",
+    "firebase_url": "https://itlogist-bf9ed.firebaseio.com",
+    "project_id": "itlogist-bf9ed",
+    "storage_bucket": "itlogist-bf9ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340317961738:android:4adc70d19894936f",
+        "android_client_info": {
+          "package_name": "xyz.ratapp.ilx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340317961738-mof67drqflmitqdnetd8kd021odqcn11.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVScQVKz2pG6vnkbtKNdeqvxdQBCiF6Dk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

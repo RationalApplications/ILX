@@ -138,6 +138,20 @@ public class DataController {
                 Log.e("MyTag", t.toString());
             }
         });
+
+        //TODO: ВОЗМОЖНО ЭТО ДОЛЖНО БЫТЬ НЕ ТУТ (тут отправляется на сервер reg_id для FCM) Почему? Ответит Олег=D
+        SharedPreferences prefs = controller.getContext().getSharedPreferences(
+                PREFS, Context.MODE_PRIVATE);
+
+        boolean isFirstStart = prefs.getBoolean("first_start", Boolean.parseBoolean("true"));
+
+        if (isFirstStart) {
+            sendFCMRegIdToServer(controller.getContext());
+
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("first_start", Boolean.parseBoolean("false"));
+            editor.apply();
+        }
     }
 
     public void courierLocation(UserLocation location) {
@@ -404,5 +418,41 @@ public class DataController {
         editor.putString("session_id", user.getSessionId());
         editor.putString("domain_name", domainName);
         editor.apply();
+    }
+
+    public void registerFCM(String regId, Context context) {
+
+        SharedPreferences prefs = context.getSharedPreferences(
+                PREFS, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("reg_fcm_id", regId);
+        editor.apply();
+
+        if(apiUser != null) {
+            sendFCMRegIdToServer(context);
+        }
+
+    }
+
+    public void sendFCMRegIdToServer(Context context){
+        SharedPreferences prefs = context.getSharedPreferences(
+                PREFS, Context.MODE_PRIVATE);
+
+        String regId = prefs.getString("reg_fcm_id", "");
+
+        Log.e("MyTag", "sended: " + regId);
+        apiUser.registerFCM(user.getSessionId(), regId).
+                enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        Log.e("MyTag", response.message()  + " (FCM ID sended)");
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        Log.e("MyTag", t.toString() + " (FCM ID didn't send)");
+                    }
+                });
     }
 }

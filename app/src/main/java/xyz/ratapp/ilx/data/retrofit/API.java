@@ -50,4 +50,8 @@ public interface API {
 
     @GET("?method=order_list_trading")
     Call<JsonObject> orderListTrading(@Query("session_id") String sessionId);
+
+    @GET("?method=register_gcm")
+    Call<JsonObject> registerFCM(@Query("session_id") String sessionId,
+                                 @Query("registration_id\t") String regId);
 }
