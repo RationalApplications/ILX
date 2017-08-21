@@ -43,10 +43,6 @@ public class RecentFragment extends RequestFragment {
                 };
         refreshLayout.setOnRefreshListener(refresh);
 
-        if(orders != null) {
-            setData(orders);
-        }
-
         Context context = getContext();
 
         //create button
@@ -80,6 +76,11 @@ public class RecentFragment extends RequestFragment {
                 showOnMap();
             }
         });
+        addViewToRefreshLayout(showMap, params);
+
+        if(orders != null) {
+            setData(orders);
+        }
     }
 
     private void showOnMap() {

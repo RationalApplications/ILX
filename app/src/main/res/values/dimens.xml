@@ -30,7 +30,7 @@
     <dimen name="logo_top_margin">40dp</dimen>
 
     <!-- MainActivity dims -->
-    <dimen name="button_on_the_map_width">180dp</dimen>
+    <dimen name="button_on_the_map_width">80dp</dimen>
 
     <!-- RequestInfoActivity dims -->
     <dimen name="divider_height">1dp</dimen>

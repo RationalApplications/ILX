@@ -6,11 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.List;
-
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.data.dao.Address;
 import xyz.ratapp.ilx.data.dao.Order;
 
 /**
@@ -32,8 +29,9 @@ public class MessagesAdapter  extends
     @Override
     public MessagesAdapter.MessageViewHolder
     onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View v = LayoutInflater.from(context).
-                inflate(R.layout.item_address, parent, false);
+        View v = LayoutInflater.from(context).
+                inflate(R.layout.item_message, parent, false);
+
         return new MessagesAdapter.MessageViewHolder(v);
     }
 
@@ -54,14 +52,20 @@ public class MessagesAdapter  extends
             extends RecyclerView.ViewHolder {
 
         private TextView text;
+        private View holder;
 
         MessageViewHolder(View itemView) {
             super(itemView);
 
-            text = itemView.findViewById(R.id.tvAddressTitle);
+            holder = itemView;
+            text = itemView.findViewById(R.id.tvMessage);
         }
 
         void bind(Order.Message m) {
+            boolean user = m.getAuthor().equals("Курьер");
+            holder.setBackgroundResource(user ?
+                    R.drawable.user_message :
+                    R.drawable.operator_message);
             text.setText(m.getMessage());
         }
     }

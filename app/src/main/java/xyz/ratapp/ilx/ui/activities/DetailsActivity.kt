@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import xyz.ratapp.ilx.R
 import xyz.ratapp.ilx.controllers.info.InfoController
+import xyz.ratapp.ilx.controllers.interfaces.DataSettable
+import xyz.ratapp.ilx.data.dao.Button
+import xyz.ratapp.ilx.data.dao.Order
 
 class DetailsActivity : InfoActivity() {
 
@@ -20,11 +23,17 @@ class DetailsActivity : InfoActivity() {
         }
     }
 
+    private var controller: InfoController? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(intent.getIntExtra("THEME", R.style.AppTheme_Active))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-        InfoController(this)
+        controller = InfoController(this)
+    }
+
+    fun onPushButton(btn: Button) {
+        controller?.onPushButton(btn)
     }
 
 }
