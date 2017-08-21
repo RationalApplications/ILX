@@ -68,6 +68,11 @@ public class InfoController implements DataSettable<Object> {
             adapter.bindFragments(Arrays.asList(details, chat));
             container.setAdapter(adapter);
             SlidingTabLayout stlTabs = activity.findViewById(R.id.stlDetailsTabs);
+            stlTabs.setSelectedIndicatorColors(activity.getResources()
+                    .getColor(R.color.primary_dark_color));
+            stlTabs.setBackgroundResource(R.color.tab_bar_background_color);
+            stlTabs.setCustomTabView(R.layout.tab_layout, R.id.tvTabItem);
+            stlTabs.setDistributeEvenly(false);
             stlTabs.setViewPager(container);
         }
     }

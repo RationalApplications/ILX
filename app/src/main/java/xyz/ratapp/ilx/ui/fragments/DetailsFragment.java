@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,8 @@ import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.adapters.DetailsAdapter;
 
 
-public class DetailsFragment extends Fragment
+public class
+DetailsFragment extends Fragment
         implements DataSettable<Order> {
 
     private DetailsActivity activity;
@@ -74,6 +76,7 @@ public class DetailsFragment extends Fragment
                 public void onClick(View view) {
                     Log.e("MyTag", "OK");
                     activity.onPushButton(ok);
+                    Toast.makeText(getContext(), "Успешно!", Toast.LENGTH_SHORT).show();
                 }
             });
             btnIssue.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +84,7 @@ public class DetailsFragment extends Fragment
                 public void onClick(View view) {
                     Log.e("MyTag", "NOUP");
                     final Dialog dialog = new Dialog(activity);
+                    dialog.setTitle("Выберите причину: ");
                     dialog.setCanceledOnTouchOutside(true);
                     dialog.setCancelable(true);
                     //setup views
@@ -93,9 +97,18 @@ public class DetailsFragment extends Fragment
                     for (final xyz.ratapp.ilx.data.dao.Button b : noup.getOptions()) {
                         android.widget.Button btn =
                                 new android.widget.Button(activity);
-                        btn.setLayoutParams(new ViewGroup.LayoutParams(
+                        //===
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT));
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
+                        float scale = activity.getResources().
+                                getDisplayMetrics().density;
+                        int margin = (int) (10 * scale);
+                        params.leftMargin = margin;
+                        params.rightMargin = margin;
+                        params.topMargin = margin;
+                        params.bottomMargin = margin;
+                        //===
                         btn.setText(b.getName());
                         btn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -105,7 +118,7 @@ public class DetailsFragment extends Fragment
                                 Toast.makeText(getContext(), "Успешно!", Toast.LENGTH_SHORT).show();
                             }
                         });
-                        ll.addView(btn);
+                        ll.addView(btn, params);
                     }
                     dialog.setContentView(ll);
 

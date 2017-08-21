@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="@dimen/default_margin"
-            style="?buttonBarButtonStyle"
-            android:background="@color/perform_button_color"
+            style="@style/AppTheme.RoundedCornerMaterialButton"
+            android:backgroundTint="@color/perform_button_color"
             android:textColor="@color/text_color" />
 
         <Button
@@ -30,8 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="@dimen/default_margin"
-            style="?buttonBarButtonStyle"
-            android:background="@color/issue_button_color"
+            style="@style/AppTheme.RoundedCornerMaterialButton"
+            android:backgroundTint="@color/issue_button_color"
             android:textColor="@color/text_color" />
 
     </LinearLayout>

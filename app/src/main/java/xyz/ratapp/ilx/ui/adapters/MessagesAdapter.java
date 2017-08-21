@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.List;
 import xyz.ratapp.ilx.R;
@@ -52,20 +53,30 @@ public class MessagesAdapter  extends
             extends RecyclerView.ViewHolder {
 
         private TextView text;
-        private View holder;
 
         MessageViewHolder(View itemView) {
             super(itemView);
 
-            holder = itemView;
             text = itemView.findViewById(R.id.tvMessage);
         }
 
         void bind(Order.Message m) {
             boolean user = m.getAuthor().equals("Курьер");
-            holder.setBackgroundResource(user ?
+            RelativeLayout.LayoutParams params =
+                    (RelativeLayout.LayoutParams) text.getLayoutParams();
+            if(!user) {
+                params.addRule(RelativeLayout.ALIGN_PARENT_LEFT,
+                        RelativeLayout.TRUE);
+            }
+            else {
+                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,
+                        RelativeLayout.TRUE);
+            }
+
+            text.setLayoutParams(params);
+            /*text.setBackgroundResource(user ?
                     R.drawable.user_message :
-                    R.drawable.operator_message);
+                    R.drawable.operator_message);*/
             text.setText(m.getMessage());
         }
     }
