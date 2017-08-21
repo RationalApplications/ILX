@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 
 /**
  * Created by timtim on 14/08/2017.
+ *
+ * ЗАЕБАЛ ЭТОТ АЛЕКСЕЙ
  */
 
 open class InfoActivity : AppCompatActivity() {
