@@ -1,58 +1,27 @@
 {
   "project_info": {
-    "project_number": "1033011867026",
-    "firebase_url": "https://ilx-test.firebaseio.com",
-    "project_id": "ilx-test",
-    "storage_bucket": "ilx-test.appspot.com"
+    "project_number": "340317961738",
+    "firebase_url": "https://itlogist-bf9ed.firebaseio.com",
+    "project_id": "itlogist-bf9ed",
+    "storage_bucket": "itlogist-bf9ed.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1033011867026:android:7b6e809184a25e8b",
-        "android_client_info": {
-          "package_name": "com.xyz.ratapp.ilx"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1033011867026-6l3efoiruhpoigv4ucumh7787dh9r9j5.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC0g6mJbUnJ02riTkpFIB6AIykIsm_cIZI"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1033011867026:android:4adc70d19894936f",
+        "mobilesdk_app_id": "1:340317961738:android:4adc70d19894936f",
         "android_client_info": {
           "package_name": "xyz.ratapp.ilx"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1033011867026-6l3efoiruhpoigv4ucumh7787dh9r9j5.apps.googleusercontent.com",
+          "client_id": "340317961738-mof67drqflmitqdnetd8kd021odqcn11.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC0g6mJbUnJ02riTkpFIB6AIykIsm_cIZI"
+          "current_key": "AIzaSyDVScQVKz2pG6vnkbtKNdeqvxdQBCiF6Dk"
         }
       ],
       "services": {
