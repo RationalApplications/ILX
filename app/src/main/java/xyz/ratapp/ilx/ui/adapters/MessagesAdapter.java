@@ -73,10 +73,11 @@ public class MessagesAdapter  extends
                         RelativeLayout.TRUE);
             }
 
+
             text.setLayoutParams(params);
-            /*text.setBackgroundResource(user ?
+            ((RelativeLayout) text.getParent()).setBackgroundResource(user ?
                     R.drawable.user_message :
-                    R.drawable.operator_message);*/
+                    R.drawable.operator_message);
             text.setText(m.getMessage());
         }
     }

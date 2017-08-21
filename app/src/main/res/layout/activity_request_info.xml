@@ -17,18 +17,11 @@
         android:id="@+id/rvAddresses"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/default_small_margin"
         android:layout_marginBottom="@dimen/default_small_margin"
-        android:layout_marginRight="@dimen/default_large_margin"
         android:layout_marginLeft="@dimen/default_large_margin"
+        android:layout_marginRight="@dimen/default_large_margin"
+        android:layout_marginTop="@dimen/default_small_margin"
         android:layout_weight="1.04" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
-        android:layout_marginRight="@dimen/default_large_margin"
-        android:layout_marginLeft="@dimen/default_large_margin"
-        android:background="@color/passive_primary_dark_color" />
 
     <ImageView
         android:id="@+id/ivMap"
@@ -41,14 +34,6 @@
         android:layout_weight="1.16"
         android:scaleType="fitCenter"
         android:contentDescription="@string/iv_map_descr" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
-        android:layout_marginLeft="@dimen/default_large_margin"
-        android:layout_marginRight="@dimen/default_large_margin"
-        android:background="@color/passive_primary_dark_color" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvComments"
