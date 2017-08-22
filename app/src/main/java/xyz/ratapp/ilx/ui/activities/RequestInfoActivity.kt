@@ -1,8 +1,12 @@
 package xyz.ratapp.ilx.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.transition.Visibility
+import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -11,6 +15,10 @@ import kotlinx.android.synthetic.main.item_stock_request.*
 import xyz.ratapp.ilx.R
 import xyz.ratapp.ilx.controllers.info.InfoController
 import xyz.ratapp.ilx.data.dao.Request
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import java.net.URL
+
 
 class RequestInfoActivity : InfoActivity() {
 
@@ -23,6 +31,7 @@ class RequestInfoActivity : InfoActivity() {
         val STR_COST = "cost"
         val STR_COMMENT = "comment"
         val STR_DIFFICULT = "difficult"
+        val STR_MAP_URL = "map"
 
         fun getIntent(id: String, request: Request): Intent {
             val i = Intent()
@@ -32,6 +41,7 @@ class RequestInfoActivity : InfoActivity() {
             i.putExtra(STR_TITLE, request.address)
             i.putExtra(STR_COMMENT, request.comment)
             i.putExtra(STR_DIFFICULT, request.difficult)
+            i.putExtra(STR_MAP_URL, request.image)
 
             return i
         }
@@ -72,12 +82,21 @@ class RequestInfoActivity : InfoActivity() {
         val cost = data.getStringExtra(STR_COST)
         val comment = data.getStringExtra(STR_COMMENT)
         val difficult = data.getIntExtra(STR_DIFFICULT, -1)
+        val mapUrl = data.getStringExtra(STR_MAP_URL)
 
         tvCost.text = cost
         tvComment.text = comment
         tvTitle.text = title
         if(difficult != -1) {
             vDifficult.setBackgroundColor(difficult)
+        }
+
+        if (mapUrl == "")
+            ivMap.visibility = View.GONE
+        else {
+            ivMap.visibility = View.VISIBLE
+
+            //TODO: Вставить картинку с помощью глайда
         }
     }
 }

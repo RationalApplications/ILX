@@ -6,8 +6,8 @@
     android:gravity="center">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="134dp"
+        android:layout_height="66dp"
         app:srcCompat="@drawable/logo"
         android:contentDescription="@string/iv_splash_logo_descr" />
 

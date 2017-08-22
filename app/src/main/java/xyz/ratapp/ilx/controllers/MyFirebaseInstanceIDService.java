@@ -20,7 +20,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.e("MyTag", "Refreshed token: " + refreshedToken);
 
-        String regId = FirebaseInstanceId.getInstance().getId();
+        String regId = FirebaseInstanceId.getInstance().getToken();
         Log.e("MyTag", regId);
 
         // If you want to send messages to this application instance or

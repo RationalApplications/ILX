@@ -491,7 +491,7 @@ public class DataController {
                 enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        Log.e("MyTag", response.message()  + " (FCM ID sended)");
+                        Log.e("MyTag", response.body().toString()  + " FCM ID sended to " + call.request().url().toString());
                     }
 
                     @Override
