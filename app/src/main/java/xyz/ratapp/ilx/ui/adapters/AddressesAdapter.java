@@ -41,7 +41,7 @@ public class AddressesAdapter extends
     public void onBindViewHolder(AddressesAdapter.AddressessViewHolder holder,
                                  int position) {
         Address a = addresses.get(position);
-        holder.bind(a);
+        holder.bind(a, position + 1);
     }
 
     @Override
@@ -68,8 +68,8 @@ public class AddressesAdapter extends
             time = itemView.findViewById(R.id.tvAddressTime);
         }
 
-        void bind(Address a) {
-            title.setText(a.getH10());
+        void bind(Address a, int pos) {
+            title.setText(pos + ". " + a.getH10());
             time.setText(a.getH11());
             task.setText(a.getH12());
 

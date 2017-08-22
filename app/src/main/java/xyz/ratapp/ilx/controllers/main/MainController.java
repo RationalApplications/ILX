@@ -18,6 +18,7 @@ import xyz.ratapp.ilx.controllers.GeoService;
 import xyz.ratapp.ilx.controllers.Screens;
 import xyz.ratapp.ilx.controllers.data.DataController;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
+import xyz.ratapp.ilx.data.dao.Names;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.data.dao.Uuser;
 import xyz.ratapp.ilx.ui.activities.DetailsActivity;
@@ -48,12 +49,13 @@ public class MainController
     public MainController(MainActivity activity) {
         //ui
         this.activity = activity;
+        data = DataController.getInstance();
         layout = activity.findViewById(R.id.dlMain);
 
         //setup status switch
         status = new StatusSwitch(activity);
         status.setController(this);
-        activity.setupToolbar(status);
+        activity.setupToolbar(getNames().getOrders(), status);
         activity.setupUI();
 
         //data
@@ -88,7 +90,6 @@ public class MainController
      * Method that setup data to fragments
      */
     private void setupData() {
-        data = DataController.getInstance();
         ViewPager container = activity.findViewById(R.id.vpContainer);
         RequestSectionsPagerAdapter adapter = new RequestSectionsPagerAdapter(
                 activity.getSupportFragmentManager());
@@ -207,7 +208,6 @@ public class MainController
         return activity;
     }
 
-    //TODO: сунуть в параметры скрин
     public void refresh(Screens screen) {
         if(screen.equals(Screens.STOCK)) {
             data.orderListTrading(this);
@@ -215,5 +215,9 @@ public class MainController
         else if(screen.equals(Screens.RECENT)) {
             data.orderList(this);
         }
+    }
+
+    public Names getNames() {
+        return data.getNames();
     }
 }

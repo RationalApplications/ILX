@@ -24,14 +24,16 @@ import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.adapters.DetailsAdapter;
 
 
-public class
-DetailsFragment extends Fragment
+public class DetailsFragment extends Fragment
         implements DataSettable<Order> {
 
     private DetailsActivity activity;
     private RecyclerView rvDetails;
     private Button btnPerform;
     private Button btnIssue;
+    private Button btnSendMessage;
+    private String btnSendMessageText;
+    private String routeText;
     private Order order;
 
     @Override
@@ -51,6 +53,7 @@ DetailsFragment extends Fragment
         rvDetails = v.findViewById(R.id.rvTasks);
         btnPerform = v.findViewById(R.id.btnPerform);
         btnIssue = v.findViewById(R.id.btnIssue);
+        btnSendMessage = v.findViewById(R.id.btnSendMessage);
         activity = ((DetailsActivity) getActivity());
 
         return v;
@@ -62,6 +65,18 @@ DetailsFragment extends Fragment
         setupData();
     }
 
+    public void setBtnSendMessageText(String btnSendMessageText) {
+        this.btnSendMessageText = btnSendMessageText;
+
+        if(btnSendMessage != null) {
+            btnSendMessage.setText(btnSendMessageText);
+        }
+    }
+
+    public void setRouteText(String routeText) {
+        this.routeText = routeText;
+    }
+
     private void setupData() {
         if(order != null && rvDetails != null) {
             //setup buttons
@@ -70,7 +85,16 @@ DetailsFragment extends Fragment
             final Order.NegativeButton noup = btns.getNo();
             btnPerform.setText(ok.getName());
             btnIssue.setText(noup.getName());
-            //setup onclicks
+            if(btnSendMessage != null) {
+                btnSendMessage.setText(btnSendMessageText);
+                //setup onclicks
+                btnSendMessage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        activity.getController().sendMessage();
+                    }
+                });
+            }
             btnPerform.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -131,7 +155,7 @@ DetailsFragment extends Fragment
             List<Order.Item> details = order.getItems();
             GridLayoutManager glm = new GridLayoutManager(getContext(), 1);
             rvDetails.setLayoutManager(glm);
-            rvDetails.setAdapter(new DetailsAdapter(getActivity(), details));
+            rvDetails.setAdapter(new DetailsAdapter(getActivity(), details, routeText));
         }
     }
 }

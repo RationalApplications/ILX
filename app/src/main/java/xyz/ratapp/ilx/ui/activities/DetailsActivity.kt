@@ -23,7 +23,7 @@ class DetailsActivity : InfoActivity() {
         }
     }
 
-    private var controller: InfoController? = null
+    var controller: InfoController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(intent.getIntExtra("THEME", R.style.AppTheme_Active))

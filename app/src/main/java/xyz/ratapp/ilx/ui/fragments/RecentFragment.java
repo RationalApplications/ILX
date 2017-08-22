@@ -16,6 +16,7 @@ import java.util.List;
 
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.Screens;
+import xyz.ratapp.ilx.controllers.main.MainController;
 import xyz.ratapp.ilx.data.dao.Order;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.ui.adapters.OrdersAdapter;
@@ -30,6 +31,14 @@ public class RecentFragment extends RequestFragment {
 
     private RelativeLayout container;
     private List<Order> orders;
+    private String title;
+
+    @Override
+    public void bindController(MainController controller) {
+        super.bindController(controller);
+        title = controller.getNames().getOrderList();
+    }
+
 
     @Override
     protected void setupUI() {
@@ -130,6 +139,6 @@ public class RecentFragment extends RequestFragment {
 
     @Override
     public String getTitle() {
-        return controller.getContext().getString(R.string.recent);
+        return title;
     }
 }

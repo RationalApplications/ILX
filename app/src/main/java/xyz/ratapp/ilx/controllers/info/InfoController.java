@@ -1,11 +1,8 @@
 package xyz.ratapp.ilx.controllers.info;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -29,12 +26,15 @@ import xyz.ratapp.ilx.ui.views.SlidingTabLayout;
 
 /**
  * Created by timtim on 14/08/2017.
+ *
+ - Все строки отрисовать/отформатировать по макапу (шрифты чёрные/серые);
  */
 
 public class InfoController implements DataSettable<Object> {
 
     private DataController data;
     private InfoActivity activity;
+    private ViewPager container;
     //request id
     private String id;
     private Order order;
@@ -60,11 +60,14 @@ public class InfoController implements DataSettable<Object> {
         if (activity instanceof DetailsActivity) {
             //setup tabs and fragments
             chat = new ChatFragment();
+            chat.setBtnSendText(data.getNames().getSendMessageSubmit());
             details = new DetailsFragment();
+            details.setBtnSendMessageText(data.getNames().getSendMessage());
+            details.setRouteText(data.getNames().getRoute());
 
-            ViewPager container = activity.findViewById(R.id.vpDetailsContainer);
+            container = activity.findViewById(R.id.vpDetailsContainer);
             InfoSectionsPagerAdapter adapter = new InfoSectionsPagerAdapter(
-                    activity.getSupportFragmentManager());
+                    activity.getSupportFragmentManager(), data.getNames());
             adapter.bindFragments(Arrays.asList(details, chat));
             container.setAdapter(adapter);
             SlidingTabLayout stlTabs = activity.findViewById(R.id.stlDetailsTabs);
@@ -74,6 +77,11 @@ public class InfoController implements DataSettable<Object> {
             stlTabs.setCustomTabView(R.layout.tab_layout, R.id.tvTabItem);
             stlTabs.setDistributeEvenly(false);
             stlTabs.setViewPager(container);
+        }
+
+        if(activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().
+                    setTitle(data.getNames().getOrderView());
         }
     }
 
@@ -99,18 +107,12 @@ public class InfoController implements DataSettable<Object> {
                 !request.getImage().isEmpty()) {
             ImageView map = activity.findViewById(R.id.ivMap);
             Glide.with(activity).load(request.getImage()).asBitmap().into(map);
-            map.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    callMap();
-                }
-            });
         }
 
         //button
         if (request.getBtn() != null) {
             SwipeButton btn = activity.findViewById(R.id.swipeAccept);
-            btn.setText(request.getBtn().getName());
+            btn.setText(data.getNames().getOrderTradingButton());
         }
 
         if (request.getDetails() != null) {
@@ -138,11 +140,8 @@ public class InfoController implements DataSettable<Object> {
         data.onPushButton(request.getBtn());
     }
 
-    public void callMap() {
-        //TODO!!!
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("http://maps.google.com/maps?daddr=59.955761,30.313146"));
-        activity.startActivity(intent);
+    public void sendMessage() {
+        container.setCurrentItem(1, true);
+        chat.callToSendMessage();
     }
-
 }

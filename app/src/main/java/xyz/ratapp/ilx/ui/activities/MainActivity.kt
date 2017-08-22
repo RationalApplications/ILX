@@ -49,10 +49,10 @@ class MainActivity : AppCompatActivity() {
         picker = ThemePicker(this)
     }
 
-    fun setupToolbar(customView: View) {
+    fun setupToolbar(title: String, customView: View) {
         //toolbar
+        toolbar.title = title
         setSupportActionBar(toolbar)
-        toolbar.setTitle(R.string.requests)
         toolbar.addView(customView, Toolbar.LayoutParams(Gravity.END))
     }
 

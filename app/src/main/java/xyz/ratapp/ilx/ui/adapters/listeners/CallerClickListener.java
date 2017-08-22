@@ -3,6 +3,7 @@ package xyz.ratapp.ilx.ui.adapters.listeners;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -40,8 +41,13 @@ public class CallerClickListener
     @Override
     public void onClick(View view) {
         String phone = text;
-        Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("tel:" + phone));
-        context.startActivity(intent);
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + phone));
+
+        try {
+            context.startActivity(intent);
+        } catch (SecurityException e) {
+            Log.e("MyTag", "Ошибка звонка");
+        }
     }
 }

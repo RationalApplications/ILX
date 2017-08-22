@@ -1,7 +1,9 @@
 package xyz.ratapp.ilx.ui.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +27,14 @@ public class DetailsAdapter extends
 
     private Context context;
     private List<Order.Item> details;
+    private String routeText;
 
     public DetailsAdapter(Context context,
-                            List<Order.Item> details) {
+                          List<Order.Item> details,
+                          String routeText) {
         this.context = context;
         this.details = details;
+        this.routeText = routeText;
     }
 
     @Override
@@ -73,16 +78,27 @@ public class DetailsAdapter extends
 
             String text = item.getText();
 
-            if(item.getType().equals("text") ||
-                    item.getType().equals("time") ||
-                    item.getType().equals("fio")) {
+            if(item.getType().equals("text")) {
                 title.setText(text);
+                title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                title.setTypeface(null, Typeface.ITALIC);
+            }
+            else if(item.getType().equals("time")) {
+                title.setText(text);
+                title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+            }
+            else if(item.getType().equals("fio")) {
+                title.setText(text);
+                title.setTextColor(context.getResources().getColor(R.color.text_color));
+                title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             }
             else if(item.getType().equals("address")) {
                 Order.GeoItem geo = ((Order.GeoItem) item);
                 title.setText(text);
+                title.setTextColor(context.getResources().getColor(R.color.text_color));
+                title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                 btnAction.setVisibility(View.VISIBLE);
-                btnAction.setText(R.string.path);
+                btnAction.setText(routeText);
 
                 if(pather == null) {
                     pather = new MapClickListener(context,
@@ -93,6 +109,8 @@ public class DetailsAdapter extends
             }
             else if(item.getType().equals("phone")) {
                 title.setText(text);
+                title.setTextColor(context.getResources().getColor(R.color.text_color));
+                title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 ivAction.setVisibility(View.VISIBLE);
                 ivAction.setImageResource(R.drawable.phone);
 

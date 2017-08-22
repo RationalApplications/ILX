@@ -1,5 +1,6 @@
 package xyz.ratapp.ilx.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,22 +20,22 @@ import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
 import xyz.ratapp.ilx.data.dao.Order;
 import xyz.ratapp.ilx.ui.adapters.MessagesAdapter;
-import xyz.ratapp.ilx.ui.adapters.OrdersAdapter;
 
 public class ChatFragment extends Fragment
         implements ListSettable<Order.Message> {
 
     private List<Order.Message> messages;
-    private Button sendMessage;
+    private Button send;
     private EditText textField;
     private RecyclerView rvChat;
+    private String btnSendText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        sendMessage = v.findViewById(R.id.btnSendMessage);
+        send = v.findViewById(R.id.btnSend);
         textField = v.findViewById(R.id.etMessage);
         rvChat = v.findViewById(R.id.rvMessages);
 
@@ -46,9 +48,14 @@ public class ChatFragment extends Fragment
         setupUI();
     }
 
+    public void setBtnSendText(String btnSendText) {
+        this.btnSendText = btnSendText;
+    }
+
     private void setupUI() {
         //work with btn
-        sendMessage.setOnClickListener(new View.OnClickListener() {
+        send.setText(btnSendText);
+        send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendMessage();
@@ -61,7 +68,7 @@ public class ChatFragment extends Fragment
     }
 
     private void sendMessage() {
-        if (textField != null && sendMessage != null &&
+        if (textField != null && send != null &&
                 textField.getText() != null) {
 
             String text = textField.getText().toString();
@@ -91,5 +98,12 @@ public class ChatFragment extends Fragment
             rvChat.setLayoutManager(glm);
             rvChat.setAdapter(new MessagesAdapter(getActivity(), messages));
         }
+    }
+
+    public void callToSendMessage() {
+        textField.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getActivity().
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(textField, InputMethodManager.SHOW_IMPLICIT);
     }
 }

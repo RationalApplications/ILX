@@ -6,17 +6,21 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
+import xyz.ratapp.ilx.data.dao.Names;
+
 
 /**
  * Created by timtim on 21/08/2017.
  */
 
-public class InfoSectionsPagerAdapter extends FragmentPagerAdapter {
+class InfoSectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
+    private Names names;
 
-    InfoSectionsPagerAdapter(FragmentManager fm) {
+    InfoSectionsPagerAdapter(FragmentManager fm, Names names) {
         super(fm);
+        this.names = names;
     }
 
     void bindFragments(List<Fragment> fragments) {
@@ -32,10 +36,10 @@ public class InfoSectionsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         //TODO: hardcoded
         if(position == 0) {
-            return "ДЕТАЛИ";
+            return names.getOrderViewInfo();
         }
         else {
-            return "ЧАТ";
+            return names.getOrderViewChat();
         }
     }
 

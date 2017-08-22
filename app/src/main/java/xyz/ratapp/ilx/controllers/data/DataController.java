@@ -36,6 +36,7 @@ import xyz.ratapp.ilx.controllers.launch.LaunchController;
 import xyz.ratapp.ilx.controllers.main.MainController;
 import xyz.ratapp.ilx.data.Model;
 import xyz.ratapp.ilx.data.dao.Button;
+import xyz.ratapp.ilx.data.dao.Names;
 import xyz.ratapp.ilx.data.dao.Order;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.data.dao.Rerequest;
@@ -76,6 +77,7 @@ public class DataController {
     private List<Rerequest> stock;
     private List<Order> recent;
     private String domainName;
+    private Names names;
     private Uuser user;
 
 
@@ -97,28 +99,13 @@ public class DataController {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
-                Log.e("MyTag", response.message());
-                //tmp code
-                String resp = "";
-                try {
-                    Resources res = controller.getContext().getResources();
-                    InputStream in_s = res.openRawResource(R.raw.response);
-
-                    byte[] b = new byte[in_s.available()];
-                    in_s.read(b);
-                    resp = new String(b);
-                } catch (Exception e) {
-                    // e.printStackTrace();
-                }
-
-                Gson gson = new Gson();
-                JsonObject body = gson.fromJson(resp, JsonObject.class);
-                int status = body.getAsJsonObject("response").
+                int status = response.body().getAsJsonObject("response").
                         get("status").getAsInt();
 
                 if(status == 1) {
+                    Gson gson = new Gson();
                     Type type = new TypeToken<Map<String, Order>>(){}.getType();
-                    JsonObject orderList = body.getAsJsonObject("response").
+                    JsonObject orderList = response.body().getAsJsonObject("response").
                             getAsJsonObject("orders");
                     Map<String, Order> orderMap = gson.fromJson(orderList, type);
                     recent = new ArrayList<>();
@@ -277,19 +264,29 @@ public class DataController {
 
                     if(status == 1) {
 
-                        String ava = obj.get("ava_url").getAsString();
-                        String preview = obj.get("ava_url_preview").getAsString();
+                        String domain = String.format(USER_URL_MASK, domainName);
+
+                        String courierName = obj.get("courier_name").getAsString();
+                        String ava = domain + obj.get("ava_url").getAsString();
+                        String preview = domain + obj.get("ava_url_preview").getAsString();
+                        String courierPhone = obj.get("courier_phone").getAsString();
                         String clientName = obj.get("client_name").getAsString();
                         String clientPhone = obj.get("client_phone").getAsString();
                         String authProperty = obj.get("auth_property").getAsString();
+                        String authMd = obj.get("auth_md").getAsString();
                         String sessionId = obj.get("session_id").getAsString();
-                        int gps = obj.get("gps").getAsInt();
-                        String workStatus = obj.get("work_status").getAsString();
-                        String gpsTimeout = obj.get("gps_timeout").getAsString();
                         String cid = obj.get("cid").getAsString();
                         int wareHouseProperty = obj.get("warehouse_property").getAsInt();
-                        String courierName = obj.get("courier_name").getAsString();
+                        String gpsTimeout = obj.get("gps_timeout").getAsString();
+                        String workStatus = obj.get("work_status").getAsString();
                         String courierType = obj.get("courier_type").getAsString();
+                        int gps = obj.get("gps").getAsInt();
+                        //get names
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<Names>(){}.getType();
+                        JsonObject orderList = response.body().getAsJsonObject("response").
+                                getAsJsonObject("elements_name");
+                        names = gson.fromJson(orderList, type);
 
                         user = new Uuser(ava, preview, clientName, clientPhone,
                                 authProperty, sessionId, gps, workStatus, gpsTimeout,
@@ -405,6 +402,10 @@ public class DataController {
                 }
             }).start();
         }
+    }
+
+    public Names getNames() {
+        return names;
     }
 
     public void bindRequests(Screens screen,

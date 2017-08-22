@@ -127,9 +127,6 @@ public abstract class RequestFragment extends Fragment
      * false in other case
      */
     protected boolean refresh() {
-        Toast.makeText(getActivity(), "Вот так будет работать обновление",
-                Toast.LENGTH_SHORT).show();
-
         controller.refresh(getScreen());
 
         return true;
