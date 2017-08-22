@@ -19,7 +19,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        Log.e("MyTag", remoteMessage.getData().toString());
+        Log.e("MyTag", remoteMessage.getData().toString() + "kek");
+
+
 
     }
 }
