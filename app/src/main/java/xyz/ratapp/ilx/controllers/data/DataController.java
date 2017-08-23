@@ -80,6 +80,7 @@ public class DataController {
     private String domainName;
     private Names names;
     private Uuser user;
+    private int frequency;
 
 
     private DataController() {
@@ -163,6 +164,7 @@ public class DataController {
                                     new ArrayList<>(r.getAddress().values()),
                                     r.getBtn());
                         }
+                        req.setMdKey(r.getMdKey());
 
                         newRequests.add(req);
                     }
@@ -320,7 +322,7 @@ public class DataController {
 
                     if(status == 1) {
 
-                        String domain = String.format(USER_URL_MASK, domainName);
+                        String domain = "https://" + domainName + "/";
 
                         String courierName = obj.get("courier_name").getAsString();
                         String ava = domain + obj.get("ava_url").getAsString();
@@ -337,6 +339,8 @@ public class DataController {
                         String workStatus = obj.get("work_status").getAsString();
                         String courierType = obj.get("courier_type").getAsString();
                         int gps = obj.get("gps").getAsInt();
+
+                        frequency = Integer.parseInt(gpsTimeout);
                         //get names
                         Gson gson = new Gson();
                         Type type = new TypeToken<Names>(){}.getType();
@@ -367,6 +371,26 @@ public class DataController {
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 //TODO: hardcoded
                 controller.authFailed("Ошибка соединения!");
+            }
+        });
+    }
+
+    public void sendMessage(String text, String lat,
+                            String lng, String speed,
+                            String acc, String time,
+                            String mdKey) {
+        String sessionId = user.getSessionId();
+
+        apiUser.sendMessage(sessionId, text, lat, lng,
+                speed, acc, time, mdKey).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
             }
         });
     }
@@ -569,6 +593,10 @@ public class DataController {
                         Log.e("MyTag", t.toString() + " (FCM ID didn't send)");
                     }
                 });
+    }
+
+    public int getFrequency() {
+        return frequency;
     }
 }
 

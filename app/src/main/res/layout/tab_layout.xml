@@ -3,7 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
+    android:gravity="center"
     android:orientation="horizontal">
+
+    <View
+        android:id="@+id/vNewMessages"
+        android:layout_height="20dp"
+        android:layout_width="20dp"
+        android:background="@drawable/red_circle"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/tvTabItem"

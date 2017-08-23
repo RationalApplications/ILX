@@ -5,4 +5,5 @@
     <!-- StatusSwitch paddings -->
     <integer name="switch_padding">12</integer>
     <integer name="switch_text_size">14</integer>
+    <integer name="switch_wait_time">3</integer>
 </resources>

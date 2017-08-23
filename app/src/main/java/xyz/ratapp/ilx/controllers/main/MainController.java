@@ -93,6 +93,7 @@ public class MainController
         data.orderListTrading(this);
         data.orderList(this);
         data.orderListHistory(this);
+        data.bindUser(this);
     }
 
     public void setSwitch(StatusSwitch statusSwitch) {
@@ -111,8 +112,6 @@ public class MainController
     public void bindData(Screens screen) {
         RequestFragment f = getFragment(screen);
         data.bindRequests(f.getScreen(), f);
-
-        data.bindUser(this);
     }
 
     private RequestFragment getFragment(Screens screen) {
@@ -178,6 +177,8 @@ public class MainController
 
     private void toggleUpdatingGPS(boolean state) {
         Intent i = new Intent(activity, GeoService.class);
+        i.putExtra("frequency", data.getFrequency());
+
         if (state) {
             activity.startService(i);
         }

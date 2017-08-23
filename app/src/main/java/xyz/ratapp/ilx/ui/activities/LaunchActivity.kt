@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.InputType
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import kotlinx.android.synthetic.main.activity_launch.*
 import kotlinx.android.synthetic.main.activity_launch.view.*
 import xyz.ratapp.ilx.R
@@ -14,6 +15,7 @@ class LaunchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_splash)
         LaunchController(this)
     }
@@ -21,7 +23,8 @@ class LaunchActivity : AppCompatActivity() {
     fun setAuthorizeScreen() {
         setContentView(R.layout.activity_launch)
         //TODO: make keyboard with only numbers
-        ciPassword.setInputType(InputType.TYPE_CLASS_NUMBER)
+        ciPassword.setInputType(InputType.TYPE_CLASS_PHONE)
+        ciPassword.onCreateInputConnection(EditorInfo())
     }
 
     fun onStartLogin() {

@@ -13,6 +13,9 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.inputmethod.BaseInputConnection;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -233,6 +236,14 @@ public class CodeInput extends View {
      */
     public void setInputType(int inputType) {
         mInputType = inputType;
+    }
+
+    @Override
+    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+        outAttrs.actionLabel = null;
+        outAttrs.inputType = mInputType;
+        outAttrs.imeOptions = EditorInfo.IME_ACTION_DONE;
+        return new BaseInputConnection(this, true);
     }
 
     @Override

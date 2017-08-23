@@ -17,8 +17,10 @@ import android.widget.Toast;
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
+import xyz.ratapp.ilx.controllers.info.InfoController;
 import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
 import xyz.ratapp.ilx.data.dao.Order;
+import xyz.ratapp.ilx.ui.activities.InfoActivity;
 import xyz.ratapp.ilx.ui.adapters.MessagesAdapter;
 
 public class ChatFragment extends Fragment
@@ -29,6 +31,7 @@ public class ChatFragment extends Fragment
     private EditText textField;
     private RecyclerView rvChat;
     private String btnSendText;
+    private InfoController controller;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +49,10 @@ public class ChatFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupUI();
+    }
+
+    public void setController(InfoController controller) {
+        this.controller = controller;
     }
 
     public void setBtnSendText(String btnSendText) {
@@ -80,7 +87,10 @@ public class ChatFragment extends Fragment
                         Toast.LENGTH_SHORT).show();
             }
             else {
-                //send message to server
+                //send message to controller
+                if(controller != null) {
+                    controller.sendMessage(text);
+                }
             }
         }
     }

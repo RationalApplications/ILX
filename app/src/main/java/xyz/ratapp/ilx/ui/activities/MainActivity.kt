@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun bindUser(user: Uuser) {
-        Glide.with(this).load(user.preview).error(R.mipmap.ic_launcher).
+        Glide.with(this).load(user.ava).error(R.mipmap.ic_launcher).
                 into(navView.getHeaderView(0).ivNavIcon)
         navView.getHeaderView(0).tvNavHeader.text = user.courierName
         navView.getHeaderView(0).tvNavText.text = user.workStatus

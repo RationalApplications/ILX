@@ -35,7 +35,7 @@ public class RequestsAdapter extends
         Map<Screens, Integer> tmp = new HashMap<>();
         tmp.put(Screens.RECENT, R.layout.item_recent_request);
         tmp.put(Screens.STOCK, R.layout.item_stock_request);
-        tmp.put(Screens.HISTORY, R.layout.item_recent_request);
+        tmp.put(Screens.HISTORY, R.layout.item_stock_request);
 
         screenItemMap = Collections.unmodifiableMap(tmp);
     }
@@ -114,7 +114,8 @@ public class RequestsAdapter extends
                 task = itemView.findViewById(R.id.tvTask);
                 time = itemView.findViewById(R.id.tvTime);
             }
-            else if(screen.equals(Screens.STOCK)){
+            else if(screen.equals(Screens.STOCK) ||
+                    screen.equals(Screens.HISTORY)){
                 cost = itemView.findViewById(R.id.tvCost);
             }
         }
@@ -128,7 +129,8 @@ public class RequestsAdapter extends
                 task.setText(r.getTask());
                 time.setText(r.getTime());
             }
-            else if(screen.equals(Screens.STOCK)) {
+            else if(screen.equals(Screens.STOCK) ||
+                    screen.equals(Screens.HISTORY)) {
                 cost.setText(r.getCost());
             }
 

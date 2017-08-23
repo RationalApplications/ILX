@@ -1,7 +1,15 @@
 package xyz.ratapp.ilx.controllers.info;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+
 import java.util.Arrays;
+
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.data.DataController;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
@@ -18,8 +26,8 @@ import xyz.ratapp.ilx.ui.views.SlidingTabLayout;
 
 /**
  * Created by timtim on 14/08/2017.
- *
- - Все строки отрисовать/отформатировать по макапу (шрифты чёрные/серые);
+ * <p>
+ * - Все строки отрисовать/отформатировать по макапу (шрифты чёрные/серые);
  */
 
 public class InfoController implements DataSettable<Object> {
@@ -31,6 +39,7 @@ public class InfoController implements DataSettable<Object> {
     private String id;
     private Order order;
     private Request request;
+    private SlidingTabLayout stlTabs;
 
     //fragments for details activity
     private ChatFragment chat;
@@ -53,6 +62,7 @@ public class InfoController implements DataSettable<Object> {
         if (activity instanceof DetailsActivity) {
             //setup tabs and fragments
             chat = new ChatFragment();
+            chat.setController(this);
             chat.setBtnSendText(data.getNames().getSendMessageSubmit());
             details = new DetailsFragment();
             details.setBtnSendMessageText(data.getNames().getSendMessage());
@@ -63,18 +73,42 @@ public class InfoController implements DataSettable<Object> {
                     activity.getSupportFragmentManager(), data.getNames());
             adapter.bindFragments(Arrays.asList(details, chat));
             container.setAdapter(adapter);
-            SlidingTabLayout stlTabs = activity.findViewById(R.id.stlDetailsTabs);
+            stlTabs = activity.findViewById(R.id.stlDetailsTabs);
             stlTabs.setSelectedIndicatorColors(activity.getResources()
                     .getColor(R.color.primary_dark_color));
             stlTabs.setBackgroundResource(R.color.tab_bar_background_color);
             stlTabs.setCustomTabView(R.layout.tab_layout, R.id.tvTabItem);
             stlTabs.setDistributeEvenly(false);
             stlTabs.setViewPager(container);
-        }
-        else if(activity instanceof RequestInfoActivity &&
+            container.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    if(position == 0) {
+                        View view = activity.getCurrentFocus();
+
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager)
+                                    activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+                    }
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+        } else if (activity instanceof RequestInfoActivity &&
                 id.startsWith("h")) {
             //setup tabs and fragments
             chat = new ChatFragment();
+            chat.setController(this);
             chat.setBtnSendText(data.getNames().getSendMessageSubmit());
             reqInfo = new RequestInfoFragment();
             reqInfo.bindController(this);
@@ -84,15 +118,38 @@ public class InfoController implements DataSettable<Object> {
                     activity.getSupportFragmentManager(), data.getNames());
             adapter.bindFragments(Arrays.asList(reqInfo, chat));
             container.setAdapter(adapter);
-            SlidingTabLayout stlTabs = activity.findViewById(R.id.stlReqInfoTabs);
+            stlTabs = activity.findViewById(R.id.stlReqInfoTabs);
             stlTabs.setSelectedIndicatorColors(activity.getResources()
                     .getColor(R.color.primary_dark_color));
             stlTabs.setBackgroundResource(R.color.tab_bar_background_color);
             stlTabs.setCustomTabView(R.layout.tab_layout, R.id.tvTabItem);
             stlTabs.setDistributeEvenly(false);
             stlTabs.setViewPager(container);
-        }
-        else if(activity instanceof RequestInfoActivity &&
+            container.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    if(position == 0) {
+                        View view = activity.getCurrentFocus();
+
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager)
+                                    activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+                    }
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+        } else if (activity instanceof RequestInfoActivity &&
                 id.startsWith("s")) {
             reqInfo = new RequestInfoFragment();
             reqInfo.bindController(this);
@@ -101,7 +158,7 @@ public class InfoController implements DataSettable<Object> {
                     replace(R.id.fl_content, reqInfo).commit();
         }
 
-        if(activity.getSupportActionBar() != null) {
+        if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().
                     setTitle(data.getNames().getOrderView());
         }
@@ -112,18 +169,22 @@ public class InfoController implements DataSettable<Object> {
         if (data instanceof Request && !id.startsWith("h")) {
             this.request = (Request) data;
             setupReqInfoData();
-        }
-        else if(data instanceof Request && id.startsWith("h")) {
+        } else if (data instanceof Request && id.startsWith("h")) {
             this.request = (Request) data;
             setupReqInfoHistoryData();
-        }
-        else if (data instanceof Order) {
+        } else if (data instanceof Order) {
             this.order = (Order) data;
             setupDetailsData();
         }
     }
 
     private void setupDetailsData() {
+        if(order.getNewMessages() != 0) {
+            ((ViewGroup) stlTabs.getChildAt(0)).getChildAt(1).
+                    findViewById(R.id.vNewMessages).
+                    setVisibility(View.VISIBLE);
+        }
+
         chat.setData(order.getMessages());
         details.setData(order);
     }
@@ -149,5 +210,23 @@ public class InfoController implements DataSettable<Object> {
     public void sendMessage() {
         container.setCurrentItem(1, true);
         chat.callToSendMessage();
+    }
+
+    public void sendMessage(String text) {
+        try {
+            LocationManager lm = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            String lat = location.getLatitude() + "";
+            String lng = location.getLongitude() + "";
+            String speed = location.getSpeed() + "";
+            String acc = location.getAccuracy() + "";
+            String time = location.getTime() + "";
+            String mdKey = order == null ? request.getMdKey() : order.getMdKey();
+
+            data.sendMessage(text, lat, lng, speed, acc, time, mdKey);
+        } catch (SecurityException e) {
+
+        }
     }
 }

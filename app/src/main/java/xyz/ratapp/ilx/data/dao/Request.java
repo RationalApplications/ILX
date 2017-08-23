@@ -30,6 +30,7 @@ public class Request {
     private List<String> details;
     private List<Address> addresses;
     private Button btn;
+    private String mdKey;
 
 
     public Request(String address, String task, String comment,
@@ -133,4 +134,14 @@ public class Request {
     public Button getBtn() {
         return btn;
     }
+
+    public void setMdKey(String mdKey) {
+        this.mdKey = mdKey;
+    }
+
+    public String getMdKey() {
+        return mdKey;
+    }
+
+    
 }

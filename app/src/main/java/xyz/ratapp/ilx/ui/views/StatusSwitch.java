@@ -3,6 +3,7 @@ package xyz.ratapp.ilx.ui.views;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.SwitchCompat;
 import android.util.TypedValue;
@@ -23,6 +24,7 @@ public class StatusSwitch extends SwitchCompat {
 
     public static int SWITCH_PADDING;
     public static int TEXT_SIZE;
+    public static int WAIT_TIME;
     public static float SCALE;
 
     private Context context;
@@ -43,6 +45,11 @@ public class StatusSwitch extends SwitchCompat {
     }
 
     private void setupSizes() {
+        if(WAIT_TIME == 0) {
+            WAIT_TIME = getResources().
+                    getInteger(R.integer.switch_wait_time);
+        }
+
         if (SWITCH_PADDING == 0) {
             SWITCH_PADDING = getResources().
                     getInteger(R.integer.switch_padding);
@@ -113,6 +120,14 @@ public class StatusSwitch extends SwitchCompat {
             setText(b ?
                     R.string.online :
                     R.string.offline);
+            setEnabled(false);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setEnabled(true);
+                }
+            }, WAIT_TIME * 1000);
+
             controller.setStateChanged(b);
         }
     }

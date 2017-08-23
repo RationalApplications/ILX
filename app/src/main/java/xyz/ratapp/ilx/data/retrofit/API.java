@@ -31,6 +31,10 @@ import retrofit2.http.Query;
  *
  * Метод        order_list_history
  * URL		    https://{domain_name}/api/courier/v2/?method=order_list_history&session_id= {session_id}
+ *
+ *
+ * Метод		send_message
+ * URL		    https://{domain_name}/api/courier/v2/?method=send_message&session_id={session_id}& message={message}&lat={lat}&lng={lng}&speed={speed}&acc={acc}&time={time}&md_key={md_key}
  */
 
 public interface API {
@@ -69,4 +73,14 @@ public interface API {
     @GET("?method=register_gcm")
     Call<JsonObject> registerFCM(@Query("session_id") String sessionId,
                                  @Query("registration_id") String regId);
+
+    @GET("?method=send_message")
+    Call<JsonObject> sendMessage(@Query("session_id") String sessionId,
+                                 @Query("message") String message,
+                                 @Query("lat") String lat,
+                                 @Query("lng") String lng,
+                                 @Query("speed") String speed,
+                                 @Query("acc") String acc,
+                                 @Query("time") String time,
+                                 @Query("md_key") String md_key);
 }

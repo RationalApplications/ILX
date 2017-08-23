@@ -34,7 +34,6 @@ class InfoSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        //TODO: hardcoded
         if(position == 0) {
             return names.getOrderViewInfo();
         }
@@ -47,4 +46,6 @@ class InfoSectionsPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragments.size();
     }
+
+
 }
