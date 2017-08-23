@@ -42,4 +42,5 @@
     <color name="code_input_underline_selected_color">#9e1ace</color>
     <!-- END CODE INPUT -->
 
+    <color name="white">#fff</color>
 </resources>
