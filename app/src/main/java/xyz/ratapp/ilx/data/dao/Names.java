@@ -20,7 +20,7 @@ public class Names implements Serializable {
     private String orderListTrading;
     @SerializedName("order_list")
     private String orderList;
-    @SerializedName("order_list_hostory")
+    @SerializedName("order_list_history")
     private String orderListHistory;
     @SerializedName("order_trading_button")
     private String orderTradingButton;

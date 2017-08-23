@@ -1,10 +1,7 @@
 package xyz.ratapp.ilx.ui.activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.transition.Visibility
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +12,8 @@ import kotlinx.android.synthetic.main.item_stock_request.*
 import xyz.ratapp.ilx.R
 import xyz.ratapp.ilx.controllers.info.InfoController
 import xyz.ratapp.ilx.data.dao.Request
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import java.net.URL
+import xyz.ratapp.ilx.ui.fragments.RequestFragment
+import xyz.ratapp.ilx.ui.fragments.RequestInfoFragment
 
 
 class RequestInfoActivity : InfoActivity() {
@@ -48,55 +44,26 @@ class RequestInfoActivity : InfoActivity() {
     }
 
     private var controller: InfoController? = null
+    private var reqInfo: RequestInfoFragment? = null
+    private var id: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(intent.getIntExtra("THEME", R.style.AppTheme_Active))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request_info)
-        setupUI()
+        reqInfo = RequestInfoFragment()
+        id = intent.getStringExtra("id")
+        if(id!!.startsWith("h")) {
+            setupHistoryUI()
+        }
+
         controller = InfoController(this)
     }
 
-    fun setupUI() {
-        bindData()
-
-        swipeAccept.setOnStateChangeListener {
-            val activity = this@RequestInfoActivity
-
-            swipeAccept.isEnabled = false
-            val tv = TextView(activity)
-            tv.setText(R.string.accepted)
-            tv.gravity = Gravity.CENTER
-            tv.setTextColor(activity.resources.getColor(R.color.text_color))
-            swipeAccept.addView(tv, RelativeLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT))
-            controller!!.acceptRequest()
-        }
+    private fun setupHistoryUI() {
+        fl_content.visibility = View.GONE
+        stlReqInfoTabs.visibility = View.VISIBLE
+        vpReqInfoContainer.visibility = View.VISIBLE
     }
 
-    fun bindData() {
-        val data = intent
-
-        val title = data.getStringExtra(STR_TITLE)
-        val cost = data.getStringExtra(STR_COST)
-        val comment = data.getStringExtra(STR_COMMENT)
-        val difficult = data.getIntExtra(STR_DIFFICULT, -1)
-        val mapUrl = data.getStringExtra(STR_MAP_URL)
-
-        tvCost.text = cost
-        tvComment.text = comment
-        tvTitle.text = title
-        if(difficult != -1) {
-            vDifficult.setBackgroundColor(difficult)
-        }
-
-        if (mapUrl == "")
-            ivMap.visibility = View.GONE
-        else {
-            ivMap.visibility = View.VISIBLE
-
-            //TODO: Вставить картинку с помощью глайда
-        }
-    }
 }

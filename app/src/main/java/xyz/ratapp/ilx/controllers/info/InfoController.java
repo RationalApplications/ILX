@@ -1,15 +1,7 @@
 package xyz.ratapp.ilx.controllers.info;
 
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.ebanx.swipebtn.SwipeButton;
-
 import java.util.Arrays;
-
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.data.DataController;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
@@ -18,10 +10,10 @@ import xyz.ratapp.ilx.data.dao.Order;
 import xyz.ratapp.ilx.data.dao.Request;
 import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.activities.InfoActivity;
-import xyz.ratapp.ilx.ui.adapters.AddressesAdapter;
-import xyz.ratapp.ilx.ui.adapters.CommentsAdapter;
+import xyz.ratapp.ilx.ui.activities.RequestInfoActivity;
 import xyz.ratapp.ilx.ui.fragments.ChatFragment;
 import xyz.ratapp.ilx.ui.fragments.DetailsFragment;
+import xyz.ratapp.ilx.ui.fragments.RequestInfoFragment;
 import xyz.ratapp.ilx.ui.views.SlidingTabLayout;
 
 /**
@@ -43,6 +35,7 @@ public class InfoController implements DataSettable<Object> {
     //fragments for details activity
     private ChatFragment chat;
     private DetailsFragment details;
+    private RequestInfoFragment reqInfo;
 
     public InfoController(InfoActivity activity) {
         this.activity = activity;
@@ -78,6 +71,35 @@ public class InfoController implements DataSettable<Object> {
             stlTabs.setDistributeEvenly(false);
             stlTabs.setViewPager(container);
         }
+        else if(activity instanceof RequestInfoActivity &&
+                id.startsWith("h")) {
+            //setup tabs and fragments
+            chat = new ChatFragment();
+            chat.setBtnSendText(data.getNames().getSendMessageSubmit());
+            reqInfo = new RequestInfoFragment();
+            reqInfo.bindController(this);
+
+            container = activity.findViewById(R.id.vpReqInfoContainer);
+            InfoSectionsPagerAdapter adapter = new InfoSectionsPagerAdapter(
+                    activity.getSupportFragmentManager(), data.getNames());
+            adapter.bindFragments(Arrays.asList(reqInfo, chat));
+            container.setAdapter(adapter);
+            SlidingTabLayout stlTabs = activity.findViewById(R.id.stlReqInfoTabs);
+            stlTabs.setSelectedIndicatorColors(activity.getResources()
+                    .getColor(R.color.primary_dark_color));
+            stlTabs.setBackgroundResource(R.color.tab_bar_background_color);
+            stlTabs.setCustomTabView(R.layout.tab_layout, R.id.tvTabItem);
+            stlTabs.setDistributeEvenly(false);
+            stlTabs.setViewPager(container);
+        }
+        else if(activity instanceof RequestInfoActivity &&
+                id.startsWith("s")) {
+            reqInfo = new RequestInfoFragment();
+            reqInfo.bindController(this);
+
+            activity.getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fl_content, reqInfo).commit();
+        }
 
         if(activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().
@@ -87,10 +109,15 @@ public class InfoController implements DataSettable<Object> {
 
     @Override
     public void setData(Object data) {
-        if (data instanceof Request) {
+        if (data instanceof Request && !id.startsWith("h")) {
             this.request = (Request) data;
             setupReqInfoData();
-        } else if (data instanceof Order) {
+        }
+        else if(data instanceof Request && id.startsWith("h")) {
+            this.request = (Request) data;
+            setupReqInfoHistoryData();
+        }
+        else if (data instanceof Order) {
             this.order = (Order) data;
             setupDetailsData();
         }
@@ -101,35 +128,14 @@ public class InfoController implements DataSettable<Object> {
         details.setData(order);
     }
 
+    private void setupReqInfoHistoryData() {
+        reqInfo.setData(request);
+        reqInfo.setSwipeButtonText(null);
+    }
+
     private void setupReqInfoData() {
-        //map
-        if (request.getImage() != null &&
-                !request.getImage().isEmpty()) {
-            ImageView map = activity.findViewById(R.id.ivMap);
-            Glide.with(activity).load(request.getImage()).asBitmap().into(map);
-        }
-
-        //button
-        if (request.getBtn() != null) {
-            SwipeButton btn = activity.findViewById(R.id.swipeAccept);
-            btn.setText(data.getNames().getOrderTradingButton());
-        }
-
-        if (request.getDetails() != null) {
-            //rv comments
-            RecyclerView rvComments = activity.findViewById(R.id.rvComments);
-            GridLayoutManager glm = new GridLayoutManager(activity, 1);
-            rvComments.setLayoutManager(glm);
-            rvComments.setAdapter(new CommentsAdapter(activity, request.getDetails()));
-        }
-
-        if (request.getAddresses() != null) {
-            //rv addresses
-            RecyclerView rvAddresses = activity.findViewById(R.id.rvAddresses);
-            GridLayoutManager glmm = new GridLayoutManager(activity, 1);
-            rvAddresses.setLayoutManager(glmm);
-            rvAddresses.setAdapter(new AddressesAdapter(activity, request.getAddresses()));
-        }
+        reqInfo.setData(request);
+        reqInfo.setSwipeButtonText(data.getNames().getOrderTradingButton());
     }
 
     public void onPushButton(Button btn) {

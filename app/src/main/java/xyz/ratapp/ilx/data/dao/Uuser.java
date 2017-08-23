@@ -22,6 +22,7 @@ public class Uuser {
     private String courierName;
     private String courierType;
     private List<Order> orders;
+    private List<Request> history;
 
 
     public Uuser(String ava, String preview, String clientName, String clientPhone,
@@ -110,5 +111,13 @@ public class Uuser {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public List<Request> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<Request> history) {
+        this.history = history;
     }
 }

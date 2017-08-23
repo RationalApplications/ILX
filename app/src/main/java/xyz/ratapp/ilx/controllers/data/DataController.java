@@ -75,6 +75,7 @@ public class DataController {
     private API apiBase = retrofitBase.create(API.class),
             apiUser;
     private List<Rerequest> stock;
+    private List<Rerequest> history;
     private List<Order> recent;
     private String domainName;
     private Names names;
@@ -113,6 +114,61 @@ public class DataController {
 
                     user.setOrders(recent);
                     controller.bindData(Screens.RECENT);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.e("MyTag", t.toString());
+            }
+        });
+    }
+
+    public void orderListHistory(final MainController controller) {
+        String sessionId = user.getSessionId();
+
+        apiUser.orderListHistory(sessionId).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                Log.e("MyTag", response.message());
+                int status = response.body().getAsJsonObject("response").
+                        get("status").getAsInt();
+
+                if(status == 1) {
+
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<Map<String, Rerequest>>(){}.getType();
+                    JsonObject orderList = response.body().getAsJsonObject("response").
+                            getAsJsonObject("order_list_history");
+                    Map<String, Rerequest> orderMap = gson.fromJson(orderList, type);
+                    history = new ArrayList<>();
+                    history.addAll(orderMap.values());
+
+                    List<Request> newRequests = new ArrayList<>();
+                    for (Rerequest r : history) {
+                        String diff = r.getDifficult();
+                        Request req;
+                        if(diff.isEmpty()) {
+
+                            req = new Request(r.getH2(), r.getH3(), r.getH1(),
+                                    r.getImage(), new ArrayList<>(r.getComments().values()),
+                                    new ArrayList<>(r.getAddress().values()),
+                                    r.getBtn());
+                        }
+                        else {
+                            req = new Request(r.getH2(), r.getH3(), r.getH1(),
+                                    Color.parseColor(r.getDifficult()),
+                                    r.getImage(), new ArrayList<>(r.getComments().values()),
+                                    new ArrayList<>(r.getAddress().values()),
+                                    r.getBtn());
+                        }
+
+                        newRequests.add(req);
+                    }
+
+                    user.setHistory(newRequests);
+                    controller.bindData(Screens.HISTORY);
                 }
             }
 
@@ -328,7 +384,7 @@ public class DataController {
         }
         else if(screen.equals(Screens.HISTORY)) {
             //h mean history
-            id = "h" + model.getUser().getHistoryOfRequests().indexOf(data);
+            id = "h" + user.getHistory().indexOf(data);
         }
 
         return id;
@@ -350,7 +406,7 @@ public class DataController {
         }
         if(id.startsWith("h")) {
             //history
-            return model.getUser().getHistoryOfRequests().get(n);
+            return user.getHistory().get(n);
         }
 
         return null;
@@ -418,7 +474,7 @@ public class DataController {
             settable.setData(user.getOrders());
         }
         else {
-            settable.setData(screenRequestsMap.get(screen));
+            settable.setData(user.getHistory());
         }
     }
 
@@ -455,6 +511,18 @@ public class DataController {
 
         auth(controller, sessionId);
         return false;
+    }
+
+    public void exit(MainController controller) {
+        setState(controller, false);
+
+        Context context = controller.getContext();
+        SharedPreferences prefs = context.getSharedPreferences(
+                PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("session_id", "");
+        editor.putString("domain_name", "");
+        editor.apply();
     }
 
     private void savePrefs(Context context) {

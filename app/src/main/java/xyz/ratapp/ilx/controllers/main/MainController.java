@@ -28,6 +28,7 @@ import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
 import xyz.ratapp.ilx.ui.fragments.HistoryFragment;
 import xyz.ratapp.ilx.ui.fragments.RecentFragment;
 import xyz.ratapp.ilx.ui.fragments.RequestFragment;
+import xyz.ratapp.ilx.ui.fragments.RequestInfoFragment;
 import xyz.ratapp.ilx.ui.fragments.StockFragment;
 import xyz.ratapp.ilx.ui.views.SlidingTabLayout;
 import xyz.ratapp.ilx.ui.views.StatusSwitch;
@@ -45,22 +46,14 @@ public class MainController
     private MainActivity activity;
     private DrawerLayout layout;
     private StatusSwitch status;
+    //костыль
+    private boolean exit = false;
 
     public MainController(MainActivity activity) {
         //ui
         this.activity = activity;
         data = DataController.getInstance();
         layout = activity.findViewById(R.id.dlMain);
-
-        //setup status switch
-        status = new StatusSwitch(activity);
-        status.setController(this);
-        activity.setupToolbar(getNames().getOrders(), status);
-        activity.setupUI();
-
-        //data
-        createFragments();
-        setupData();
     }
 
     /**
@@ -99,6 +92,17 @@ public class MainController
         stlTabs.setViewPager(container);
         data.orderListTrading(this);
         data.orderList(this);
+        data.orderListHistory(this);
+    }
+
+    public void setSwitch(StatusSwitch statusSwitch) {
+        this.status = statusSwitch;
+        activity.setupToolbar(getNames().getOrders(), status);
+        activity.setupUI();
+
+        //data
+        createFragments();
+        setupData();
     }
 
     /**
@@ -124,6 +128,10 @@ public class MainController
     public void bindUser(Uuser user) {
         toggleUpdatingGPS(user.isOnline());
         activity.bindUser(user);
+
+        if(exit) {
+            activity.finish();
+        }
     }
 
     /**
@@ -140,7 +148,7 @@ public class MainController
                     DetailsActivity.Companion.getIntent(id) :
                     RequestInfoActivity.Companion.getIntent(id, ((Request) data));
             next = from.equals(Screens.HISTORY) ?
-                    DetailsActivity.Companion.getIntent(id) :
+                    RequestInfoActivity.Companion.getIntent(id, ((Request) data)) :
                     next;
 
             //TODO: hardcoded
@@ -165,6 +173,7 @@ public class MainController
         data.setState(this, state);
         data.orderListTrading(this);
         data.orderList(this);
+        data.orderListHistory(this);
     }
 
     private void toggleUpdatingGPS(boolean state) {
@@ -196,6 +205,11 @@ public class MainController
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.nav_exit) {
+            exit = true;
+            data.exit(this);
+        }
+
         layout.closeDrawer(GravityCompat.START);
 
         return true;
@@ -214,6 +228,9 @@ public class MainController
         }
         else if(screen.equals(Screens.RECENT)) {
             data.orderList(this);
+        }
+        else if(screen.equals(Screens.HISTORY)) {
+            data.orderListHistory(this);
         }
     }
 

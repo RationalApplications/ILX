@@ -5,6 +5,10 @@
         <item
             android:id="@+id/nav_requests"
             android:title="@string/requests" />
+
+        <item
+            android:id="@+id/nav_exit"
+            android:title="@string/exit" />
     </group>
 
 </menu>

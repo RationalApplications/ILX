@@ -6,6 +6,7 @@
 
     <!--Navigation Drawer & Toolbar strings:-->
     <string name="requests">Заявки</string>
+    <string name="exit">Выход</string>
     <string name="nav_drawer_open_desc">Navigation Bar Open</string>
     <string name="nav_drawer_close_desc">Navigation Bar Close</string>
 
