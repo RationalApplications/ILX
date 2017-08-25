@@ -113,6 +113,8 @@ public class InfoController implements DataSettable<Object> {
             reqInfo = new RequestInfoFragment();
             reqInfo.bindController(this);
 
+
+
             container = activity.findViewById(R.id.vpReqInfoContainer);
             InfoSectionsPagerAdapter adapter = new InfoSectionsPagerAdapter(
                     activity.getSupportFragmentManager(), data.getNames());

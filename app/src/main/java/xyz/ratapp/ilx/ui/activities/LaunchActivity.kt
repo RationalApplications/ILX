@@ -6,10 +6,8 @@ import android.text.InputType
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import kotlinx.android.synthetic.main.activity_launch.*
-import kotlinx.android.synthetic.main.activity_launch.view.*
 import xyz.ratapp.ilx.R
 import xyz.ratapp.ilx.controllers.launch.LaunchController
-import xyz.ratapp.ilx.ui.views.CodeInput
 
 class LaunchActivity : AppCompatActivity() {
 
@@ -23,8 +21,9 @@ class LaunchActivity : AppCompatActivity() {
     fun setAuthorizeScreen() {
         setContentView(R.layout.activity_launch)
         //TODO: make keyboard with only numbers
-        ciPassword.setInputType(InputType.TYPE_CLASS_PHONE)
-        ciPassword.onCreateInputConnection(EditorInfo())
+        //ciPassword.setInputType(InputType.TYPE_CLASS_PHONE)
+        //val editor = EditorInfo()
+        //ciPassword.onCreateInputConnection(EditorInfo()).beginBatchEdit()
     }
 
     fun onStartLogin() {

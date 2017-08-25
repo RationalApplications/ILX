@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         //navigationView
+        val navView = navView
         navView.setNavigationItemSelectedListener(controller)
         navView.setCheckedItem(R.id.nav_requests)
     }

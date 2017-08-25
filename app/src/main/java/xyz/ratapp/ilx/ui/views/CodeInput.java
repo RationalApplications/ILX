@@ -239,14 +239,6 @@ public class CodeInput extends View {
     }
 
     @Override
-    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
-        outAttrs.actionLabel = null;
-        outAttrs.inputType = mInputType;
-        outAttrs.imeOptions = EditorInfo.IME_ACTION_DONE;
-        return new BaseInputConnection(this, true);
-    }
-
-    @Override
     public boolean onCheckIsTextEditor() {
         return true;
     }

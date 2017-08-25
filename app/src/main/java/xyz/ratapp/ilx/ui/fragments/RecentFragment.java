@@ -65,7 +65,7 @@ public class RecentFragment extends RequestFragment {
         RelativeLayout.LayoutParams params =
                 new RelativeLayout.LayoutParams(
                         (int) (ON_THE_MAP_WIDTH * SCALE + 0.5f),
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
         //margins
         final float LEFT_MARGIN = getResources().getDimension(R.dimen.default_screen_margin);
         final float BOTTOM_MARGIN = getResources().getDimension(R.dimen.default_large_margin);

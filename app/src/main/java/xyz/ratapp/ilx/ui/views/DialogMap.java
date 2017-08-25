@@ -71,6 +71,7 @@ public class DialogMap extends Dialog
         LatLngBounds bounds;
 
         for(LatLng ll : data) {
+            builder.include(ll);
             googleMap.addMarker(new MarkerOptions().position(ll)
                     .title("Marker in Spb"));
         }
