@@ -42,8 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setupUI() {
         //tabs
-        stlTabs.setSelectedIndicatorColors(
-                resources.getColor(R.color.primary_dark_color))
+        stlTabs.setSelectedIndicatorColors(resources.getColor(R.color.primary_dark_color))
         stlTabs.setBackgroundResource(R.color.tab_bar_background_color)
         stlTabs.setCustomTabView(R.layout.tab_layout, R.id.tvTabItem)
         stlTabs.setDistributeEvenly(false)
@@ -67,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         val navView = navView
         navView.setNavigationItemSelectedListener(controller)
         navView.setCheckedItem(R.id.nav_requests)
+        navView.menu.findItem(R.id.nav_requests).title = title
     }
 
     fun bindUser(user: Uuser) {

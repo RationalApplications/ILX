@@ -98,7 +98,7 @@ public class RecentFragment extends RequestFragment {
             locations.add(o.getLocation());
         }
 
-        DialogMap dialog = new DialogMap(getContext());
+        DialogMap dialog = new DialogMap(getActivity());
         dialog.setData(locations);
         dialog.show();
     }

@@ -1,8 +1,11 @@
 package xyz.ratapp.ilx.ui.views;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Point;
 import android.support.annotation.NonNull;
+import android.view.Display;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
@@ -47,6 +50,7 @@ public class DialogMap extends Dialog
     private void setupDialog() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(layout);
+        setCancelable(true);
         setCanceledOnTouchOutside(true);
     }
 
@@ -59,10 +63,17 @@ public class DialogMap extends Dialog
     }
 
     private void setupMap() {
+        Display display = ((Activity) context).getWindowManager()
+                .getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
         map = new MapView(context);
         ViewGroup.LayoutParams mapParams = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
+                ((int) (width * 0.75f)),
+                ((int) (height * 0.75f)));
         layout.addView(map, mapParams);
     }
 
@@ -77,7 +88,7 @@ public class DialogMap extends Dialog
         }
 
         bounds = builder.build();
-        int padding = 40;
+        int padding = 100;
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         googleMap.moveCamera(cu);
     }
