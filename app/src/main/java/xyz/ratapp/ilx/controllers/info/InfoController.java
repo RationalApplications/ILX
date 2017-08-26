@@ -60,6 +60,8 @@ public class InfoController implements DataSettable<Object> {
     }
 
     private void preSetupUI() {
+        String param = activity.getIntent().getStringExtra("param");
+
         if (activity instanceof DetailsActivity) {
             //setup tabs and fragments
             chat = new ChatFragment();
@@ -105,6 +107,10 @@ public class InfoController implements DataSettable<Object> {
 
                 }
             });
+
+            if(param != null && param.equals("order_chat")) {
+                container.setCurrentItem(1);
+            }
         } else if (activity instanceof RequestInfoActivity &&
                 id.startsWith("h")) {
             //setup tabs and fragments
@@ -152,6 +158,10 @@ public class InfoController implements DataSettable<Object> {
 
                 }
             });
+
+            if(param != null && param.equals("order_chat")) {
+                container.setCurrentItem(1);
+            }
         } else if (activity instanceof RequestInfoActivity &&
                 id.startsWith("s")) {
             reqInfo = new RequestInfoFragment();
