@@ -395,6 +395,40 @@ public class DataController {
         });
     }
 
+    public String getIdByMdKey(String mdKey) {
+        String id = "-1";
+
+        List<Request> stock = model.getNewRequests();
+        List<Request> history = user.getHistory();
+        List<Order> recent = user.getOrders();
+
+        for (Request r : stock) {
+            if(r.getMdKey().equals(mdKey)) {
+                id = "s" + stock.indexOf(r);
+
+                return id;
+            }
+        }
+
+        for (Request r : history) {
+            if(r.getMdKey().equals(mdKey)) {
+                id = "h" + history.indexOf(r);
+
+                return id;
+            }
+        }
+
+        for (Order o : recent) {
+            if(o.getMdKey().equals(mdKey)) {
+                id = "r" + recent.indexOf(o);
+
+                return id;
+            }
+        }
+
+        return id;
+    }
+
     public String idOf(Object data, Screens screen) {
         String id = "-1";
 

@@ -64,22 +64,20 @@ public class LaunchController {
     /**
      * send app to the next Screen
      */
-    /*
-    order_list_trading
-    order_list
-    order_list_history
-    order_info
-    order_chat
-    */
     public void next() {
         String type = startIntent.getStringExtra("type");
         String mdKey = startIntent.getStringExtra("md_key");
         Intent next = new Intent(activity, MainActivity.class);
 
-        next.putExtra("type", type);
+        if(type != null && !type.isEmpty() ||
+                (type != null && !type.isEmpty() &&
+                        mdKey != null && !mdKey.isEmpty())) {
+            next.putExtra("type", type);
 
-        if (type.equals("order_info") || type.equals("order_chat")) {
-            next.putExtra("md_key", mdKey);
+            if (type.equals("order_info") ||
+                    type.equals("order_chat")) {
+                next.putExtra("md_key", mdKey);
+            }
         }
 
         activity.startActivity(next);

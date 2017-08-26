@@ -48,12 +48,60 @@ public class MainController
     private StatusSwitch status;
     //костыль
     private boolean exit = false;
+    private int selected = -1;
 
     public MainController(MainActivity activity) {
         //ui
         this.activity = activity;
         data = DataController.getInstance();
         layout = activity.findViewById(R.id.dlMain);
+        checkIntent();
+    }
+
+    private void checkIntent() {
+        Intent intent = activity.getIntent();
+
+        String type = intent.getStringExtra("type");
+
+        if(type != null) {
+            String mdKey = null;
+            if (type.equals("order_info") ||
+                    type.equals("order_chat")) {
+                mdKey = intent.getStringExtra("md_key");
+            }
+
+            if(!type.isEmpty() || (!type.isEmpty() &&
+                    mdKey != null && !mdKey.isEmpty())) {
+
+                if(type.equals("order_list_trading")) {
+                    selected = 0;
+                }
+                else if(type.equals("order_list")) {
+                    selected = 1;
+                }
+                else if(type.equals("order_list_history")) {
+                    selected = 2;
+                }
+                else if(type.equals("order_info")) {
+                    Object data = this.data.getIdByMdKey(mdKey);
+                    Screens screen = data.toString().startsWith("r") ?
+                            Screens.RECENT : Screens.HISTORY;
+                    screen = data.toString().startsWith("h") ?
+                            screen : Screens.STOCK;
+
+                    next(screen, data);
+                }
+                else if(type.equals("order_chat")) {
+                    Object data = this.data.getIdByMdKey(mdKey);
+                    Screens screen = data.toString().startsWith("r") ?
+                            Screens.RECENT : Screens.HISTORY;
+                    screen = data.toString().startsWith("h") ?
+                            screen : Screens.STOCK;
+
+                    next(screen, data);
+                }
+            }
+        }
     }
 
     /**
@@ -94,6 +142,10 @@ public class MainController
         data.orderList(this);
         data.orderListHistory(this);
         data.bindUser(this);
+
+        if(selected != -1) {
+            container.setCurrentItem(selected);
+        }
     }
 
     public void setSwitch(StatusSwitch statusSwitch) {

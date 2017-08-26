@@ -24,6 +24,8 @@ public class Names implements Serializable {
     private String orderListHistory;
     @SerializedName("order_trading_button")
     private String orderTradingButton;
+    @SerializedName("order_trading_button2")
+    private String orderTradingButton2;
     @SerializedName("order_view")
     private String orderView;
     @SerializedName("order_view_info")
