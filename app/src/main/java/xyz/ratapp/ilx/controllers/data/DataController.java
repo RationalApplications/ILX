@@ -2,7 +2,6 @@ package xyz.ratapp.ilx.controllers.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.Log;
 
@@ -11,12 +10,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,7 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.Screens;
 import xyz.ratapp.ilx.controllers.info.InfoController;
 import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
@@ -421,16 +417,62 @@ public class DataController {
     }
 
     private void sendNextByMdKey(MainController controller) {
-        Object data = getIdByMdKey(mdKey);
-        Screens screen = data.toString().startsWith("r") ?
+        Object data = getDataByMdKey(mdKey);
+        String id = idOf(data);
+        Screens screen = id.startsWith("r") ?
                 Screens.RECENT : Screens.HISTORY;
-        screen = data.toString().startsWith("h") ?
+        screen = id.startsWith("h") ?
                 screen : Screens.STOCK;
 
         controller.next(screen, data, param);
     }
 
-    private String getIdByMdKey(String mdKey) {
+    private Object getDataByMdKey(String mdKey) {
+        List<Request> stock = model.getNewRequests();
+        List<Request> history = user.getHistory();
+        List<Order> recent = user.getOrders();
+
+        for (Request r : stock) {
+            if(r.getMdKey().equals(mdKey)) {
+                return r;
+            }
+        }
+
+        for (Request r : history) {
+            if(r.getMdKey().equals(mdKey)) {
+                return r;
+            }
+        }
+
+        for (Order o : recent) {
+            if(o.getMdKey().equals(mdKey)) {
+                return o;
+            }
+        }
+
+        return null;
+    }
+
+    public String idOf(Object data, Screens screen) {
+        String id = "-1";
+
+        if(screen.equals(Screens.STOCK)) {
+            //s mean stock
+            id = "s" + model.getNewRequests().indexOf(data);
+        }
+        else if(screen.equals(Screens.RECENT)) {
+            //r mean recent
+            id = "r" + user.getOrders().indexOf(data);
+        }
+        else if(screen.equals(Screens.HISTORY)) {
+            //h mean history
+            id = "h" + user.getHistory().indexOf(data);
+        }
+
+        return id;
+    }
+
+    private String idOf(Object data) {
         String id = "-1";
 
         List<Request> stock = model.getNewRequests();
@@ -459,25 +501,6 @@ public class DataController {
 
                 return id;
             }
-        }
-
-        return id;
-    }
-
-    public String idOf(Object data, Screens screen) {
-        String id = "-1";
-
-        if(screen.equals(Screens.STOCK)) {
-            //s mean stock
-            id = "s" + model.getNewRequests().indexOf(data);
-        }
-        else if(screen.equals(Screens.RECENT)) {
-            //r mean recent
-            id = "r" + user.getOrders().indexOf(data);
-        }
-        else if(screen.equals(Screens.HISTORY)) {
-            //h mean history
-            id = "h" + user.getHistory().indexOf(data);
         }
 
         return id;

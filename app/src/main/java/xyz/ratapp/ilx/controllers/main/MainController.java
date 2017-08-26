@@ -86,7 +86,6 @@ public class MainController
                     data.sendNextByMdKey(mdKey, "order_info");
                 }
                 else if(type.equals("order_chat")) {
-                    data.sendNextByMdKey(mdKey, "order_chat");
                 }
             }
         }
