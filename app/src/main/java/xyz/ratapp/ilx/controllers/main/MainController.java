@@ -58,7 +58,7 @@ public class MainController
         checkIntent();
     }
 
-    private void checkIntent() {
+    public void checkIntent() {
         Intent intent = activity.getIntent();
 
         String type = intent.getStringExtra("type");
@@ -83,22 +83,10 @@ public class MainController
                     selected = 2;
                 }
                 else if(type.equals("order_info")) {
-                    Object data = this.data.getIdByMdKey(mdKey);
-                    Screens screen = data.toString().startsWith("r") ?
-                            Screens.RECENT : Screens.HISTORY;
-                    screen = data.toString().startsWith("h") ?
-                            screen : Screens.STOCK;
-
-                    next(screen, data);
+                    data.sendNextByMdKey(mdKey, "order_info");
                 }
                 else if(type.equals("order_chat")) {
-                    Object data = this.data.getIdByMdKey(mdKey);
-                    Screens screen = data.toString().startsWith("r") ?
-                            Screens.RECENT : Screens.HISTORY;
-                    screen = data.toString().startsWith("h") ?
-                            screen : Screens.STOCK;
-
-                    next(screen, data);
+                    data.sendNextByMdKey(mdKey, "order_chat");
                 }
             }
         }
@@ -208,6 +196,29 @@ public class MainController
                     R.style.AppTheme_Passive;
 
             next.putExtra("THEME", theme);
+
+            activity.startActivity(next);
+        }
+    }
+
+    public void next(Screens from, Object data, String param) {
+        if(RequestsAdapter.screenItemMap.containsKey(from)) {
+            boolean recent = from.equals(Screens.RECENT);
+            String id = this.data.idOf(data, from);
+            Intent next = recent ?
+                    DetailsActivity.Companion.getIntent(id) :
+                    RequestInfoActivity.Companion.getIntent(id, ((Request) data));
+            next = from.equals(Screens.HISTORY) ?
+                    RequestInfoActivity.Companion.getIntent(id, ((Request) data)) :
+                    next;
+
+            //TODO: hardcoded
+            int theme = this.data.getLastState() ?
+                    R.style.AppTheme_Active :
+                    R.style.AppTheme_Passive;
+
+            next.putExtra("THEME", theme);
+            next.putExtra("param", param);
 
             activity.startActivity(next);
         }

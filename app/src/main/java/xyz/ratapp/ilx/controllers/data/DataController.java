@@ -81,6 +81,8 @@ public class DataController {
     private Names names;
     private Uuser user;
     private int frequency;
+    private String mdKey = null;
+    private String param;
 
 
     private DataController() {
@@ -115,6 +117,12 @@ public class DataController {
 
                     user.setOrders(recent);
                     controller.bindData(Screens.RECENT);
+
+                    if(mdKey != null &&
+                            user.getHistory() != null &&
+                            model.getNewRequests() != null) {
+                        sendNextByMdKey(controller);
+                    }
                 }
             }
 
@@ -171,6 +179,12 @@ public class DataController {
 
                     user.setHistory(newRequests);
                     controller.bindData(Screens.HISTORY);
+
+                    if(mdKey != null &&
+                            model.getNewRequests() != null &&
+                            user.getOrders() != null) {
+                        sendNextByMdKey(controller);
+                    }
                 }
             }
 
@@ -226,6 +240,12 @@ public class DataController {
 
                     model.setNewRequests(newRequests);
                     controller.bindData(Screens.STOCK);
+
+                    if(mdKey != null &&
+                            user.getHistory() != null &&
+                            user.getOrders() != null) {
+                        sendNextByMdKey(controller);
+                    }
                 }
             }
 
@@ -396,7 +416,22 @@ public class DataController {
         });
     }
 
-    public String getIdByMdKey(String mdKey) {
+    public void sendNextByMdKey(String mdKey, String param) {
+        this.mdKey = mdKey;
+        this.param = param;
+    }
+
+    private void sendNextByMdKey(MainController controller) {
+        Object data = getIdByMdKey(mdKey);
+        Screens screen = data.toString().startsWith("r") ?
+                Screens.RECENT : Screens.HISTORY;
+        screen = data.toString().startsWith("h") ?
+                screen : Screens.STOCK;
+
+        controller.next(screen, data, param);
+    }
+
+    private String getIdByMdKey(String mdKey) {
         String id = "-1";
 
         List<Request> stock = model.getNewRequests();
