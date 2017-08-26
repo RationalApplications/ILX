@@ -22,7 +22,6 @@ public class Model {
     private List<Request> newRequests, curRequests, histRequests;
 
     public Model() {
-        newRequests = new ArrayList<>();
         curRequests = new ArrayList<>();
         histRequests = new ArrayList<>();
 
@@ -74,9 +73,6 @@ public class Model {
                 "8р.", //commission
                 "Александр Викторович",
                 "+79252412512", Color.BLUE);
-
-        newRequests.add(requestNew);
-        newRequests.add(requestNew2);
 
         curRequests.add(requestCur);
         curRequests.add(requestCur2);

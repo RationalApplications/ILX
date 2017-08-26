@@ -124,7 +124,7 @@ public class GeoService extends Service {
 
                 DataController controller = DataController.getInstance();
 
-                controller.courierLocation(location);
+                controller.courierLocation(location, getApplicationContext());
             }
         };
     }
@@ -135,14 +135,6 @@ public class GeoService extends Service {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             log("no permission");
-            return;
-        }
-
-        //Check GPS connected
-        LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (!enabled) {
-            Toast.makeText(getApplicationContext(), R.string.enable_geo, Toast.LENGTH_LONG).show();
             return;
         }
 
