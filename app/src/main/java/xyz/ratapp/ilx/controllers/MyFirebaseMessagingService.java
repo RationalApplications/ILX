@@ -116,6 +116,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 
         resultIntent = new Intent(this, LaunchActivity.class);
+        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         resultIntent.putExtra("type", type);
         resultIntent.putExtra("md_key", mdKey);
         stackBuilder.addParentStack(LaunchActivity.class);
@@ -127,6 +128,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
         mBuilder.setContentIntent(resultPendingIntent);
+
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 

@@ -22,7 +22,6 @@ public class Model {
     private List<Request> newRequests, curRequests, histRequests;
 
     public Model() {
-        newRequests = new ArrayList<>();
         curRequests = new ArrayList<>();
         histRequests = new ArrayList<>();
 

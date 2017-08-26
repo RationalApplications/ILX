@@ -230,6 +230,7 @@ public class DataController {
                                     new ArrayList<>(r.getAddress().values()),
                                     r.getBtn());
                         }
+                        req.setMdKey(r.getMdKey());
 
                         newRequests.add(req);
                     }
@@ -266,26 +267,28 @@ public class DataController {
         }
     }
 
-    public void courierLocation(UserLocation location) {
-        String sessionId = user.getSessionId();
-        String lat = location.getLatitude();
-        String lng = location.getLongitude();
-        String speed = location.getSpeed();
-        String acc = location.getAcc();
-        String time = location.getTime();
+    public void courierLocation(UserLocation location, Context context) {
+        if(user != null) {
+            String sessionId = user.getSessionId();
+            String lat = location.getLatitude();
+            String lng = location.getLongitude();
+            String speed = location.getSpeed();
+            String acc = location.getAcc();
+            String time = location.getTime();
 
-        apiUser.courierLocation(sessionId, lat, lng, speed, acc, time).
-                enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.e("MyTag", response.message());
-            }
+            apiUser.courierLocation(sessionId, lat, lng, speed, acc, time).
+                    enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            Log.e("MyTag", response.message());
+                        }
 
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Log.e("MyTag", t.toString());
-            }
-        });
+                        @Override
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                            Log.e("MyTag", t.toString());
+                        }
+                    });
+        }
     }
 
     public void authAccessCode(final LaunchController controller, String code) {
