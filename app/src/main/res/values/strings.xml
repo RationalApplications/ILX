@@ -49,5 +49,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="send">Отправить</string>
     <string name="input_message">Введите сообщение</string>
+    <string name="enable_geo">Включите передачу геоданных</string>
 
 </resources>
