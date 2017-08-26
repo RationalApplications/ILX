@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class ChatFragment extends Fragment
         implements ListSettable<Order.Message> {
 
     private List<Order.Message> messages;
-    private Button send;
+    private ImageView send;
     private EditText textField;
     private RecyclerView rvChat;
     private String btnSendText;
@@ -61,7 +62,6 @@ public class ChatFragment extends Fragment
 
     private void setupUI() {
         //work with btn
-        send.setText(btnSendText);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

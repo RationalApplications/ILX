@@ -126,6 +126,7 @@ public class RecentFragment extends RequestFragment {
         refreshLayout.addView(container, params);
     }
 
+
     @Override
     protected void addViewToRefreshLayout(View view,
                                           ViewGroup.LayoutParams params) {

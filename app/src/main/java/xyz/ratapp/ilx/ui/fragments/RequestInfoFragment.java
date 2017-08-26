@@ -1,6 +1,7 @@
 package xyz.ratapp.ilx.ui.fragments;
 
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -68,6 +69,7 @@ public class RequestInfoFragment extends Fragment
 
     private void setupUI() {
         bindData();
+
 
         swipeAccept.setOnStateChangeListener(new OnStateChangeListener() {
             @Override

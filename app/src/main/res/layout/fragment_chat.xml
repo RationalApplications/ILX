@@ -14,8 +14,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="9"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <EditText
@@ -24,11 +23,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:ems="10"
-            android:inputType="textCapSentences"
-            android:hint="@string/input_message" />
+            android:hint="@string/input_message"
+            android:inputType="textCapSentences" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnSend"
+            android:src="@drawable/ic_send_black_48dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
