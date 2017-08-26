@@ -385,7 +385,7 @@ public class DataController {
                 speed, acc, time, mdKey).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
+                Log.e("MyTag", response.body().toString());
             }
 
             @Override

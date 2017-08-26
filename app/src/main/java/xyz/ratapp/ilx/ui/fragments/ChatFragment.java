@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class ChatFragment extends Fragment
             @Override
             public void onClick(View view) {
                 sendMessage();
+
             }
         });
 
@@ -77,9 +79,8 @@ public class ChatFragment extends Fragment
     private void sendMessage() {
         if (textField != null && send != null &&
                 textField.getText() != null) {
-
             String text = textField.getText().toString();
-
+            Log.e("MyTag", text);
             if(text.isEmpty()) {
                 //TODO: hardcoded
                 Toast.makeText(getContext(),
@@ -90,6 +91,7 @@ public class ChatFragment extends Fragment
                 //send message to controller
                 if(controller != null) {
                     controller.sendMessage(text);
+                    textField.setText("");  
                 }
             }
         }

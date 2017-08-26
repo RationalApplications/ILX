@@ -35,17 +35,12 @@ public class GeoService extends Service {
     private static int FASTEST_INTERVAL;
 
 
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        INTERVAL = intent.getIntExtra("frequency", 1000);
+
+        INTERVAL = intent.getIntExtra("frequency", 1000) * 1000;
         FASTEST_INTERVAL = ((int) (INTERVAL * 0.9));
-
-        return super.onStartCommand(intent, flags, startId);
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
 
         buildGoogleApi();
 
@@ -55,6 +50,25 @@ public class GeoService extends Service {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         startLocationUpdates();
+
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        /*INTERVAL = intent.getIntExtra("frequency", 1000) * 1000;
+        FASTEST_INTERVAL = ((int) (INTERVAL * 0.9));
+
+        buildGoogleApi();
+
+        createLocationRequest();
+        createLocationCallback();
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        startLocationUpdates();*/
     }
 
 

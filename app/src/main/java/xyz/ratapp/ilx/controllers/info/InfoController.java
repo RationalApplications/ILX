@@ -1,6 +1,7 @@
 package xyz.ratapp.ilx.controllers.info;
 
 import android.content.Context;
+import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.view.ViewPager;
@@ -217,7 +218,12 @@ public class InfoController implements DataSettable<Object> {
     public void sendMessage(String text) {
         try {
             LocationManager lm = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location == null)
+                location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+            if (location == null)
+                location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
 
             String lat = location.getLatitude() + "";
             String lng = location.getLongitude() + "";
@@ -228,7 +234,6 @@ public class InfoController implements DataSettable<Object> {
 
             data.sendMessage(text, lat, lng, speed, acc, time, mdKey);
         } catch (SecurityException e) {
-
         }
     }
 }

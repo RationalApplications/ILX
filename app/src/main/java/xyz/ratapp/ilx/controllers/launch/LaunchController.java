@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.data.DataController;
+import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.activities.InfoActivity;
 import xyz.ratapp.ilx.ui.activities.LaunchActivity;
 import xyz.ratapp.ilx.ui.activities.MainActivity;
@@ -70,10 +73,14 @@ public class LaunchController {
     */
     public void next() {
         String type = startIntent.getStringExtra("type");
+        String mdKey = startIntent.getStringExtra("md_key");
         Intent next = new Intent(activity, MainActivity.class);
-        if (type == null || type.equals(""))
-            type = "nothing";
+
         next.putExtra("type", type);
+
+        if (type.equals("order_info") || type.equals("order_chat")) {
+            next.putExtra("md_key", mdKey);
+        }
 
         activity.startActivity(next);
         activity.finish();

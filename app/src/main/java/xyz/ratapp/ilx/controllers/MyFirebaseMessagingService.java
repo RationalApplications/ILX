@@ -66,12 +66,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String title= remoteMessage.getData().get("title");
         String message= remoteMessage.getData().get("message");
         String eventTime= remoteMessage.getData().get("event_time");
+        String mdKey= remoteMessage.getData().get("md_key");
 
 
-        sendNotification(iconBig, iconPreview, type, title, message, eventTime);
+        sendNotification(mdKey, iconBig, iconPreview, type, title, message, eventTime);
     }
 
-    private void sendNotification(String iconBig, String iconPreview, String type, String title, String message, String eventTime) {
+    private void sendNotification(String mdKey, String iconBig, String iconPreview, String type, String title, String message, String eventTime) {
         Bitmap theBitmap = null;
         try {
             theBitmap = Glide.
@@ -116,6 +117,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         resultIntent = new Intent(this, LaunchActivity.class);
         resultIntent.putExtra("type", type);
+        resultIntent.putExtra("md_key", mdKey);
         stackBuilder.addParentStack(LaunchActivity.class);
 
         stackBuilder.addNextIntent(resultIntent);
