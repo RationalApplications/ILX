@@ -333,6 +333,7 @@ public class DataController {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 try {
+                    Log.e("MyTag", response.body().toString());
                     JsonObject obj = response.body().getAsJsonObject("response");
                     int status = obj.get("status").getAsInt();
 

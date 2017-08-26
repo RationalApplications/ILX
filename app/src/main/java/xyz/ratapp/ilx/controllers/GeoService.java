@@ -2,8 +2,10 @@ package xyz.ratapp.ilx.controllers;
 
 import android.Manifest;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
@@ -12,6 +14,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -20,6 +24,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
+import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.data.DataController;
 import xyz.ratapp.ilx.data.dao.UserLocation;
 
@@ -132,6 +137,15 @@ public class GeoService extends Service {
             log("no permission");
             return;
         }
+
+        //Check GPS connected
+        LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (!enabled) {
+            Toast.makeText(getApplicationContext(), R.string.enable_geo, Toast.LENGTH_LONG).show();
+            return;
+        }
+
         mFusedLocationClient.requestLocationUpdates(mLocationRequest,
                 mLocationCallback, Looper.myLooper());
     }
@@ -159,6 +173,16 @@ public class GeoService extends Service {
 
     private void log(String text) {
         Log.i("MyTag", text);
+    }
+
+    public boolean checkGPSConnected(){
+        LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (!enabled) {
+            Toast.makeText(getApplicationContext(), R.string.enable_geo, Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
 }
