@@ -117,6 +117,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         resultIntent = new Intent(this, LaunchActivity.class);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //commit to commit
         resultIntent.putExtra("type", type);
         resultIntent.putExtra("md_key", mdKey);
         stackBuilder.addParentStack(LaunchActivity.class);
