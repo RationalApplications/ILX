@@ -2,14 +2,12 @@ package xyz.ratapp.ilx.controllers.launch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
-import java.util.Objects;
-
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.controllers.data.DataController;
-import xyz.ratapp.ilx.ui.activities.DetailsActivity;
-import xyz.ratapp.ilx.ui.activities.InfoActivity;
+import xyz.ratapp.ilx.controllers.data.DataBinder;
+import xyz.ratapp.ilx.ui.interfaces.ErrorDisplayable;
 import xyz.ratapp.ilx.ui.activities.LaunchActivity;
 import xyz.ratapp.ilx.ui.activities.MainActivity;
 import xyz.ratapp.ilx.ui.views.CodeInput;
@@ -21,15 +19,15 @@ import xyz.ratapp.ilx.ui.views.CodeInput;
 public class LaunchController {
 
     private LaunchActivity activity;
-    private DataController data;
+    private DataBinder data;
     private boolean firstStart = false;
     private Intent startIntent;
 
     public LaunchController(LaunchActivity launchActivity) {
         this.activity = launchActivity;
         startIntent = activity.getIntent();
-        data = DataController.getInstance();
-        firstStart = data.getPrefs(this);
+        data = DataBinder.getInstance(launchActivity);
+        firstStart = data.isFirstStart();
         setupData();
     }
 
@@ -42,29 +40,24 @@ public class LaunchController {
                 @Override
                 public void onCodeReady(String code) {
                     activity.onStartLogin();
-                    data.authAccessCode(LaunchController.this, code);
+                    data.auth(LaunchController.this, code);
                 }
             });
         }
+        else {
+            data.auth(this);
+        }
     }
 
-    public void authFailed(String throwable) {
-        if (firstStart) {
-            Toast.makeText(activity,
-                    throwable,
-                    Toast.LENGTH_LONG).show();
-            activity.onLoginFailed();
-        }
-        else {
-            firstStart = true;
-            setupData();
-        }
+    public void onAuthFailed() {
+        setupData();
     }
 
     /**
      * send app to the next Screen
      */
     public void next() {
+        //TODO: костыли
         String type = startIntent.getStringExtra("type");
         String mdKey = startIntent.getStringExtra("md_key");
         Intent next = new Intent(activity, MainActivity.class);

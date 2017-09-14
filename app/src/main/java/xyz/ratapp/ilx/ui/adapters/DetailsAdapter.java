@@ -14,7 +14,9 @@ import android.widget.TextView;
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.data.dao.Order;
+import xyz.ratapp.ilx.data.dao.orders.Order;
+import xyz.ratapp.ilx.data.dao.orders.info.GeoItem;
+import xyz.ratapp.ilx.data.dao.orders.info.Item;
 import xyz.ratapp.ilx.ui.adapters.listeners.CallerClickListener;
 import xyz.ratapp.ilx.ui.adapters.listeners.MapClickListener;
 
@@ -26,11 +28,11 @@ public class DetailsAdapter extends
         RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder> {
 
     private Context context;
-    private List<Order.Item> details;
+    private List<Item> details;
     private String routeText;
 
     public DetailsAdapter(Context context,
-                          List<Order.Item> details,
+                          List<Item> details,
                           String routeText) {
         this.context = context;
         this.details = details;
@@ -46,7 +48,7 @@ public class DetailsAdapter extends
 
     @Override
     public void onBindViewHolder(DetailsAdapter.DetailsViewHolder holder, int position) {
-        Order.Item item = details.get(position);
+        Item item = details.get(position);
         holder.bind(item);
     }
 
@@ -74,7 +76,7 @@ public class DetailsAdapter extends
             ivAction = itemView.findViewById(R.id.ivDetailsAction);
         }
 
-        void bind(Order.Item item) {
+        void bind(Item item) {
 
             String text = item.getText();
 
@@ -93,7 +95,7 @@ public class DetailsAdapter extends
                 title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             }
             else if(item.getType().equals("address")) {
-                Order.GeoItem geo = ((Order.GeoItem) item);
+                GeoItem geo = ((GeoItem) item);
                 title.setText(text);
                 title.setTextColor(context.getResources().getColor(R.color.text_color));
                 title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);

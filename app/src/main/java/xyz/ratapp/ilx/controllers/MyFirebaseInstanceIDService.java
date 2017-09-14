@@ -1,12 +1,10 @@
 package xyz.ratapp.ilx.controllers;
 
-import android.app.Service;
 import android.util.Log;
-
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-import xyz.ratapp.ilx.controllers.data.DataController;
+import xyz.ratapp.ilx.controllers.data.DataBinder;
 
 /**
  * Created by Олег on 20.08.2017.
@@ -27,8 +25,8 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
 
-        DataController controller = DataController.getInstance();
-        controller.registerFCM(regId, getApplicationContext());
+        DataBinder controller = DataBinder.getInstance(getApplicationContext());
+        //controller.registerFCM(regId, getApplicationContext());
 
         //TODO:sendRegistrationToServer(refreshedToken);
     }

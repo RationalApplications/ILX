@@ -9,7 +9,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.List;
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.data.dao.Order;
+import xyz.ratapp.ilx.data.dao.orders.Order;
+import xyz.ratapp.ilx.data.dao.orders.info.Message;
 
 /**
  * Created by timtim on 21/08/2017.
@@ -19,10 +20,10 @@ public class MessagesAdapter  extends
         RecyclerView.Adapter<MessagesAdapter.MessageViewHolder> {
 
     private Context context;
-    private List<Order.Message> messages;
+    private List<Message> messages;
 
     public MessagesAdapter(Context context,
-                           List<Order.Message> messages) {
+                           List<Message> messages) {
         this.context = context;
         this.messages = messages;
     }
@@ -39,7 +40,7 @@ public class MessagesAdapter  extends
     @Override
     public void onBindViewHolder(MessagesAdapter.MessageViewHolder holder,
                                  int position) {
-        Order.Message m = messages.get(position);
+        Message m = messages.get(position);
         holder.bind(m);
     }
 
@@ -60,7 +61,7 @@ public class MessagesAdapter  extends
             text = itemView.findViewById(R.id.tvMessage);
         }
 
-        void bind(Order.Message m) {
+        void bind(Message m) {
             boolean user = m.getAuthor().equals("Курьер");
             RelativeLayout.LayoutParams params =
                     (RelativeLayout.LayoutParams) text.getLayoutParams();
@@ -75,9 +76,9 @@ public class MessagesAdapter  extends
 
 
             text.setLayoutParams(params);
-           /*((RelativeLayout) text.getParent()).setBackgroundResource(user ?
+           ((RelativeLayout) text.getParent()).setBackgroundResource(user ?
                     R.drawable.user_message :
-                    R.drawable.operator_message);*/
+                    R.drawable.operator_message);
             text.setText(m.getMessage());
         }
     }

@@ -7,18 +7,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+
+import java.util.ArrayList;
 import java.util.List;
-import xyz.ratapp.ilx.controllers.Screens;
+import xyz.ratapp.ilx.controllers.routing.Screens;
 import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
 import xyz.ratapp.ilx.controllers.main.MainController;
-import xyz.ratapp.ilx.data.dao.Request;
-import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
+import xyz.ratapp.ilx.data.dao.orders.BaseOrder;
+import xyz.ratapp.ilx.data.dao.orders.Order;
+import xyz.ratapp.ilx.data.dao.orders.Request;
+import xyz.ratapp.ilx.ui.adapters.BaseOrdersAdapter;
 
 /**
  * Created by timtim on 12/08/2017.
@@ -37,7 +39,7 @@ import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
  */
 
 public abstract class RequestFragment extends Fragment
-        implements ListSettable {
+        implements ListSettable<BaseOrder> {
 
     protected RecyclerView requestList;
     protected SwipeRefreshLayout refreshLayout;
@@ -96,7 +98,7 @@ public abstract class RequestFragment extends Fragment
         refreshLayout.setOnRefreshListener(refresh);
 
         if(data != null) {
-            setData(data);
+            setData(new ArrayList<BaseOrder>(data));
         }
     }
 
@@ -148,13 +150,17 @@ public abstract class RequestFragment extends Fragment
      * @param data - List of dao for RV
      */
     @Override
-    public void setData(List data) {
-        this.data = (List<Request>) data;
+    public void setData(List<BaseOrder> data) {
+        this.data = new ArrayList<>();
+        for (BaseOrder bo : data) {
+            this.data.add((Request) bo);
+        }
 
         if(requestList != null) {
             GridLayoutManager glm = new GridLayoutManager(getActivity(), 1);
             requestList.setLayoutManager(glm);
-            requestList.setAdapter(new RequestsAdapter(controller, getScreen(), data));
+            requestList.setAdapter(new BaseOrdersAdapter(controller,
+                    getScreen(), new ArrayList<BaseOrder>(this.data)));
         }
     }
 

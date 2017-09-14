@@ -1,4 +1,4 @@
-package xyz.ratapp.ilx.controllers;
+package xyz.ratapp.ilx.controllers.routing;
 
 /**
  * Created by timtim on 13/08/2017.

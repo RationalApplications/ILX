@@ -1,9 +1,7 @@
 package xyz.ratapp.ilx.ui.fragments;
 
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,12 +17,10 @@ import com.bumptech.glide.Glide;
 import com.ebanx.swipebtn.OnStateChangeListener;
 import com.ebanx.swipebtn.SwipeButton;
 
-import org.w3c.dom.Text;
-
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.info.InfoController;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
-import xyz.ratapp.ilx.data.dao.Request;
+import xyz.ratapp.ilx.data.dao.orders.Request;
 import xyz.ratapp.ilx.ui.activities.RequestInfoActivity;
 import xyz.ratapp.ilx.ui.adapters.AddressesAdapter;
 import xyz.ratapp.ilx.ui.adapters.CommentsAdapter;
@@ -93,7 +89,7 @@ public class RequestInfoFragment extends Fragment
 
     private void bindData() {
         Intent data = getActivity().getIntent();
-        String title = data.getStringExtra(RequestInfoActivity.Companion.getSTR_TITLE());
+        /*String title = data.getStringExtra(RequestInfoActivity.Companion.getSTR_TITLE());
         String cost = data.getStringExtra(RequestInfoActivity.Companion.getSTR_COST());
         String comment = data.getStringExtra(RequestInfoActivity.Companion.getSTR_COMMENT());
         int difficult = data.getIntExtra(RequestInfoActivity.Companion.getSTR_DIFFICULT(), -1);
@@ -112,7 +108,7 @@ public class RequestInfoFragment extends Fragment
             ivMap.setVisibility(View.VISIBLE);
             Glide.with(getContext()).load(mapUrl).
                     asBitmap().into(ivMap);
-        }
+        }*/
     }
 
     public void setSwipeButtonText(String text) {
@@ -142,18 +138,18 @@ public class RequestInfoFragment extends Fragment
                         load(request.getImage()).asBitmap().into(ivMap);
             }
 
-            if (request.getDetails() != null) {
+            if (request.getComments() != null) {
                 //rv comments
                 GridLayoutManager glm = new GridLayoutManager(getContext(), 1);
                 rvComments.setLayoutManager(glm);
-                rvComments.setAdapter(new CommentsAdapter(getActivity(), request.getDetails()));
+                rvComments.setAdapter(new CommentsAdapter(getActivity(), request.getComments()));
             }
 
-            if (request.getAddresses() != null) {
+            if (request.getAddress() != null) {
                 //rv addresses
                 GridLayoutManager glmm = new GridLayoutManager(getContext(), 1);
                 rvAddresses.setLayoutManager(glmm);
-                rvAddresses.setAdapter(new AddressesAdapter(getActivity(), request.getAddresses()));
+                rvAddresses.setAdapter(new AddressesAdapter(getActivity(), request.getAddress()));
             }
         }
     }

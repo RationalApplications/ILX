@@ -9,7 +9,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
-import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -25,8 +24,8 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.controllers.data.DataController;
-import xyz.ratapp.ilx.data.dao.UserLocation;
+import xyz.ratapp.ilx.controllers.data.DataBinder;
+import xyz.ratapp.ilx.data.dao.users.CourierLocation;
 
 public class GeoService extends Service {
 
@@ -57,23 +56,6 @@ public class GeoService extends Service {
         startLocationUpdates();
 
         return super.onStartCommand(intent, flags, startId);
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        /*INTERVAL = intent.getIntExtra("frequency", 1000) * 1000;
-        FASTEST_INTERVAL = ((int) (INTERVAL * 0.9));
-
-        buildGoogleApi();
-
-        createLocationRequest();
-        createLocationCallback();
-
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        startLocationUpdates();*/
     }
 
 
@@ -116,15 +98,15 @@ public class GeoService extends Service {
             public void onLocationResult(LocationResult locationResult) {
                 log("Loc: " + locationResult.getLastLocation());
 
-                UserLocation location = new UserLocation(locationResult.getLastLocation().getLatitude() + "",
+                CourierLocation location = new CourierLocation(locationResult.getLastLocation().getLatitude() + "",
                         locationResult.getLastLocation().getLongitude() + "",
                         locationResult.getLastLocation().getTime() + "",
                         locationResult.getLastLocation().getSpeed() + "",
                         locationResult.getLastLocation().getAccuracy() + "");
 
-                DataController controller = DataController.getInstance();
+                DataBinder controller = DataBinder.getInstance(getApplicationContext());
 
-                controller.courierLocation(location, getApplicationContext());
+                //controller.courierLocation(location, getApplicationContext());
             }
         };
     }

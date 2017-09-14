@@ -54,6 +54,7 @@ import xyz.ratapp.ilx.ui.activities.MainActivity;
  */
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
@@ -62,11 +63,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         String iconBig = remoteMessage.getData().get("icon_big");
         String iconPreview = remoteMessage.getData().get("icon_preview");
-        String type= remoteMessage.getData().get("type");
-        String title= remoteMessage.getData().get("title");
-        String message= remoteMessage.getData().get("message");
-        String eventTime= remoteMessage.getData().get("event_time");
-        String mdKey= remoteMessage.getData().get("md_key");
+        String type = remoteMessage.getData().get("type");
+        String title = remoteMessage.getData().get("title");
+        String message = remoteMessage.getData().get("message");
+        String eventTime = remoteMessage.getData().get("event_time");
+        String mdKey = remoteMessage.getData().get("md_key");
 
 
         sendNotification(mdKey, iconBig, iconPreview, type, title, message, eventTime);
@@ -81,18 +82,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     asBitmap().
                     into(100, 100). // Width and height
                     get();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-    }
+        }
 
         RemoteViews remoteView = new RemoteViews(getPackageName(), R.layout.notification_custom);
 
         RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), theBitmap);
         bitmapDrawable.setCornerRadius(30f);
 
-        remoteView.setImageViewBitmap(R.id.iv_notif_icon,  getCroppedBitmap(theBitmap));
+        remoteView.setImageViewBitmap(R.id.iv_notif_icon, getCroppedBitmap(theBitmap));
         remoteView.setTextViewText(R.id.tv_title, title);
         remoteView.setTextViewText(R.id.tv_message, message);
         Date date = Calendar.getInstance().getTime();
@@ -111,7 +110,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setTicker(title, remoteView)
                         .setCustomHeadsUpContentView(remoteView)
                         .setCustomContentView(remoteView);
-/*Icon.createWithBitmap(yourDownloadedBitmap)*/
+        /*Icon.createWithBitmap(yourDownloadedBitmap)*/
         Intent resultIntent;
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 

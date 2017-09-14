@@ -1,4 +1,4 @@
-package xyz.ratapp.ilx.data.dao;
+package xyz.ratapp.ilx.data.dao.app;
 
 import com.google.gson.annotations.SerializedName;
 

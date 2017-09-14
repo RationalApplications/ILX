@@ -2,20 +2,17 @@ package xyz.ratapp.ilx.ui.activities
 
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
-import android.view.Menu
 import android.view.View
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import xyz.ratapp.ilx.R
 import xyz.ratapp.ilx.controllers.main.MainController
-import xyz.ratapp.ilx.data.dao.Uuser
+import xyz.ratapp.ilx.data.dao.users.Courier
 import xyz.ratapp.ilx.ui.helpers.ThemePicker
 import xyz.ratapp.ilx.ui.views.DrawerToggle
 import xyz.ratapp.ilx.ui.views.StatusSwitch
@@ -69,11 +66,11 @@ class MainActivity : AppCompatActivity() {
         navView.menu.findItem(R.id.nav_requests).title = title
     }
 
-    fun bindUser(user: Uuser) {
+    fun bindCourier(user: Courier) {
         Glide.with(this).load(user.ava).error(R.mipmap.ic_launcher).
                 into(navView.getHeaderView(0).ivNavIcon)
         navView.getHeaderView(0).tvNavHeader.text = user.courierName
-        navView.getHeaderView(0).tvNavText.text = user.workStatus
+        navView.getHeaderView(0).tvNavText.text = user.getWorkStatus(this)
 
         picker!!.setTheme(user.isOnline)
     }

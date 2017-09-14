@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,14 +20,14 @@ import java.util.List;
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.info.InfoController;
 import xyz.ratapp.ilx.controllers.interfaces.ListSettable;
-import xyz.ratapp.ilx.data.dao.Order;
-import xyz.ratapp.ilx.ui.activities.InfoActivity;
+import xyz.ratapp.ilx.data.dao.orders.Order;
+import xyz.ratapp.ilx.data.dao.orders.info.Message;
 import xyz.ratapp.ilx.ui.adapters.MessagesAdapter;
 
 public class ChatFragment extends Fragment
-        implements ListSettable<Order.Message> {
+        implements ListSettable<Message> {
 
-    private List<Order.Message> messages;
+    private List<Message> messages;
     private ImageView send;
     private EditText textField;
     private RecyclerView rvChat;
@@ -98,7 +97,7 @@ public class ChatFragment extends Fragment
     }
 
     @Override
-    public void setData(List<Order.Message> data) {
+    public void setData(List<Message> data) {
         this.messages = data;
         setupData();
     }

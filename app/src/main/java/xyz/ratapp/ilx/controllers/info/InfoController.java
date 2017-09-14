@@ -1,7 +1,6 @@
 package xyz.ratapp.ilx.controllers.info;
 
 import android.content.Context;
-import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.view.ViewPager;
@@ -12,11 +11,12 @@ import android.view.inputmethod.InputMethodManager;
 import java.util.Arrays;
 
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.controllers.data.DataController;
+import xyz.ratapp.ilx.controllers.data.DataBinder;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
-import xyz.ratapp.ilx.data.dao.Button;
-import xyz.ratapp.ilx.data.dao.Order;
-import xyz.ratapp.ilx.data.dao.Request;
+import xyz.ratapp.ilx.data.dao.app.Button;
+import xyz.ratapp.ilx.data.dao.orders.BaseOrder;
+import xyz.ratapp.ilx.data.dao.orders.Order;
+import xyz.ratapp.ilx.data.dao.orders.Request;
 import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.activities.InfoActivity;
 import xyz.ratapp.ilx.ui.activities.RequestInfoActivity;
@@ -31,9 +31,9 @@ import xyz.ratapp.ilx.ui.views.SlidingTabLayout;
  * - Все строки отрисовать/отформатировать по макапу (шрифты чёрные/серые);
  */
 
-public class InfoController implements DataSettable<Object> {
+public class InfoController implements DataSettable<BaseOrder> {
 
-    private DataController data;
+    private DataBinder data;
     private InfoActivity activity;
     private ViewPager container;
     //request id
@@ -50,13 +50,13 @@ public class InfoController implements DataSettable<Object> {
     public InfoController(InfoActivity activity) {
         this.activity = activity;
         id = activity.getIntent().getStringExtra("id");
-        data = DataController.getInstance();
+        data = DataBinder.getInstance(activity);
         preSetupUI();
         setupData();
     }
 
     private void setupData() {
-        data.bindInfoData(this, id);
+        data.bindInfoData(this);
     }
 
     private void preSetupUI() {
@@ -66,14 +66,14 @@ public class InfoController implements DataSettable<Object> {
             //setup tabs and fragments
             chat = new ChatFragment();
             chat.setController(this);
-            chat.setBtnSendText(data.getNames().getSendMessageSubmit());
+            chat.setBtnSendText(data.getStrings().getSendMessageSubmit());
             details = new DetailsFragment();
-            details.setBtnSendMessageText(data.getNames().getSendMessage());
-            details.setRouteText(data.getNames().getRoute());
+            details.setBtnSendMessageText(data.getStrings().getSendMessage());
+            details.setRouteText(data.getStrings().getRoute());
 
             container = activity.findViewById(R.id.vpDetailsContainer);
             InfoSectionsPagerAdapter adapter = new InfoSectionsPagerAdapter(
-                    activity.getSupportFragmentManager(), data.getNames());
+                    activity.getSupportFragmentManager(), data.getStrings());
             adapter.bindFragments(Arrays.asList(details, chat));
             container.setAdapter(adapter);
             stlTabs = activity.findViewById(R.id.stlDetailsTabs);
@@ -116,7 +116,7 @@ public class InfoController implements DataSettable<Object> {
             //setup tabs and fragments
             chat = new ChatFragment();
             chat.setController(this);
-            chat.setBtnSendText(data.getNames().getSendMessageSubmit());
+            chat.setBtnSendText(data.getStrings().getSendMessageSubmit());
             reqInfo = new RequestInfoFragment();
             reqInfo.bindController(this);
 
@@ -124,7 +124,7 @@ public class InfoController implements DataSettable<Object> {
 
             container = activity.findViewById(R.id.vpReqInfoContainer);
             InfoSectionsPagerAdapter adapter = new InfoSectionsPagerAdapter(
-                    activity.getSupportFragmentManager(), data.getNames());
+                    activity.getSupportFragmentManager(), data.getStrings());
             adapter.bindFragments(Arrays.asList(reqInfo, chat));
             container.setAdapter(adapter);
             stlTabs = activity.findViewById(R.id.stlReqInfoTabs);
@@ -173,20 +173,20 @@ public class InfoController implements DataSettable<Object> {
 
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().
-                    setTitle(data.getNames().getOrderView());
+                    setTitle(data.getStrings().getOrderView());
         }
     }
 
     @Override
-    public void setData(Object data) {
-        if (data instanceof Request && !id.startsWith("h")) {
-            this.request = (Request) data;
+    public void setData(BaseOrder order) {
+        if (order instanceof Request && !id.startsWith("h")) {
+            this.request = (Request) order;
             setupReqInfoData();
-        } else if (data instanceof Request && id.startsWith("h")) {
-            this.request = (Request) data;
+        } else if (order instanceof Request && id.startsWith("h")) {
+            this.request = (Request) order;
             setupReqInfoHistoryData();
-        } else if (data instanceof Order) {
-            this.order = (Order) data;
+        } else if (order instanceof Order) {
+            this.order = (Order) order;
             setupDetailsData();
         }
     }
@@ -209,15 +209,15 @@ public class InfoController implements DataSettable<Object> {
 
     private void setupReqInfoData() {
         reqInfo.setData(request);
-        reqInfo.setSwipeButtonText(data.getNames().getOrderTradingButton());
+        reqInfo.setSwipeButtonText(data.getStrings().getOrderTradingButton());
     }
 
     public void onPushButton(Button btn) {
-        data.onPushButton(btn);
+        data.pushButton(btn);
     }
 
     public void acceptRequest() {
-        data.onPushButton(request.getBtn());
+        data.pushButton(request.getBtn());
     }
 
     public void sendMessage() {

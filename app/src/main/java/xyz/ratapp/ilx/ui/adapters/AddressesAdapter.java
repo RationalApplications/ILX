@@ -10,8 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.data.dao.Address;
-import xyz.ratapp.ilx.data.dao.Request;
+import xyz.ratapp.ilx.data.dao.orders.info.Address;
 
 /**
  * Created by timtim on 10/08/2017.

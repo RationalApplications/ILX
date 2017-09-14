@@ -1,6 +1,6 @@
 package xyz.ratapp.ilx.ui.fragments;
 
-import xyz.ratapp.ilx.controllers.Screens;
+import xyz.ratapp.ilx.controllers.routing.Screens;
 import xyz.ratapp.ilx.controllers.main.MainController;
 
 /**
@@ -14,7 +14,8 @@ public class HistoryFragment extends RequestFragment {
     @Override
     public void bindController(MainController controller) {
         super.bindController(controller);
-        title = controller.getNames().getOrderListHistory();
+        title = controller.getStrings().
+                getOrderListHistory();
     }
 
     @Override

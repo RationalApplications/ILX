@@ -1,12 +1,10 @@
-package xyz.ratapp.ilx.data.dao;
-
-import com.google.android.gms.maps.model.LatLng;
+package xyz.ratapp.ilx.data.dao.users;
 
 /**
  * Created by Олег on 15.08.2017.
  */
 
-public class UserLocation {
+public class CourierLocation {
 
     private String latitude;
     private String longitude;
@@ -14,7 +12,8 @@ public class UserLocation {
     private String speed;
     private String acc;
 
-    public UserLocation(String latitude, String longitude, String time, String speed, String acc) {
+    public CourierLocation(String latitude, String longitude,
+                           String time, String speed, String acc) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.time = time;

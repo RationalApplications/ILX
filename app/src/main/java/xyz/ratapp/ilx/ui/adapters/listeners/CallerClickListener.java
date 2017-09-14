@@ -30,10 +30,6 @@ public class CallerClickListener
         this.text = text;
     }
 
-    public CallerClickListener(Context context) {
-        this.context = context;
-    }
-
     public void setText(String text) {
         this.text = text;
     }

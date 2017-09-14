@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-import xyz.ratapp.ilx.data.dao.Names;
+import xyz.ratapp.ilx.data.dao.app.AppStrings;
 
 
 /**
@@ -16,11 +16,11 @@ import xyz.ratapp.ilx.data.dao.Names;
 class InfoSectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
-    private Names names;
+    private AppStrings strings;
 
-    InfoSectionsPagerAdapter(FragmentManager fm, Names names) {
+    InfoSectionsPagerAdapter(FragmentManager fm, AppStrings strings) {
         super(fm);
-        this.names = names;
+        this.strings = strings;
     }
 
     void bindFragments(List<Fragment> fragments) {
@@ -35,10 +35,10 @@ class InfoSectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         if(position == 0) {
-            return names.getOrderViewInfo();
+            return strings.getOrderViewInfo();
         }
         else {
-            return names.getOrderViewChat();
+            return strings.getOrderViewChat();
         }
     }
 

@@ -18,8 +18,11 @@ import java.util.List;
 
 import xyz.ratapp.ilx.R;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
-import xyz.ratapp.ilx.data.dao.Order;
-import xyz.ratapp.ilx.data.dao.Request;
+import xyz.ratapp.ilx.data.dao.app.Buttons;
+import xyz.ratapp.ilx.data.dao.app.NegativeButton;
+import xyz.ratapp.ilx.data.dao.orders.Order;
+import xyz.ratapp.ilx.data.dao.orders.Request;
+import xyz.ratapp.ilx.data.dao.orders.info.Item;
 import xyz.ratapp.ilx.ui.activities.DetailsActivity;
 import xyz.ratapp.ilx.ui.adapters.DetailsAdapter;
 
@@ -87,9 +90,9 @@ public class DetailsFragment extends Fragment
     private void setupRequestData() {
         if(request != null && rvDetails != null) {
             //setup buttons
-            Order.Buttons btns = order.getBtns();
-            final xyz.ratapp.ilx.data.dao.Button ok = btns.getOk();
-            final Order.NegativeButton noup = btns.getNo();
+            Buttons btns = order.getBtns();
+            final xyz.ratapp.ilx.data.dao.app.Button ok = btns.getOk();
+            final NegativeButton noup = btns.getNo();
             btnPerform.setText(ok.getName());
             btnIssue.setText(noup.getName());
             if(btnSendMessage != null) {
@@ -125,7 +128,7 @@ public class DetailsFragment extends Fragment
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.MATCH_PARENT));
                     //setup data
-                    for (final xyz.ratapp.ilx.data.dao.Button b : noup.getOptions()) {
+                    for (final xyz.ratapp.ilx.data.dao.app.Button b : noup.getOptions()) {
                         android.widget.Button btn =
                                 new android.widget.Button(activity);
                         //===
@@ -159,7 +162,7 @@ public class DetailsFragment extends Fragment
 
 
             //setup items
-            List<Order.Item> details = order.getItems();
+            List<Item> details = order.getItems();
             GridLayoutManager glm = new GridLayoutManager(getContext(), 1);
             rvDetails.setLayoutManager(glm);
             rvDetails.setAdapter(new DetailsAdapter(getActivity(), details, routeText));
@@ -169,9 +172,9 @@ public class DetailsFragment extends Fragment
     private void setupOrderData() {
         if(order != null && rvDetails != null) {
             //setup buttons
-            Order.Buttons btns = order.getBtns();
-            final xyz.ratapp.ilx.data.dao.Button ok = btns.getOk();
-            final Order.NegativeButton noup = btns.getNo();
+            Buttons btns = order.getBtns();
+            final xyz.ratapp.ilx.data.dao.app.Button ok = btns.getOk();
+            final NegativeButton noup = btns.getNo();
             btnPerform.setText(ok.getName());
             btnIssue.setText(noup.getName());
             if(btnSendMessage != null) {
@@ -207,7 +210,7 @@ public class DetailsFragment extends Fragment
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.MATCH_PARENT));
                     //setup data
-                    for (final xyz.ratapp.ilx.data.dao.Button b : noup.getOptions()) {
+                    for (final xyz.ratapp.ilx.data.dao.app.Button b : noup.getOptions()) {
                         android.widget.Button btn =
                                 new android.widget.Button(activity);
                         //===
@@ -241,7 +244,7 @@ public class DetailsFragment extends Fragment
 
 
             //setup items
-            List<Order.Item> details = order.getItems();
+            List<Item> details = order.getItems();
             GridLayoutManager glm = new GridLayoutManager(getContext(), 1);
             rvDetails.setLayoutManager(glm);
             rvDetails.setAdapter(new DetailsAdapter(getActivity(), details, routeText));

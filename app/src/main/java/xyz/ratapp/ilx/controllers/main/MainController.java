@@ -14,21 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.controllers.GeoService;
-import xyz.ratapp.ilx.controllers.Screens;
-import xyz.ratapp.ilx.controllers.data.DataController;
+import xyz.ratapp.ilx.controllers.routing.Screens;
+import xyz.ratapp.ilx.controllers.data.DataBinder;
 import xyz.ratapp.ilx.controllers.interfaces.DataSettable;
-import xyz.ratapp.ilx.data.dao.Names;
-import xyz.ratapp.ilx.data.dao.Request;
-import xyz.ratapp.ilx.data.dao.Uuser;
-import xyz.ratapp.ilx.ui.activities.DetailsActivity;
+import xyz.ratapp.ilx.data.dao.app.AppStrings;
+import xyz.ratapp.ilx.data.dao.orders.BaseOrder;
+import xyz.ratapp.ilx.data.dao.orders.Request;
+import xyz.ratapp.ilx.data.dao.users.Courier;
 import xyz.ratapp.ilx.ui.activities.MainActivity;
-import xyz.ratapp.ilx.ui.activities.RequestInfoActivity;
-import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
+import xyz.ratapp.ilx.ui.adapters.BaseOrdersAdapter;
 import xyz.ratapp.ilx.ui.fragments.HistoryFragment;
 import xyz.ratapp.ilx.ui.fragments.RecentFragment;
 import xyz.ratapp.ilx.ui.fragments.RequestFragment;
-import xyz.ratapp.ilx.ui.fragments.RequestInfoFragment;
 import xyz.ratapp.ilx.ui.fragments.StockFragment;
 import xyz.ratapp.ilx.ui.views.SlidingTabLayout;
 import xyz.ratapp.ilx.ui.views.StatusSwitch;
@@ -37,12 +34,12 @@ import xyz.ratapp.ilx.ui.views.StatusSwitch;
  * Created by timtim on 07/08/2017.
  */
 
-public class MainController
-        implements NavigationView.OnNavigationItemSelectedListener,
-        DataSettable<Uuser> {
+public class MainController implements
+        NavigationView.OnNavigationItemSelectedListener,
+        DataSettable<Courier> {
 
     private List<RequestFragment> fragments;
-    private DataController data;
+    private DataBinder data;
     private MainActivity activity;
     private DrawerLayout layout;
     private StatusSwitch status;
@@ -53,12 +50,12 @@ public class MainController
     public MainController(MainActivity activity) {
         //ui
         this.activity = activity;
-        data = DataController.getInstance();
+        data = DataBinder.getInstance(activity);
         layout = activity.findViewById(R.id.dlMain);
         checkIntent();
     }
 
-    public void checkIntent() {
+    private void checkIntent() {
         Intent intent = activity.getIntent();
 
         String type = intent.getStringExtra("type");
@@ -83,7 +80,7 @@ public class MainController
                     selected = 2;
                 }
                 else if(type.equals("order_info")) {
-                    data.sendNextByMdKey(mdKey, "order_info");
+                    //data.sendNextByMdKey(mdKey, "order_info");
                 }
                 else if(type.equals("order_chat")) {
                 }
@@ -106,7 +103,7 @@ public class MainController
     }
 
     /**
-     * Method bindUser fragment to current screen(controller)
+     * Method bindCourier fragment to current screen(controller)
      */
     private void bindFragments() {
         for (RequestFragment f : fragments) {
@@ -125,10 +122,7 @@ public class MainController
         container.setAdapter(adapter);
         SlidingTabLayout stlTabs = activity.findViewById(R.id.stlTabs);
         stlTabs.setViewPager(container);
-        data.orderListTrading(this);
-        data.orderList(this);
-        data.orderListHistory(this);
-        data.bindUser(this);
+        data.loadAllData(this);
 
         if(selected != -1) {
             container.setCurrentItem(selected);
@@ -137,20 +131,12 @@ public class MainController
 
     public void setSwitch(StatusSwitch statusSwitch) {
         this.status = statusSwitch;
-        activity.setupToolbar(getNames().getOrders(), status);
+        activity.setupToolbar(getStrings().getOrders(), status);
         activity.setupUI();
 
         //data
         createFragments();
         setupData();
-    }
-
-    /**
-     * Method that bindUser data to all of fragments
-     */
-    public void bindData(Screens screen) {
-        RequestFragment f = getFragment(screen);
-        data.bindRequests(f.getScreen(), f);
     }
 
     private RequestFragment getFragment(Screens screen) {
@@ -163,9 +149,9 @@ public class MainController
         return null;
     }
 
-    public void bindUser(Uuser user) {
-        toggleUpdatingGPS(user.isOnline());
-        activity.bindUser(user);
+    public void bindCourier(Courier courier) {
+        toggleUpdatingGPS(courier.getWorkStatus());
+        activity.bindCourier(courier);
 
         if(exit) {
             activity.finish();
@@ -179,9 +165,9 @@ public class MainController
      * @param data - data for next Screen
      */
     public void next(Screens from, Object data) {
-        if(RequestsAdapter.screenItemMap.containsKey(from)) {
+        if(BaseOrdersAdapter.screenItemMap.containsKey(from)) {
             boolean recent = from.equals(Screens.RECENT);
-            String id = this.data.idOf(data, from);
+            /*String id = this.data.idOf(data, from);
             Intent next = recent ?
                     DetailsActivity.Companion.getIntent(id) :
                     RequestInfoActivity.Companion.getIntent(id, ((Request) data));
@@ -190,19 +176,19 @@ public class MainController
                     next;
 
             //TODO: hardcoded
-            int theme = this.data.getLastState() ?
+            int theme = this.data.getState() ?
                     R.style.AppTheme_Active :
                     R.style.AppTheme_Passive;
 
             next.putExtra("THEME", theme);
 
-            activity.startActivity(next);
+            activity.startActivity(next);*/
         }
     }
 
     public void next(Screens from, Object data, String param) {
-        if(RequestsAdapter.screenItemMap.containsKey(from)) {
-            boolean recent = from.equals(Screens.RECENT);
+        if(BaseOrdersAdapter.screenItemMap.containsKey(from)) {
+            /*boolean recent = from.equals(Screens.RECENT);
             String id = this.data.idOf(data, from);
             Intent next = recent ?
                     DetailsActivity.Companion.getIntent(id) :
@@ -212,14 +198,14 @@ public class MainController
                     next;
 
             //TODO: hardcoded
-            int theme = this.data.getLastState() ?
+            int theme = this.data.getState() ?
                     R.style.AppTheme_Active :
                     R.style.AppTheme_Passive;
 
             next.putExtra("THEME", theme);
             next.putExtra("param", param);
 
-            activity.startActivity(next);
+            activity.startActivity(next);*/
         }
     }
 
@@ -232,13 +218,11 @@ public class MainController
      */
     public void setStateChanged(boolean state) {
         data.setState(this, state);
-        data.orderListTrading(this);
-        data.orderList(this);
-        data.orderListHistory(this);
+        data.loadAllData(this);
     }
 
     private void toggleUpdatingGPS(boolean state) {
-        Intent i = new Intent(activity, GeoService.class);
+        /*Intent i = new Intent(activity, GeoService.class);
         i.putExtra("frequency", data.getFrequency());
 
         if (state) {
@@ -246,18 +230,18 @@ public class MainController
         }
         else{
             activity.stopService(i);
-        }
+        }*/
     }
 
     /**
      * setup User
      *
-     * @param user - User data
+     * @param courier - User data
      */
     @Override
-    public void setData(Uuser user) {
-        activity.bindUser(user);
-        status.setChecked(user.isOnline());
+    public void setData(Courier courier) {
+        activity.bindCourier(courier);
+        status.setChecked(courier.isOnline());
     }
 
     /**
@@ -270,7 +254,7 @@ public class MainController
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.nav_exit) {
             exit = true;
-            data.exit(this);
+            data.exit();
         }
 
         layout.closeDrawer(GravityCompat.START);
@@ -287,17 +271,31 @@ public class MainController
 
     public void refresh(Screens screen) {
         if(screen.equals(Screens.STOCK)) {
-            data.orderListTrading(this);
+            data.loadOrderListTrading(this);
         }
         else if(screen.equals(Screens.RECENT)) {
-            data.orderList(this);
+            data.loadOrderList(this);
         }
         else if(screen.equals(Screens.HISTORY)) {
-            data.orderListHistory(this);
+            data.loadOrderListHistory(this);
         }
     }
 
-    public Names getNames() {
-        return data.getNames();
+    public AppStrings getStrings() {
+        return data.getStrings();
+    }
+
+    public void bindScreens() {
+        for(RequestFragment f : fragments) {
+            data.bindOrders(f.getScreen(), f);
+        }
+    }
+
+    public void bindScreen(Screens screen) {
+        RequestFragment fr = getFragment(screen);
+
+        if(fr != null) {
+            data.bindOrders(fr.getScreen(), fr);
+        }
     }
 }

@@ -11,16 +11,14 @@ import android.widget.RelativeLayout;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.controllers.Screens;
+import xyz.ratapp.ilx.controllers.routing.Screens;
 import xyz.ratapp.ilx.controllers.main.MainController;
-import xyz.ratapp.ilx.data.dao.Order;
-import xyz.ratapp.ilx.data.dao.Request;
-import xyz.ratapp.ilx.ui.adapters.OrdersAdapter;
-import xyz.ratapp.ilx.ui.adapters.RequestsAdapter;
+import xyz.ratapp.ilx.data.dao.orders.BaseOrder;
+import xyz.ratapp.ilx.data.dao.orders.Order;
+import xyz.ratapp.ilx.ui.adapters.BaseOrdersAdapter;
 import xyz.ratapp.ilx.ui.views.DialogMap;
 
 /**
@@ -36,7 +34,8 @@ public class RecentFragment extends RequestFragment {
     @Override
     public void bindController(MainController controller) {
         super.bindController(controller);
-        title = controller.getNames().getOrderList();
+        title = controller.getStrings().
+                getOrderList();
     }
 
 
@@ -110,7 +109,8 @@ public class RecentFragment extends RequestFragment {
         if(requestList != null) {
             GridLayoutManager glm = new GridLayoutManager(getActivity(), 1);
             requestList.setLayoutManager(glm);
-            requestList.setAdapter(new OrdersAdapter(controller, getScreen(), orders));
+            requestList.setAdapter(new BaseOrdersAdapter(controller,
+                    getScreen(), new ArrayList<BaseOrder>(orders)));
         }
     }
 

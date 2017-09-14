@@ -10,7 +10,7 @@
     <string name="nav_drawer_open_desc">Navigation Bar Open</string>
     <string name="nav_drawer_close_desc">Navigation Bar Close</string>
 
-    <!-- Fragment names -->
+    <!-- Fragment strings -->
     <string name="stock">Биржа</string>
     <string name="recent">Текущие</string>
     <string name="history">История</string>
@@ -50,5 +50,7 @@
     <string name="send">Отправить</string>
     <string name="input_message">Введите сообщение</string>
     <string name="enable_geo">Включите передачу геоданных</string>
+    <string name="connection_error">Ошибка соединения!</string>
+    <string name="change_status_error">Ошибка смены статуса!</string>
 
 </resources>

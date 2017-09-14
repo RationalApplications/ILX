@@ -13,11 +13,15 @@ import android.view.View;
 
 public class DrawerToggle extends ActionBarDrawerToggle {
 
-    public DrawerToggle(Activity activity, DrawerLayout drawerLayout, @StringRes int openDrawerContentDescRes, @StringRes int closeDrawerContentDescRes) {
+    public DrawerToggle(Activity activity, DrawerLayout drawerLayout,
+                        @StringRes int openDrawerContentDescRes,
+                        @StringRes int closeDrawerContentDescRes) {
         super(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes);
     }
 
-    public DrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, @StringRes int openDrawerContentDescRes, @StringRes int closeDrawerContentDescRes) {
+    public DrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar,
+                        @StringRes int openDrawerContentDescRes,
+                        @StringRes int closeDrawerContentDescRes) {
         super(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes);
     }
 

@@ -1,18 +1,14 @@
-package xyz.ratapp.ilx.data.dao;
+package xyz.ratapp.ilx.data.dao.app;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 /**
- * Created by timtim on 23/08/2017.
- *
- * DAO that saves all text-data about
- * texts of buttons, titles of toolbar
- * and other
+ * Created by timtim on 01/09/2017.
  */
 
-public class Names implements Serializable {
+public class AppStrings implements Serializable {
 
     @SerializedName("orders")
     private String orders;
@@ -60,6 +56,10 @@ public class Names implements Serializable {
         return orderTradingButton;
     }
 
+    public String getOrderTradingButton2() {
+        return orderTradingButton2;
+    }
+
     public String getOrderView() {
         return orderView;
     }
@@ -83,4 +83,5 @@ public class Names implements Serializable {
     public String getSendMessageSubmit() {
         return sendMessageSubmit;
     }
+
 }

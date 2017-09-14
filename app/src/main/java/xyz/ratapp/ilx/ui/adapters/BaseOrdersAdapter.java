@@ -14,16 +14,18 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.ratapp.ilx.R;
-import xyz.ratapp.ilx.controllers.Screens;
+import xyz.ratapp.ilx.controllers.routing.Screens;
 import xyz.ratapp.ilx.controllers.main.MainController;
-import xyz.ratapp.ilx.data.dao.Order;
+import xyz.ratapp.ilx.data.dao.orders.BaseOrder;
+import xyz.ratapp.ilx.data.dao.orders.Order;
+import xyz.ratapp.ilx.data.dao.orders.Request;
 
 /**
  * Created by timtim on 20/08/2017.
  */
 
-public class OrdersAdapter extends
-        RecyclerView.Adapter<OrdersAdapter.OrderViewHolder> {
+public class BaseOrdersAdapter extends
+        RecyclerView.Adapter<BaseOrdersAdapter.OrderViewHolder> {
 
     public final static Map<Screens, Integer> screenItemMap;
 
@@ -38,11 +40,11 @@ public class OrdersAdapter extends
 
     private MainController controller;
     private Context context;
-    private List<Order> orders;
+    private List<BaseOrder> orders;
     private Screens screen;
 
-    public OrdersAdapter(MainController controller, Screens screen,
-                         List<Order> orders) {
+    public BaseOrdersAdapter(MainController controller, Screens screen,
+                             List<BaseOrder> orders) {
         this.controller = controller;
         this.context = controller.getContext();
         this.screen = screen;
@@ -50,12 +52,12 @@ public class OrdersAdapter extends
     }
 
     @Override
-    public OrdersAdapter.OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseOrdersAdapter.OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).
                 inflate(screenItemMap.get(screen), parent, false);
         setupDifficultHeight(v);
 
-        return new OrdersAdapter.OrderViewHolder(v);
+        return new BaseOrdersAdapter.OrderViewHolder(v);
     }
 
     private void setupDifficultHeight(final View v) {
@@ -75,9 +77,17 @@ public class OrdersAdapter extends
 
 
     @Override
-    public void onBindViewHolder(OrdersAdapter.OrderViewHolder holder, int position) {
-        Order o = orders.get(position);
-        holder.bind(o);
+    public void onBindViewHolder(BaseOrdersAdapter.OrderViewHolder holder, int position) {
+        BaseOrder order = orders.get(position);
+
+        if(order instanceof Order) {
+            Order o = ((Order) order);
+            holder.bind(o);
+        }
+        else if(order instanceof Request) {
+            Request r = ((Request) order);
+            holder.bind(r);
+        }
     }
 
     @Override
@@ -88,6 +98,7 @@ public class OrdersAdapter extends
 
     class OrderViewHolder
             extends RecyclerView.ViewHolder {
+        private TextView cost;
         private TextView title;
         private TextView task;
         private TextView comment;
@@ -105,13 +116,22 @@ public class OrdersAdapter extends
             difficult = itemView.findViewById(R.id.vDifficult);
             task = itemView.findViewById(R.id.tvTask);
             time = itemView.findViewById(R.id.tvTime);
+
+            if(screen.equals(Screens.RECENT)) {
+                task = itemView.findViewById(R.id.tvTask);
+                time = itemView.findViewById(R.id.tvTime);
+            }
+            else if(screen.equals(Screens.STOCK) ||
+                    screen.equals(Screens.HISTORY)){
+                cost = itemView.findViewById(R.id.tvCost);
+            }
         }
 
         void bind(final Order o) {
 
             title.setText(o.getH21());
             comment.setText(o.getH22());
-            difficult.setBackgroundColor(o.getColor());
+            difficult.setBackgroundColor(o.getDifficult());
 
             task.setText(o.getH23());
             time.setText(o.getH24());
@@ -121,6 +141,22 @@ public class OrdersAdapter extends
                     @Override
                     public void onClick(View view) {
                         controller.next(screen, o);
+                    }
+                });
+            }
+        }
+
+        void bind(final Request r) {
+            title.setText(r.getH2());
+            comment.setText(r.getH3());
+            difficult.setBackgroundColor(r.getDifficult());
+            cost.setText(r.getH1());
+
+            if(controller != null) {
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        controller.next(screen, r);
                     }
                 });
             }

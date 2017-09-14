@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import xyz.ratapp.ilx.R
 import xyz.ratapp.ilx.controllers.info.InfoController
-import xyz.ratapp.ilx.controllers.interfaces.DataSettable
-import xyz.ratapp.ilx.data.dao.Button
-import xyz.ratapp.ilx.data.dao.Order
+import xyz.ratapp.ilx.data.dao.app.Button
 
 class DetailsActivity : InfoActivity() {
 
